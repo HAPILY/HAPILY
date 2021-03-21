@@ -1,0 +1,42 @@
+@import 'variable/**/*';
+@import 'mixin/**/*';
+@import 'function/**/*';
+@import 'foundation/**/*';
+@import 'layout/**/*';
+@import 'component/**/*';
+
+// .c-input-text {
+//   appearance: none;
+//   border-radius: 20px;
+//   padding: 15px;
+//   // background-color: map-get($color, blue, light);
+//   width: 100%;
+//   border-radius: 20px;
+//   background: linear-gradient(145deg, #e6e6e6, #ffffff);
+//   box-shadow: 5px 5px 7px #d1d1d1, -5px -5px 7px #ffffff;
+// }
+
+// input {
+//   margin-right: $ruler/2;
+//   box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+//   width: 100%;
+//   box-sizing: border-box;
+//   transition: all 0.2s ease-in-out;
+//   appearance: none;
+//   -webkit-appearance: none;
+
+//   &:focus {
+//     box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+//   }
+// }
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  label {
+    margin: 0;
+    flex: 1;
+  }
+}

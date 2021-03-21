@@ -1,0 +1,23 @@
+$color: (
+  blue: (
+    pale: #f7faff,
+    light: #e9eff9,
+    medium: #9ebdef,
+    default: #5689e2,
+  ),
+  red: (
+    medium: #f26b52,
+    default: #f05847,
+  ),
+  black: (
+    default: #4c4943,
+  ),
+  gradient: (
+    yellow: linear-gradient(to top, #fec22e 0%, #ffe371 80%),
+  ),
+);
+
+$unit: 4px;
+$paddingSp: 25px;
+$text-color: map-get($color, black, default);
+$ruler: 16px;
