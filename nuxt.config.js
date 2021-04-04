@@ -29,6 +29,7 @@ export default {
     { src: '@/plugins/swiper', ssr: false },
     { src: '@/plugins/routerSetting' },
     { src: '@/plugins/lottie.js', ssr: false },
+    { src: '@/plugins/axios/index', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,7 +42,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios'],
   styleResources: {
     scss: [
       '@/assets/css/variable/**/*.scss',
