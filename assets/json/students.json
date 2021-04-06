@@ -1,57 +1,274 @@
 [
   {
+    "mainName": "長谷川 太一朗",
+    "rome": "Hasegawa Taichiro",
     "name": "usernameusername",
     "kana": "kanakanakana",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー",
+      "startDate": "2021年１月",
+      "endDate": "",
+      "job": [
+        {
+        "name": "プロダクトオーナー",
+        "details": "Lftのプロダクト"
+        },
+        {
+          "name": "フロントエンジニア",
+          "details": "Vue.js TypeScript"
+        }
+      ]
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー",
+        "startDate": "2021年１月",
+        "endDate": "2021年5月",
+        "job": [
+          {
+          "name": "プロダクトオーナー"
+          },
+          {
+            "name": "フロントエンジニア"
+          }
+        ]
+      },{
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー",
+        "startDate": "2021年１月",
+        "endDate": "2021年5月",
+        "job": [
+          {
+          "name": "プロダクトオーナー"
+          },
+          {
+            "name": "フロントエンジニア"
+          }
+        ]
+      }
+    ],
+    "academic":[
+      {
+        "title":"Libry学園",
+        "subTitle": "情報科",
+        "graduationDate": ""
+      },
+      {
+        "title":"Libry高校",
+        "subTitle": "情報システム科",
+        "graduationDate": "2020年3月"
+      }
+    ],
+    "dreamList":[
+      {
+        "dreamId":1,
+        "name": "留学"
+      },
+      {
+        "dreamId":2,
+        "name": "起業"
+      },
+      {
+        "dreamId":3,
+        "name": "稼ぐ"
+      },
+      {
+        "dreamId":4,
+        "name": "プログラミング"
+      },
+      {
+        "dreamId":3,
+        "name": "稼ぐ"
+      },
+      {
+        "dreamId":3,
+        "name": "稼ぐ"
+      },
+      {
+        "dreamId":3,
+        "name": "稼ぐ"
+      }
+    ],
+    "write":[
+      {
+        "title":"フロントリニューアルにVue3.0を採用した話",
+        "postDate": "2021年1月25日",
+        "url":"#",
+        "thumbnail":""
+      },
+      {
+        "title":"フロントリニューアルにVue3.0を採用した話",
+        "postDate": "2021年1月25日",
+        "url":"#",
+        "thumbnail":""
+      }
+    ],
+    "achievements":[
+      {
+        "title":"みんながハッピーになれるアプリ",
+        "postDate": "2021年1月25日",
+        "url":"#",
+        "thumbnail":""
+      },
+      {
+        "title":"みんながハッピーになれるアプリ",
+        "postDate": "2021年1月25日",
+        "url":"#",
+        "thumbnail":""
+      }
+    ]
   },
   {
     "name": "username",
     "kana": "kana",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "usernameusername",
     "kana": "kanakanakana",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "usernameusernameuser",
     "kana": "kankananana",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "usernameusername",
     "kana": "kananaka",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "username",
     "kana": "kananaka",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "usernameusername",
     "kana": "kananaka",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "usernameusername",
     "kana": "kananaka",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "username",
     "kana": "kananaka",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "usernameusername",
     "kana": "kananaka",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   },
   {
     "name": "usernameusername",
     "kana": "kananaka",
-    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを"
+    "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+    "career": [
+      {
+      "title":"Libry",
+      "subTitle": "プロダクトオーナー"
+      },
+      {
+        "title":"Libry",
+        "subTitle": "プロダクトオーナー"
+      }
+    ]
   }
 ]
