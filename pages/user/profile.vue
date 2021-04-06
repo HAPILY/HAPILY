@@ -3,6 +3,19 @@
     <section class="images">
       <div class="l-container">
         <div class="slider">
+          <div class="profile">
+            <div class="profile__inner">
+              <div class="user-info">
+                <h1 class="font-extrabold text-3xl text-white">Taichiro</h1>
+                <h1 class="font-extrabold text-3xl text-white">Hasegawa</h1>
+                <p class="mt-1 text-white text-base">東京大学 法学部</p>
+              </div>
+              <!-- <img
+                class="rounded-full user-img"
+                src="@/assets/img/students/students_img0.jpg"
+              /> -->
+            </div>
+          </div>
           <MoleculeUserSliderProfile :items="students" />
         </div>
       </div>
@@ -26,47 +39,50 @@
             テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
           </p>
         </div>
-        <div class="price"><span>必要金額</span>1500,000<span>円</span></div>
-        <div class="condition">
-          <h2 class="title-center">条件</h2>
-          <ul class="list-condition">
-            <li>てxtてxtてxtてxtてxtてxtてxtてxt</li>
-            <li>てxtてxtてxtてxtてxtてxtててxtてxtててxtてxtてxtてxt</li>
-            <li>てxtてxtてxtてxtてxtてxtてxtてxt</li>
-          </ul>
+      </div>
+    </section>
+
+    <section class="career">
+      <div class="l-container">
+        <div class="content">
+          <atoms-section-title-line>職歴</atoms-section-title-line>
+          <organism-career-time-line :career="students[0].career" />
         </div>
       </div>
     </section>
 
-    <section class="future">
+    <section class="academic">
       <div class="l-container">
         <div class="content">
-          <h2 class="title-lines">将来の夢</h2>
-          <div class="future__inner">
-            <div class="future__txt">
-              <p>
-                テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-              </p>
-            </div>
-
-            <div class="future__avator">
-              <img src="@/assets/img/common/avator.svg" alt="" />
-            </div>
-          </div>
+          <atoms-section-title-line>学歴</atoms-section-title-line>
+          <organism-academic-time-line :academic="students[0].academic" />
         </div>
       </div>
     </section>
 
-    <section class="experience">
+    <section class="dream-list">
       <div class="l-container">
         <div class="content">
-          <h2 class="title-center">実績</h2>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますΩテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
+          <atoms-section-title-line>やりたいこと</atoms-section-title-line>
+          <organism-tag-list :tagList="students[0].dreamList" />
+        </div>
+      </div>
+    </section>
+
+    <section class="write">
+      <div class="l-container">
+        <div class="content">
+          <atoms-section-title-line>執筆</atoms-section-title-line>
+          <organism-rect-card-list :posts="students[0].write" />
+        </div>
+      </div>
+    </section>
+
+    <section class="achievements">
+      <div class="l-container">
+        <div class="content">
+          <atoms-section-title-line>実績</atoms-section-title-line>
+          <organism-rect-card-list :posts="students[0].achievements" />
         </div>
       </div>
     </section>
@@ -74,12 +90,29 @@
 </template>
 
 <script>
+import OrganismCareerTimeLine from "@/components/organism/OrganismCareerTimeLine.vue";
+import OrganismAcademicTimeLine from "@/components/organism/OrganismAcademicTimeLine.vue";
+import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
+import MoleculesRectCard from "@/components/molecules/user/MoleculesRectCard.vue";
+import AtomsSectionTitleLine from "@/components/atoms/line/AtomsSectionTitleLine.vue";
+import OrganismTagList from "../../components/organism/OrganismTagList.vue";
+import OrganismRectCardList from "../../components/organism/OrganismRectCardList.vue";
+
 export default {
   asyncData() {
     return {
-      students: require(`~/assets/json/students.json`)
+      students: require(`~/assets/json/students.json`),
     };
-  }
+  },
+  components: {
+    MoleculesProgressBox,
+    MoleculesRectCard,
+    OrganismCareerTimeLine,
+    OrganismAcademicTimeLine,
+    AtomsSectionTitleLine,
+    OrganismTagList,
+    OrganismRectCardList,
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -88,6 +121,7 @@ export default {
   margin-bottom: 8%;
 }
 .title {
+  vertical-align: top;
   position: relative;
   padding: 0 0 ($unit * 4) ($unit * 6);
   font-size: 1.1rem;
@@ -155,32 +189,7 @@ export default {
     }
   }
 }
-.title-lines {
-  display: flex;
-  align-items: center;
-  line-height: 1.4;
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: map-get($color, blue, default);
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    height: 1px;
-    flex-grow: 1;
-    background-color: map-get($color, blue, default);
-  }
-  &:before {
-    margin-right: 1em;
-  }
-  &:after {
-    margin-left: 1em;
-  }
-}
-.name {
-  font-size: 0.9rem;
-  color: #bbb;
-}
+
 .content {
   font-size: 0.9rem;
   line-height: 1.8;
@@ -228,16 +237,26 @@ export default {
     }
   }
 }
-.title-center {
-  color: #fff;
-  border-radius: 50px;
-  text-align: center;
-  font-weight: bold;
-  padding: 4px 4px 6px;
-  line-height: 1.4;
-  min-width: 160px;
-  margin: 0 auto 12px;
-  background-color: map-get($color, blue, default);
-  font-size: 1.1rem;
+
+.profile {
+  z-index: 100;
+  height: 150px;
+  .user-img {
+    width: 28%;
+  }
+
+  .profile__inner {
+    position: relative;
+    .user-info {
+      position: absolute;
+      top: 1.5rem;
+      left: 3rem;
+    }
+    .user-img {
+      position: absolute;
+      top: 6rem;
+      right: 2.5rem;
+    }
+  }
 }
 </style>
