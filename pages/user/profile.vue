@@ -25,18 +25,21 @@
       <div class="l-container">
         <h1 class="title">
           <span class="date">2021.01.07</span>
-          【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを
+          {{ saveProfileData.title }}
         </h1>
+        <organism-profile-input-modal
+          class="w-12 bl-margin-left"
+          :profileTextData="saveProfileData.textData"
+          @update:profileTextData="getProfileTextData"
+          :profileTitle="saveProfileData.title"
+          @update:profileTitle="getProfileTitle"
+          @close="inputCloseAction('profile')"
+          :key="closeKey.profile"
+        />
         <p class="name">@usernameusername</p>
         <div class="content">
           <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますΩテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
+            {{ saveProfileData.textData }}
           </p>
         </div>
       </div>
@@ -46,7 +49,20 @@
       <div class="l-container">
         <div class="content">
           <atoms-section-title-line>職歴</atoms-section-title-line>
-          <organism-career-time-line :career="students[0].career" />
+          <organism-campany-input-modal
+            class="w-12 bl-margin-left"
+            @close="inputCloseAction('career')"
+            @save="getCareerInputData"
+            :key="`career-${closeKey.career}`"
+          >
+            <template #ignition>
+              <atom-button class="w-full">追加</atom-button>
+            </template>
+          </organism-campany-input-modal>
+          <organism-career-time-line
+            :career="students[0].career"
+            :key="`careerTimeLine-${closeKey.careerTimeLine}`"
+          />
         </div>
       </div>
     </section>
@@ -55,7 +71,19 @@
       <div class="l-container">
         <div class="content">
           <atoms-section-title-line>学歴</atoms-section-title-line>
-          <organism-academic-time-line :academic="students[0].academic" />
+          <organism-academic-input-modal
+            class="w-12 bl-margin-left"
+            @close="inputCloseAction('academic')"
+            @save="getAcademicInputData"
+            :key="`academic-${closeKey.academic}`"
+            ><template #ignition>
+              <atom-button class="w-full">追加</atom-button>
+            </template></organism-academic-input-modal
+          >
+          <organism-academic-time-line
+            :academic="students[0].academic"
+            :key="`academicTimeLine-${closeKey.academicTimeLine}`"
+          />
         </div>
       </div>
     </section>
@@ -65,6 +93,21 @@
         <div class="content">
           <atoms-section-title-line>やりたいこと</atoms-section-title-line>
           <organism-tag-list :tagList="students[0].dreamList" />
+          <organism-tag-input-modal
+            @add="addTag"
+            @close="inputCloseAction('todo')"
+            :key="closeKey.todo"
+            class="mt-4"
+          >
+            <template #ignition>
+              <atom-border-button class="add-job-btn">
+                <div class="flex justify-center">
+                  <atom-icon class="w-4" name="plus" />
+                  <span>やりたいことを追加</span>
+                </div>
+              </atom-border-button>
+            </template>
+          </organism-tag-input-modal>
         </div>
       </div>
     </section>
@@ -74,6 +117,16 @@
         <div class="content">
           <atoms-section-title-line>執筆</atoms-section-title-line>
           <organism-rect-card-list :posts="students[0].write" />
+          <organism-writer-post-input-modal @add="addWrite" class="mt-4">
+            <template #ignition>
+              <atom-border-button class="add-job-btn">
+                <div class="flex justify-center">
+                  <atom-icon class="w-4" name="plus" />
+                  <span>執筆を追加</span>
+                </div>
+              </atom-border-button>
+            </template>
+          </organism-writer-post-input-modal>
         </div>
       </div>
     </section>
@@ -83,6 +136,16 @@
         <div class="content">
           <atoms-section-title-line>実績</atoms-section-title-line>
           <organism-rect-card-list :posts="students[0].achievements" />
+          <organism-writer-post-input-modal @add="addAchievements" class="mt-4">
+            <template #ignition>
+              <atom-border-button class="add-job-btn">
+                <div class="flex justify-center">
+                  <atom-icon class="w-4" name="plus" />
+                  <span>実績を追加</span>
+                </div>
+              </atom-border-button>
+            </template>
+          </organism-writer-post-input-modal>
         </div>
       </div>
     </section>
@@ -97,13 +160,28 @@ import MoleculesRectCard from "@/components/molecules/user/MoleculesRectCard.vue
 import AtomsSectionTitleLine from "@/components/atoms/line/AtomsSectionTitleLine.vue";
 import OrganismTagList from "../../components/organism/OrganismTagList.vue";
 import OrganismRectCardList from "../../components/organism/OrganismRectCardList.vue";
+import MoleculesModal from "../../components/molecules/user/MoleculesModal.vue";
+import AtomButton from "../../components/atoms/button/AtomButton.vue";
+import AtomTextarea from "../../components/atoms/input/AtomTextarea.vue";
+import AtomInputText from "../../components/atoms/input/AtomInputText.vue";
+import OrganismProfileInputModal from "../../components/organism/OrganismProfileInputModal.vue";
+import OrganismCampanyInputModal from "../../components/organism/OrganismCampanyInputModal.vue";
+import OrganismAcademicInputModal from "../../components/organism/OrganismAcademicInputModal.vue";
+import OrganismTagInputModal from "../../components/organism/OrganismTagInputModal.vue";
+import OrganismWriterPostInputModal from "../../components/organism/OrganismPostInputModal.vue";
 
 export default {
   asyncData() {
+    const saveProfileData = {
+      title: "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
+      textData: "testtesttesttesttesttesttesttesttesttesttesttest",
+    };
     return {
       students: require(`~/assets/json/students.json`),
+      saveProfileData: saveProfileData,
     };
   },
+  beforeMount() {},
   components: {
     MoleculesProgressBox,
     MoleculesRectCard,
@@ -112,7 +190,76 @@ export default {
     AtomsSectionTitleLine,
     OrganismTagList,
     OrganismRectCardList,
+    MoleculesModal,
+    AtomButton,
+    AtomTextarea,
+    AtomInputText,
+    OrganismProfileInputModal,
+    OrganismCampanyInputModal,
+    OrganismAcademicInputModal,
+    OrganismTagInputModal,
+    OrganismWriterPostInputModal,
   },
+  data() {
+    return {
+      closeKey: {
+        todo: 0,
+        career: 0,
+        careerTimeLine: 0,
+        academic: 0,
+        academicTimeLine: 0,
+        profile: 0,
+      },
+    };
+  },
+  methods: {
+    getProfileTextData(value) {
+      this.saveProfileData.textData = value;
+    },
+    getProfileTitle(value) {
+      this.saveProfileData.title = value;
+    },
+    getAcademicInputData(value) {
+      this.students[0].academic.push(value);
+      this.inputCloseAction("academicTimeLine");
+    },
+    getCareerInputData(value) {
+      this.students[0].career.push(value);
+      this.inputCloseAction("careerTimeLine");
+    },
+    inputCloseAction(closeModalName) {
+      switch (closeModalName) {
+        case "todo":
+          this.closeKey.todo++;
+          break;
+        case "career":
+          this.closeKey.career++;
+          break;
+        case "careerTimeLine":
+          this.closeKey.careerTimeLine++;
+          break;
+        case "academic":
+          this.closeKey.academic++;
+          break;
+        case "academicTimeLine":
+          this.closeKey.academicTimeLine++;
+          break;
+        case "profile":
+          this.closeKey.profile++;
+          break;
+      }
+    },
+    addTag(newTag) {
+      this.students[0].dreamList.push({ name: newTag });
+    },
+    addWrite(newPost) {
+      this.students[0].write.push(newPost);
+    },
+    addAchievements(newPost) {
+      this.students[0].achievements.push(newPost);
+    },
+  },
+  watch: {},
 };
 </script>
 <style lang="scss" scoped>

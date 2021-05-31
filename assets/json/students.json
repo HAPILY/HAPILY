@@ -7,59 +7,43 @@
     "text": "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
     "career": [
       {
-      "title":"Libry",
-      "subTitle": "プロダクトオーナー",
-      "startDate": "2021年１月",
+      "orgName":"Libry",
+      "beginDate": "2020-01-01",
       "endDate": "",
-      "job": [
+      "jobList": [
         {
-        "name": "プロダクトオーナー",
-        "details": "Lftのプロダクト"
+        "jobName": "プロダクトオーナー",
+        "jobDetail": "Lftのプロダクト"
         },
         {
-          "name": "フロントエンジニア",
-          "details": "Vue.js TypeScript"
+        "jobName": "プロダクトオーナー",
+        "jobDetail": "Lftのプロダクト"
         }
       ]
-      },
-      {
-        "title":"Libry",
-        "subTitle": "プロダクトオーナー",
-        "startDate": "2021年１月",
-        "endDate": "2021年5月",
-        "job": [
-          {
-          "name": "プロダクトオーナー"
-          },
-          {
-            "name": "フロントエンジニア"
-          }
-        ]
-      },{
-        "title":"Libry",
-        "subTitle": "プロダクトオーナー",
-        "startDate": "2021年１月",
-        "endDate": "2021年5月",
-        "job": [
-          {
-          "name": "プロダクトオーナー"
-          },
-          {
-            "name": "フロントエンジニア"
-          }
-        ]
       }
     ],
     "academic":[
       {
-        "title":"Libry学園",
-        "subTitle": "情報科",
-        "graduationDate": ""
+        "orgName":"Libry学園",
+        "beginDate": "2020-01-01",
+        "endDate": "",
+        "classList": [
+          {
+          "className": "情報処理科",
+          "classDetail": "プログラムの勉強"
+          }
+        ]
       },
       {
-        "title":"Libry高校",
-        "subTitle": "情報システム科",
-        "graduationDate": "2020年3月"
+        "orgName":"Libry学園",
+        "beginDate": "2020-01-01",
+        "endDate": "2020-01-01",
+        "classList": [
+          {
+          "className": "情報処理科",
+          "classDetail": "プログラムの勉強"
+          }
+        ]
       }
     ],
     "dreamList":[

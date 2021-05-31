@@ -5,7 +5,6 @@
     <div class="main">
       <Nuxt />
     </div>
-    <GlobalFooter />
     <portal-target name="modal" />
   </div>
 </template>
@@ -55,9 +54,8 @@ export default {
   &:before {
     content: "";
     display: block;
-    border-radius: 50%;
-    width: 170vw;
-    height: 150vw;
+    width: 150vw;
+    height: 16vh;
     position: absolute;
     top: 0;
     left: 44%;
@@ -65,7 +63,7 @@ export default {
     opacity: 1;
     transform: translate3d(-40%, -50%, 0);
     transition: border-radius 0.3s;
-    background: map-get($color, gradient, yellow);
+    background: map-get($color, yellow, default);
   }
   // &.-scroll {
   //   &:before {

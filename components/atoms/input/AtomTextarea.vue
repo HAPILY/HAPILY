@@ -1,22 +1,24 @@
 <template>
-  <input
-    :type="type"
-    v-model="computedValue"
-    :placeholder="placeholder"
-    class="input-text"
-  />
+  <div class="text-area">
+    <textarea
+      ref="textarea"
+      v-model="computedValue"
+      class="input-text"
+    ></textarea>
+    <div class="dummy" ref="dummy"></div>
+  </div>
 </template>
+
 <script>
 export default {
   props: {
-    type: {
+    value: {
       type: String,
-      default: "text",
     },
-    placeholder: {
-      type: String,
-      default: "",
-    },
+  },
+  mounted() {
+    this.$refs.dummy.textContent = this.value + "\u200b";
+    this.$refs.textarea.style.height = this.$refs.dummy.clientHeight + "px";
   },
   computed: {
     computedValue: {
@@ -24,6 +26,8 @@ export default {
         return this.value;
       },
       set(value) {
+        this.$refs.dummy.textContent = value + "\u200b";
+        this.$refs.textarea.style.height = this.$refs.dummy.clientHeight + "px";
         this.$emit("input", value);
       },
     },
@@ -32,12 +36,36 @@ export default {
 </script>
 
 <style lang="scss" scope>
-.input-text {
+textarea {
+  position: absolute;
+  left: 0;
+  top: 0;
+  word-break: break-all;
+  resize: none;
+}
+.text-area {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.dummy {
+  max-width: 100%;
   width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  visibility: hidden;
+  word-break: break-all;
+}
+
+.input-text {
   border: 0;
   outline: 0;
   border-radius: 20px;
-  padding: 16px;
+  padding: 10px;
   background-color: map-get($color, blue, light);
   color: #61677c;
   transition: all 0.2s ease-in-out;

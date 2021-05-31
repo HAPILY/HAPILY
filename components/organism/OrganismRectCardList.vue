@@ -13,9 +13,7 @@
         <time>{{ item.postDate }}</time>
       </template>
       <template v-slot:thumbnail>
-        <img
-          class="card-thumbnail"
-          :src="item.thumbnail.length > 0 || defaultImage"
+        <img class="card-thumbnail" :src="item.thumbnail || defaultImage"
       /></template>
     </molecules-rect-card>
   </div>

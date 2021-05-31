@@ -30,6 +30,8 @@ export default {
     { src: '@/plugins/routerSetting' },
     { src: '@/plugins/lottie.js', ssr: false },
     { src: '@/plugins/axios/index', ssr: false },
+    { src: '~/plugins/window', ssr: false},
+    { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,10 +41,11 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/composition-api/module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', "portal-vue/nuxt"],
   styleResources: {
     scss: [
       '@/assets/css/variable/**/*.scss',
@@ -59,6 +62,7 @@ export default {
     },
   },
   server: {
+    host: '0.0.0.0',
     port: 8000,
   },
   vue: {
