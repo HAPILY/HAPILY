@@ -340,6 +340,9 @@ $footerHeght: 100px;
     margin-top: 40px;
     padding-left: 10px;
     padding-right: 10px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
     .my {
       margin-left: auto;
     }
@@ -446,5 +449,11 @@ $footerHeght: 100px;
 
 .profile-info {
   float: left;
+}
+
+.chat-input-area {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

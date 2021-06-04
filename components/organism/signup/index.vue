@@ -22,14 +22,14 @@
             </ul>
 
             <div class="btn">
-              <AtomButton> 新規登録 </AtomButton>
+              <AtomButton class="m-auto"> 新規登録 </AtomButton>
             </div>
           </form>
 
           <div class="login">
             <h2 class="c-title-left">アカウントをお持ちの方はこちら</h2>
             <div class="btn">
-              <AtomButton color="red"> ログイン </AtomButton>
+              <AtomButton color="red m-auto"> ログイン </AtomButton>
             </div>
           </div>
         </AtomBoxRounded>
@@ -39,6 +39,19 @@
 </template>
 
 <style lang="scss" scoped>
+.signup {
+  @include pc {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    &:before,&:after {
+      content: '';
+      display: block;
+      flex: 1;
+      min-height: 50px;
+    }
+  }
+}
 .title {
   text-align: center;
   font-size: 20px;

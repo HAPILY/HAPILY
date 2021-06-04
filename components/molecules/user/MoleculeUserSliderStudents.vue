@@ -184,19 +184,31 @@ export default {
   data() {
     return {
       swiperOption: {
-        speed: 600,
         autoplay: {
-          disableOnInteraction: false
+          delay: 1,
         },
-        slidesPerView: 1.4,
         centeredSlides: true,
-        centerPadding: "10%",
         spaceBetween: 0,
-        navigation: {
-          nextEl: ".arrow-next",
-          prevEl: ".arrow-prev"
-        },
-        loop: true
+        loop: true,
+        centerPadding: 0,
+        speed: 7000,
+        slidesPerView: 'auto',
+        allowTouchMove: false,
+        disableOnInteraction: true,
+        breakpoints: {
+          767: {
+            slidesPerView: 1.4,
+            centerPadding: "10%",
+            speed: 600,
+            autoplay: {
+              delay: 2000,
+            },
+            navigation: {
+              nextEl: ".arrow-next",
+              prevEl: ".arrow-prev"
+            },
+          }
+        }
       }
     };
   }
@@ -218,6 +230,10 @@ export default {
     justify-content: center;
     z-index: 100;
     background: linear-gradient(to top, #fec22e 0%, #ffe371 80%);
+
+    @include pc {
+      display: none;
+    }
     i {
       display: block;
       width: 22px;
@@ -235,6 +251,19 @@ export default {
 }
 .swiper-slide {
   padding: 0 16px;
+
+  @include pc{
+    width: vw-pc(400);
+  }
+
+  @include pcL {
+    width: 400px;
+  }
+}
+::v-deep .swiper-wrapper {
+  @include pc {
+    transition-timing-function: linear !important;
+  }
 }
 .slide-inner {
   width: 100%;
@@ -254,6 +283,11 @@ export default {
   align-items: flex-start;
   position: relative;
   overflow: hidden;
+  background-color: #fff;
+
+  &:hover > * {
+    opacity: .7;
+  }
 
   .thumb {
     margin: -28px -20px 14px;

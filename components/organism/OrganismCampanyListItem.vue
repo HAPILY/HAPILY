@@ -63,15 +63,27 @@ export default {
 }
 .campany-message {
   padding: 15px;
+
+  @include pc {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 .campany-contact {
   margin-top: 10px;
 }
 .campany-thumbnail {
-  height: 170px;
+  padding-top: 56.25%;
   background-image: url("~@/assets/img/students/students_img0.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  object-fit: fill;
+  background-position: center center;
+
+  @include pc {
+
+  }
+  @include pcL {
+    
+  }
 }
 </style>

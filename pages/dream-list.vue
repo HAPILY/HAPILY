@@ -23,7 +23,7 @@ export default {
 .dream-list-header {
   height: 96px;
   background: map-get($color, yellow, default);
-  font-size: 26;
+  font-size: 26px;
   font-weight: 600;
   color: white;
   padding-top: 25px;

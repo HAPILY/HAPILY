@@ -54,15 +54,13 @@ export default {
   &:before {
     content: "";
     display: block;
-    width: 150vw;
-    height: 16vh;
+    width: 100%;
+    height: 50px;
     position: absolute;
     top: 0;
-    left: 44%;
+    left: 0;
     z-index: -1;
     opacity: 1;
-    transform: translate3d(-40%, -50%, 0);
-    transition: border-radius 0.3s;
     background: map-get($color, yellow, default);
   }
   // &.-scroll {

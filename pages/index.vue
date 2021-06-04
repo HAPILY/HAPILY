@@ -1,10 +1,7 @@
 <template>
   <div>
     <section class="mv">
-      <div class="l-container">
-        <h1 class="title">
-          <AtomLogo />
-        </h1>
+      <div class="mv_inner l-container relative">
         <p class="copy">コピー入ります<br />コピー入ります<br />コピー</p>
         <div class="mv_img">
           <img src="@/assets/img/top/mv1.svg" alt="" />
@@ -31,15 +28,16 @@
             </AtomButton>
           </div>
         </div>
+        <h1 class="title">
+          <AtomLogo />
+        </h1>
       </div>
     </section>
 
     <section class="students">
-      <div class="l-container">
         <div class="students__slider">
           <MoleculeUserSliderStudents :items="students" />
         </div>
-      </div>
     </section>
   </div>
 </template>
@@ -57,14 +55,44 @@ export default {
 <style lang="scss" scoped>
 .mv {
   position: relative;
-  padding-top: 74%;
-  margin-bottom: 16%;
+  margin-bottom: 12%;
+
+  @include pc {
+    margin-bottom: vw-pc(220);
+  }
+
+  @include pcL {
+    margin-bottom: 220px;
+  }
+
+  &_inner{
+    padding-top: 74%;
+
+    @include pc {
+      padding-top: vw-pc(270);
+    }
+    @include pcL {
+      padding-top: 270px;
+    }
+  }
 
   &_img {
     position: absolute;
     top: 4vw;
     right: -50vw;
     width: 105vw;
+
+    @include pc {
+      top: vw-pc(50);
+      right: 0;
+      transform: translate(10%,0);
+      width: vw-pc(900);
+    }
+
+    @include pcL {
+      top: 50px;
+      width: 900px;
+    }
   }
 }
 .copy {
@@ -75,15 +103,48 @@ export default {
   top: 18vw;
   left: $paddingSp;
   z-index: 100;
-  // text-shadow: 1px 1px 3px rgba(#000, 0.2);
+
+  @include pc {
+    top: vw-pc(80);
+    left: $paddingPc;
+    font-size: vw-pc(40);
+  }
+
+  @include pcL {
+    top: 80px;
+    font-size: 40px;
+  }
 }
 .title {
-  width: 40%;
-  margin: 0 auto 10%;
+  @include sp{
+    width: 40%;
+    margin: 10% auto 0;
+  }
+
+  @include pc {
+    width: 20%;
+    margin-top: 4%;
+    margin-left: 6%;
+
+    ::v-deep {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+
+  @include pcL {
+  }
 }
 .search-box {
   display: flex;
   justify-content: space-between;
+
+  @include pc {
+    width: 40%;
+    max-width: 400px;
+    margin-top: 5%;
+  }
 
   .input {
     width: 80%;
@@ -97,7 +158,6 @@ export default {
 }
 .students {
   &__slider {
-    @include noGutter;
   }
 }
 </style>

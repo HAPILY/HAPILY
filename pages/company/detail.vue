@@ -13,7 +13,7 @@ export default {
 
 <style lang="scss" scoped>
 .company-detail {
-  margin-top: 40px;
+  padding-top: 40px;
 }
 </style>
 

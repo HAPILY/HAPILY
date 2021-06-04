@@ -22,7 +22,7 @@
               >
             </p>
             <div class="btn">
-              <AtomButton>
+              <AtomButton class="m-auto">
                 ログイン
               </AtomButton>
             </div>
@@ -33,7 +33,7 @@
               アカウントをお持ちでない方はこちら
             </h2>
             <div class="btn">
-              <AtomButton color="red">
+              <AtomButton color="red m-auto">
                 新規会員登録
               </AtomButton>
             </div>
@@ -45,6 +45,19 @@
 </template>
 
 <style lang="scss" scoped>
+.login {
+  @include pc {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    &:before,&:after {
+      content: '';
+      display: block;
+      flex: 1;
+      min-height: 50px;
+    }
+  }
+}
 .title {
   text-align: center;
   font-size: 20px;

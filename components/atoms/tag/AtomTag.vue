@@ -32,5 +32,9 @@ export default {
   min-width: 60px;
   background-color: var(--color);
   font-size: 0.9rem;
+
+  @include pc {
+    font-size: 0.7rem;
+  }
 }
 </style>
