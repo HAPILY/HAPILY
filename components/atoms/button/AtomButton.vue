@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-default" :class="color">
+  <button class="btn-default" @click="click" :class="color">
     <slot />
   </button>
 </template>
@@ -8,25 +8,28 @@ export default {
   props: {
     type: {
       type: String,
-      default: "text"
+      default: "text",
     },
     color: {
       type: String,
-      default: ""
-    }
-  }
+      default: "",
+    },
+  },
+  methods: {
+    click(e) {
+      this.$emit("click", e);
+    },
+  },
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .btn-default {
-  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   border-radius: 20px;
-  width: 100%;
   border: 0;
   outline: 0;
   padding: 4px;
@@ -35,6 +38,7 @@ export default {
   font-weight: bold;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  width: 100%;
 
   &.red {
     background-color: map-get($color, red, medium);

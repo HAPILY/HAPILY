@@ -40,3 +40,31 @@
     flex: 1;
   }
 }
+
+.bl-justify-root{
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.bl-margin-left{
+  margin-left:auto
+}
+
+.bl-mb-20{
+  margin-bottom: 20px;
+}
+
+.bl-justify-center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.bl-box1{
+  margin: 1em 0;
+  border: 1px solid;
+  color: #5989cf;
+  background: white;
+  border-radius: 9px;
+}
