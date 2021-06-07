@@ -9,7 +9,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'hapily',
+    title: 'HAPILY 〜やりたいことをやる〜',
     htmlAttrs: {
       lang: 'ja',
     },
@@ -46,6 +46,16 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', "portal-vue/nuxt"],
+
+  axios: {
+    proxy: true,
+  },
+  proxy: {
+    '/api/v1': {
+      target: 'http://localhost:3200',
+    },
+  },
+
   styleResources: {
     scss: [
       '@/assets/css/variable/**/*.scss',
