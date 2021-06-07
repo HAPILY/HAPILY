@@ -40,16 +40,17 @@ export default {};
   display: block;
   .dream-item__inner {
     display: flex;
+    
   }
   .left {
     width: 55%;
     .dream-thumbnail {
-      min-height: 115px;
+      padding-top: 56.25%;
       background-image: url("~@/assets/img/students/students_img0.jpg");
       background-size: cover;
       background-repeat: no-repeat;
+      background-position: center center;
       position: relative;
-      padding-bottom: 1px;
       .icon-heart {
         width: 25px;
         height: 25px;

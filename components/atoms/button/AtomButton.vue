@@ -39,6 +39,11 @@ export default {
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   width: 100%;
+  max-width: 300px;
+
+  @include pc {
+    height: 54px;
+  }
 
   &.red {
     background-color: map-get($color, red, medium);

@@ -1,0 +1,18 @@
+//  mediaquery
+@mixin sp {
+  @media screen and (max-width: $spMaxWidth) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media print, screen and (min-width: $spMaxWidth + 1) {
+    @content;
+  }
+}
+
+@mixin pcL {
+  @media screen and (min-width: $pcMaxWidth) {
+    @content;
+  }
+}

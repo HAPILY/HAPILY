@@ -1,30 +1,32 @@
 <template>
   <div class="user-profile">
     <section class="images">
-      <div class="l-container">
-        <div class="slider">
-          <div class="profile">
-            <div class="profile__inner">
-              <div class="user-info">
-                <h1 class="font-extrabold text-3xl text-white">Taichiro</h1>
-                <h1 class="font-extrabold text-3xl text-white">Hasegawa</h1>
-                <p class="mt-1 text-white text-base">東京大学 法学部</p>
-              </div>
-              <!-- <img
-                class="rounded-full user-img"
-                src="@/assets/img/students/students_img0.jpg"
-              /> -->
+      <div class="user-profile_inner l-container">
+        <div class="profile">
+          <div class="profile__inner">
+            <div class="user-info">
+              <h1 class="user-info_name font-extrabold text-white">
+                <span class="sp:block pc:inline-block pc:mr-1">Taichiro</span>
+                <span class="sp:block pc:inline-block">Hasegawa</span>
+              </h1>
+              <p class="mt-1 text-white text-base">東京大学 法学部</p>
             </div>
+            <!-- <img
+              class="rounded-full user-img"
+              src="@/assets/img/students/students_img0.jpg"
+            /> -->
           </div>
+        </div>
+        <div class="slider">
           <MoleculeUserSliderProfile :items="students" />
         </div>
       </div>
     </section>
 
     <section class="body">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <h1 class="title">
-          <span class="date">2021.01.07</span>
+          <span class="date sp:text-gray-400 pc:text-black">2021.01.07</span>
           {{ saveProfileData.title }}
         </h1>
         <organism-profile-input-modal
@@ -46,7 +48,7 @@
     </section>
 
     <section class="career">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>職歴</atoms-section-title-line>
           <organism-campany-input-modal
@@ -68,7 +70,7 @@
     </section>
 
     <section class="academic">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>学歴</atoms-section-title-line>
           <organism-academic-input-modal
@@ -89,7 +91,7 @@
     </section>
 
     <section class="dream-list">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>やりたいこと</atoms-section-title-line>
           <organism-tag-list :tagList="students[0].dreamList" />
@@ -113,7 +115,7 @@
     </section>
 
     <section class="write">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>執筆</atoms-section-title-line>
           <organism-rect-card-list :posts="students[0].write" />
@@ -132,7 +134,7 @@
     </section>
 
     <section class="achievements">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>実績</atoms-section-title-line>
           <organism-rect-card-list :posts="students[0].achievements" />
@@ -263,9 +265,22 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.user-profile_inner {
+  @include pc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
 .slider {
-  @include noGutter;
   margin-bottom: 8%;
+
+  @include sp {
+    @include noGutter;
+  }
+  @include pc {
+    width: 54%;
+  }
 }
 .title {
   vertical-align: top;
@@ -275,6 +290,7 @@ export default {
   margin-bottom: 12px;
   line-height: 1.6;
   font-weight: bold;
+
   &:before {
     content: "";
     display: block;
@@ -287,7 +303,6 @@ export default {
     background: linear-gradient(to top, #fec22e 0%, #ffe371 80%);
   }
   .date {
-    color: #ddd;
     text-align: right;
     font-size: 0.8rem;
     display: block;
@@ -387,7 +402,14 @@ export default {
 
 .profile {
   z-index: 100;
-  height: 150px;
+  @include sp {
+    height: 150px;
+  }
+  @include pc {
+    width: 40%;
+    margin-bottom: 10%;
+  }
+
   .user-img {
     width: 28%;
   }
@@ -395,14 +417,23 @@ export default {
   .profile__inner {
     position: relative;
     .user-info {
-      position: absolute;
-      top: 1.5rem;
-      left: 3rem;
+      @include sp {
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+      }
+      &_name {
+        @include pc {
+          font-size: vw-pc(36);
+        }
+        @include pcL {
+          font-size: 36px;
+        }
+      }
     }
     .user-img {
-      position: absolute;
-      top: 6rem;
-      right: 2.5rem;
+      @include sp {
+        margin-top: 6rem;
+      }
     }
   }
 }

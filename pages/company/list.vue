@@ -4,9 +4,11 @@
       <template>
         <p class="title-border">会社一覧</p>
       </template>
-      <div v-for="(item, index) in [1, 2, 3, 4, 5]" :key="index">
-        <organism-campany-list-item />
-        <p class="company-border"></p>
+      <div class="company-list__container">
+        <div v-for="(item, index) in [1, 2, 3, 4, 5]" :key="index">
+          <organism-campany-list-item />
+          <p class="company-border"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +23,29 @@ export default {
 </script>
 
 <style lang="scss" scope>
+.company-list__container {
+  @include pc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-left: $paddingPc;
+    padding-right: $paddingPc;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+    >* {
+      width: 48%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+    }
+
+    .l-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+}
 .company-border,
 .title-border {
   width: 80%;

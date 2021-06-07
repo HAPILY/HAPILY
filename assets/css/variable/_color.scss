@@ -13,14 +13,10 @@ $color: (
     default: #4c4943,
   ),
   yellow: (
-    default:#FCDB51,
+    default: #fcdb51,
   ),
   gradient: (
     yellow: linear-gradient(to top, #fec22e 0%, #ffe371 80%),
   ),
 );
-
-$unit: 4px;
-$paddingSp: 25px;
 $text-color: map-get($color, black, default);
-$ruler: 16px;

@@ -63,9 +63,20 @@ export default {
     left: 44%;
     z-index: -1;
     opacity: 1;
-    transform: translate3d(-40%, -50%, 0);
+    transform: translate(-40%, -50%);
     transition: border-radius 0.3s;
     background: map-get($color, gradient, yellow);
+
+    @include pc{
+      transform: translate(-36%, -70%);
+      width: vw-pc(270) * 12;
+      height: vw-pc(270) * 12;
+    }
+
+    @include pcL{
+      width: 270px * 12;
+      height: 270px * 12;
+    }
   }
   // &.-scroll {
   //   &:before {

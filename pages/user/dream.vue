@@ -1,7 +1,7 @@
 <template>
   <div class="user-profile">
     <section class="images">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="slider">
           <MoleculeUserSliderProfile :items="students" />
         </div>
@@ -9,7 +9,7 @@
     </section>
 
     <section class="body">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <h1 class="title">
           <span class="date">2021.01.07</span>
           【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを
@@ -39,7 +39,7 @@
     </section>
 
     <section class="future">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="content">
           <h2 class="title-lines">将来の夢</h2>
           <div class="future__inner">
@@ -58,7 +58,7 @@
     </section>
 
     <section class="experience">
-      <div class="l-container">
+      <div class="l-container -max-900">
         <div class="content">
           <h2 class="title-center">実績</h2>
           <p>

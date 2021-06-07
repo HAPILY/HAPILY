@@ -1,0 +1,8 @@
+//  calc
+@function vw($size) {
+  @return floor($size / $spMaxWidth * 1000000vw) / 10000;
+}
+
+@function vw-pc($size) {
+  @return floor($size / $pcMaxWidth * 1000000vw) / 10000;
+}

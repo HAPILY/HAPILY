@@ -26,6 +26,7 @@ export default {
   .dream-list__inner {
     display: flex;
     flex-wrap: wrap;
+
     .tag {
       padding-left: 10px;
       padding-right: 10px;

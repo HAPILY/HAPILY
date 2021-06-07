@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <div class="company-info">
+    <div class="company-info l-container -max-900">
       <div class="bl-justify-root info__inner">
         <img
           class="rounded-full company-icon"
