@@ -16,8 +16,7 @@
           <span class="username">@hasegawa</span>
           <div class="money">
             <img class="en-icon" src="@/assets/img/common/en.svg" />
-            <span class="font-bold">1500,000</span
-            ><span class="text-sm">円</span>
+            <span class="font-bold">1500,000</span><span class="text-sm">円</span>
           </div>
           <img
             class="rounded-full user-thumbnail"
@@ -30,7 +29,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scope>
@@ -40,7 +39,7 @@ export default {};
   display: block;
   .dream-item__inner {
     display: flex;
-    
+
   }
   .left {
     width: 55%;

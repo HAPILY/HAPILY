@@ -14,7 +14,9 @@
           <span class="date">2021.01.07</span>
           【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを
         </h1>
-        <p class="name">@usernameusername</p>
+        <p class="name">
+          @usernameusername
+        </p>
         <div class="content">
           <p>
             テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
@@ -26,9 +28,13 @@
             テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
           </p>
         </div>
-        <div class="price"><span>必要金額</span>1500,000<span>円</span></div>
+        <div class="price">
+          <span>必要金額</span>1500,000<span>円</span>
+        </div>
         <div class="condition">
-          <h2 class="title-center">条件</h2>
+          <h2 class="title-center">
+            条件
+          </h2>
           <ul class="list-condition">
             <li>てxtてxtてxtてxtてxtてxtてxtてxt</li>
             <li>てxtてxtてxtてxtてxtてxtててxtてxtててxtてxtてxtてxt</li>
@@ -41,7 +47,9 @@
     <section class="future">
       <div class="l-container -max-900">
         <div class="content">
-          <h2 class="title-lines">将来の夢</h2>
+          <h2 class="title-lines">
+            将来の夢
+          </h2>
           <div class="future__inner">
             <div class="future__txt">
               <p>
@@ -60,7 +68,9 @@
     <section class="experience">
       <div class="l-container -max-900">
         <div class="content">
-          <h2 class="title-center">実績</h2>
+          <h2 class="title-center">
+            実績
+          </h2>
           <p>
             テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
           </p>
@@ -74,17 +84,13 @@
 </template>
 
 <script>
-import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
 export default {
-  asyncData() {
+  asyncData () {
     return {
-      students: require(`~/assets/json/students.json`),
-    };
-  },
-  components: {
-    MoleculesProgressBox,
-  },
-};
+      students: require('~/assets/json/students.json')
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .slider {

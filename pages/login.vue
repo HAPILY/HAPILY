@@ -17,9 +17,9 @@
               </li>
             </ul>
             <p class="password">
-              <nuxt-link class="c-link" to="password"
-                >パスワードをお忘れの方はこちら</nuxt-link
-              >
+              <nuxt-link class="c-link" to="password">
+                パスワードをお忘れの方はこちら
+              </nuxt-link>
             </p>
             <div class="btn">
               <AtomButton class="m-auto">

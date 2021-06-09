@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import signup from "@/components/organism/signup/index.vue";
+import signup from '@/components/organism/signup/index.vue'
 export default {
   components: {
-    signup,
-  },
-};
+    signup
+  }
+}
 </script>
 
 <style>

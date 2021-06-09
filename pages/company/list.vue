@@ -1,9 +1,9 @@
 <template>
   <div class="company-list">
     <div class="company-list__inner">
-      <template>
-        <p class="title-border">会社一覧</p>
-      </template>
+      <p class="title-border">
+        会社一覧
+      </p>
       <div class="company-list__container">
         <div v-for="(item, index) in [1, 2, 3, 4, 5]" :key="index">
           <organism-campany-list-item />
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import OrganismCampanyListItem from "@/components/organism/OrganismCampanyListItem.vue";
+import OrganismCampanyListItem from '@/components/organism/OrganismCampanyListItem.vue'
 export default {
   components: { OrganismCampanyListItem },
-  layout: "NoCircleNoFooterLayout",
-};
+  layout: 'NoCircleNoFooterLayout'
+}
 </script>
 
 <style lang="scss" scope>

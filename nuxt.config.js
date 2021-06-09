@@ -1,4 +1,4 @@
-const globImporter = require('node-sass-glob-importer');
+const globImporter = require('node-sass-glob-importer')
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -7,18 +7,27 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  // runtime lint
+  typescript: {
+    typeCheck: {
+      eslint: {
+        files: './**/*.{ts,js,vue}'
+      }
+    }
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'HAPILY 〜やりたいことをやる〜',
     htmlAttrs: {
-      lang: 'ja',
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: '' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -30,8 +39,8 @@ export default {
     { src: '@/plugins/routerSetting' },
     { src: '@/plugins/lottie.js', ssr: false },
     { src: '@/plugins/axios/index', ssr: false },
-    { src: '~/plugins/window', ssr: false},
-    { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false}
+    { src: '~/plugins/window', ssr: false },
+    { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,44 +50,45 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api/module'
+    '@nuxtjs/composition-api/module',
+    '@nuxt/typescript-build'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', "portal-vue/nuxt"],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', 'portal-vue/nuxt'],
 
   axios: {
-    proxy: true,
+    proxy: true
   },
   proxy: {
     '/api/v1': {
-      target: 'http://localhost:3200',
-    },
+      target: 'http://localhost:3200'
+    }
   },
 
   styleResources: {
     scss: [
       '@/assets/css/variable/**/*.scss',
       '@/assets/css/mixin/**/*.scss',
-      '@/assets/css/function/**/*.scss',
-    ],
+      '@/assets/css/function/**/*.scss'
+    ]
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(_, { loaders: { scss } }) {
-      const sassOptions = scss.sassOptions || {};
-      sassOptions.importer = globImporter();
-      scss.sassOptions = sassOptions;
-    },
+    extend (_, { loaders: { scss } }) {
+      const sassOptions = scss.sassOptions || {}
+      sassOptions.importer = globImporter()
+      scss.sassOptions = sassOptions
+    }
   },
   server: {
     host: '0.0.0.0',
-    port: 8000,
+    port: 8000
   },
   vue: {
     config: {
       productionTip: true,
-      devtools: true,
-    },
-  },
-};
+      devtools: true
+    }
+  }
+}

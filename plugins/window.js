@@ -4,7 +4,7 @@ import Vue from 'vue'
  */
 
 Vue.use({
-  install(Vue) {
+  install (Vue) {
     const $window = Vue.observable({
       width: 0,
       height: 0,

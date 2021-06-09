@@ -1,7 +1,7 @@
 <template>
   <div class="dream-list">
     <div class="dream-list__inner">
-      <atom-tag class="tag" v-for="(item, index) in tagList" :key="index">
+      <atom-tag v-for="(item, index) in tagList" :key="index" class="tag">
         {{ item.name || item }}
       </atom-tag>
     </div>
@@ -13,9 +13,12 @@ export default {
   props: {
     tagList: {
       type: Array,
-    },
-  },
-};
+      default () {
+        return []
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

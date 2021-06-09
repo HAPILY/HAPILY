@@ -12,37 +12,37 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       scrollY: 0,
-      winWidth: 0,
-    };
-  },
-  mounted() {
-    window.addEventListener("scroll", this.onScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll);
+      winWidth: 0
+    }
   },
   computed: {
-    menuOpen() {
-      return this.$store.state["menu"].globalMenu;
+    menuOpen () {
+      return this.$store.state.menu.globalMenu
     },
-    wrapperClass() {
+    wrapperClass () {
       return {
-        "-scroll": this.scrollY > this.winWidth * 0.3,
-        "-gMenuOpen": this.menuOpen,
-        "-searchMenuOpen": this.$store.state["menu"].searchMenu,
-      };
-    },
+        '-scroll': this.scrollY > this.winWidth * 0.3,
+        '-gMenuOpen': this.menuOpen,
+        '-searchMenuOpen': this.$store.state.menu.searchMenu
+      }
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
-    onScroll() {
-      this.winWidth = window.innerWidth;
-      this.scrollY = window.scrollY;
-    },
-  },
-};
+    onScroll () {
+      this.winWidth = window.innerWidth
+      this.scrollY = window.scrollY
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .wrapper {

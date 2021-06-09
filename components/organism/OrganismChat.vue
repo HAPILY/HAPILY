@@ -9,9 +9,13 @@
           />
         </div>
         <div class="profile-info">
-          <h1 class="user-name">山田　太郎</h1>
+          <h1 class="user-name">
+            山田太郎
+          </h1>
           <div class="sub-info">
-            <p class="contact">yamada@mail.jp</p>
+            <p class="contact">
+              yamada@mail.jp
+            </p>
             <p class="location">
               <atom-icon name="location" class="location-icon" />神奈川県
             </p>
@@ -19,31 +23,34 @@
         </div>
       </div>
     </div>
-    <div class="chat-content" ref="chatContent">
+    <div ref="chatContent" class="chat-content">
       <div class="header-blanc" />
       <div
-        class="chat-block"
         v-for="(items, key, index) in chatData"
         :key="index"
+        class="chat-block"
       >
-        <p class="chat-datetime">{{ key }}</p>
+        <p class="chat-datetime">
+          {{ key }}
+        </p>
         <chat-area
-          v-for="(item, index) in items"
-          :postTime="item.postDateTime"
+          v-for="(item, _index) in items"
+          :key="_index"
+          :post-time="item.postDateTime"
           :kind="isMy(item.user)"
           :class="isMy(item.user)"
-          :key="index"
           style="margin-bottom: 10px"
-          >{{ item.content }}</chat-area
         >
+          {{ item.content }}
+        </chat-area>
       </div>
-      <div class="footer-blanc" ref="footerBlanc" />
+      <div ref="footerBlanc" class="footer-blanc" />
     </div>
-    <div class="chat-footer" ref="chatFooter">
+    <div ref="chatFooter" class="chat-footer">
       <div class="footer__inner">
         <div class="chat-input-area">
           <div class="chat-input-area-content">
-            <div class="content__inner" ref="refInputContent">
+            <div ref="refInputContent" class="content__inner">
               <atom-textarea
                 :key="inputReset"
                 v-model="chatInputText"
@@ -51,19 +58,18 @@
               />
               <atom-icon name="photograph" class="photograph-icon" />
               <atom-icon
-                @click="chatPost"
                 name="arrowright"
                 class="arrowright-icon"
+                @click="chatPost"
               />
             </div>
-            <div class="chat-template" ref="refTemplate">
-              <span @click="isTemplateActive"
-                >{{ openCloseSymbol }} テンプレート文を入れる
+            <div ref="refTemplate" class="chat-template">
+              <span @click="isTemplateActive">{{ openCloseSymbol }} テンプレート文を入れる
               </span>
               <chat-template
-                @select="getSelectTemplateContent"
-                class="chat-template-content"
                 v-show="isShowTempale"
+                class="chat-template-content"
+                @select="getSelectTemplateContent"
               />
             </div>
           </div>
@@ -75,209 +81,207 @@
 
 <script>
 import {
-  defineComponent,
+
   computed,
   ref,
   reactive,
   watch,
   toRefs,
-  nextTick,
   onMounted,
-  onUpdated,
-} from "@nuxtjs/composition-api";
-import AtomIcon from "../atoms/icon/AtomIcon.vue";
-import ChatArea from "../molecules/chat/chatArea.vue";
-import AtomInputText from "../atoms/input/AtomInputText.vue";
-import ChatTemplate from "./chat/chatTemplate.vue";
-import AtomTextarea from "../atoms/input/AtomTextarea.vue";
-const moment = require("moment");
+  onUpdated
+} from '@nuxtjs/composition-api'
+import AtomIcon from '../atoms/icon/AtomIcon.vue'
+import ChatArea from '../molecules/chat/chatArea.vue'
+import AtomTextarea from '../atoms/input/AtomTextarea.vue'
+import ChatTemplate from './chat/chatTemplate.vue'
+const moment = require('moment')
 export default {
-  components: { AtomIcon, ChatArea, AtomInputText, ChatTemplate, AtomTextarea },
-  setup(_, ctx) {
-    const chatFooter = ref();
-    const footerBlanc = ref();
-    const chatContent = ref();
-    const refTemplate = ref();
-    const refInputContent = ref();
-    const inputReset = ref(0);
-    let tempRefTemplateHeight = 0;
-    let tempRefInputContentHeight,
-      defaultRefInputContentHeight = 0;
+  components: { AtomIcon, ChatArea, ChatTemplate, AtomTextarea },
+  setup () {
+    const chatFooter = ref()
+    const footerBlanc = ref()
+    const chatContent = ref()
+    const refTemplate = ref()
+    const refInputContent = ref()
+    const inputReset = ref(0)
+    let tempRefTemplateHeight = 0
+    let tempRefInputContentHeight
+    let defaultRefInputContentHeight = 0
     const updateFooterHeight = (heigth) => {
-      chatFooter.value.style.height = heigth + "px";
-      updateFooterBlancHeight(heigth);
-    };
+      chatFooter.value.style.height = heigth + 'px'
+      updateFooterBlancHeight(heigth)
+    }
     onMounted(() => {
       tempRefInputContentHeight = defaultRefInputContentHeight =
-        refInputContent.value.clientHeight;
-      window.scroll(0, chatContent.value.scrollHeight);
-    });
-    let updateFlog = {
+        refInputContent.value.clientHeight
+      window.scroll(0, chatContent.value.scrollHeight)
+    })
+    const updateFlog = {
       chatPost: false,
       oepnTemplate: false,
-      chatInput: false,
-    };
-    const updateFooterBlancHeight = (heigth) =>
-      (footerBlanc.value.style.height = heigth + "px");
+      chatInput: false
+    }
+    const updateFooterBlancHeight = heigth =>
+      (footerBlanc.value.style.height = heigth + 'px')
 
     onUpdated(() => {
       if (updateFlog.chatInput) {
-        updateFlog.chatInput = false;
+        updateFlog.chatInput = false
         if (refInputContent.value.clientHeight > tempRefInputContentHeight) {
           updateFooterHeight(
             chatFooter.value.clientHeight +
               (refInputContent.value.clientHeight - tempRefInputContentHeight)
-          );
-          tempRefInputContentHeight = refInputContent.value.clientHeight;
+          )
+          tempRefInputContentHeight = refInputContent.value.clientHeight
         } else if (
           refInputContent.value.clientHeight < tempRefInputContentHeight
         ) {
           updateFooterHeight(
             chatFooter.value.clientHeight -
               (tempRefInputContentHeight - refInputContent.value.clientHeight)
-          );
-          tempRefInputContentHeight = refInputContent.value.clientHeight;
+          )
+          tempRefInputContentHeight = refInputContent.value.clientHeight
         }
       }
       if (updateFlog.chatPost) {
-        updateFlog.chatPost = false;
+        updateFlog.chatPost = false
         if (refInputContent.value.clientHeight > defaultRefInputContentHeight) {
           updateFooterHeight(
             chatFooter.value.clientHeight -
               (refInputContent.value.clientHeight -
                 defaultRefInputContentHeight)
-          );
+          )
         }
-        inputReset.value++;
-        tempRefInputContentHeight = defaultRefInputContentHeight;
-        window.scroll(0, chatContent.value.scrollHeight);
+        inputReset.value++
+        tempRefInputContentHeight = defaultRefInputContentHeight
+        window.scroll(0, chatContent.value.scrollHeight)
       }
 
       if (updateFlog.oepnTemplate) {
-        updateFlog.oepnTemplate = false;
+        updateFlog.oepnTemplate = false
         if (isShowTempale.value) {
-          tempRefTemplateHeight = refTemplate.value.clientHeight;
+          tempRefTemplateHeight = refTemplate.value.clientHeight
           updateFooterHeight(
             chatFooter.value.clientHeight + tempRefTemplateHeight
-          );
+          )
         } else {
           updateFooterHeight(
             chatFooter.value.clientHeight - tempRefTemplateHeight
-          );
+          )
         }
       }
-    });
+    })
     const getSelectTemplateContent = (value) => {
-      state.chatInputText = value;
-      inputReset.value++;
-      updateFlog.chatInput = true;
-    };
+      state.chatInputText = value
+      inputReset.value++
+      updateFlog.chatInput = true
+    }
     const state = reactive({
-      chatInputText: "",
+      chatInputText: '',
       chatData: {
-        [moment(Date.parse("2021/5/14")).format("yyyy/M/DD")]: [
+        [moment(Date.parse('2021/5/14')).format('yyyy/M/DD')]: [
           {
             chatId: 1,
             user: 1,
-            content: "楽",
-            postDateTime: "11:08",
+            content: '楽',
+            postDateTime: '11:08'
           },
           {
             chatId: 2,
             user: 2,
-            content: "楽しかったね",
-            postDateTime: "11:08",
+            content: '楽しかったね',
+            postDateTime: '11:08'
           },
           {
             chatId: 3,
             user: 1,
-            content: "楽しかったね",
-            postDateTime: "11:08",
-          },
+            content: '楽しかったね',
+            postDateTime: '11:08'
+          }
         ],
-        [moment(Date.parse("2021/5/20")).format("yyyy/M/DD")]: [
+        [moment(Date.parse('2021/5/20')).format('yyyy/M/DD')]: [
           {
             chatId: 1,
             user: 1,
             content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
+              '楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね',
+            postDateTime: '11:08'
           },
           {
             chatId: 2,
             user: 2,
             content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
+              '楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね',
+            postDateTime: '11:08'
           },
           {
             chatId: 3,
             user: 1,
-            content: "楽しかったね",
-            postDateTime: "11:08",
+            content: '楽しかったね',
+            postDateTime: '11:08'
           },
           {
             chatId: 1,
             user: 1,
             content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
+              '楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね',
+            postDateTime: '11:08'
           },
           {
             chatId: 2,
             user: 2,
             content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
+              '楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね',
+            postDateTime: '11:08'
           },
           {
             chatId: 3,
             user: 1,
-            content: "楽しかったね",
-            postDateTime: "11:08",
-          },
-        ],
-      },
-    });
+            content: '楽しかったね',
+            postDateTime: '11:08'
+          }
+        ]
+      }
+    })
     const chatPost = () => {
       if (state.chatInputText.length > 0) {
-        const initDate = moment();
-        const initKey = initDate.format("yyyy/M/DD");
-        const postDate = initDate.format("h:mm");
+        const initDate = moment()
+        const initKey = initDate.format('yyyy/M/DD')
+        const postDate = initDate.format('h:mm')
         const postData = {
           chatId: 99,
           user: 1,
           content: state.chatInputText,
-          postDateTime: postDate,
-        };
-        if (state.chatData[initKey]) {
-          state.chatData[initKey].push(postData);
-        } else {
-          state.chatData[initKey] = [postData];
+          postDateTime: postDate
         }
-        updateFlog.chatPost = true;
-        state.chatInputText = "";
+        if (state.chatData[initKey]) {
+          state.chatData[initKey].push(postData)
+        } else {
+          state.chatData[initKey] = [postData]
+        }
+        updateFlog.chatPost = true
+        state.chatInputText = ''
       }
-    };
+    }
     const openCloseSymbol = computed(() => {
       if (isShowTempale.value) {
-        return "-";
+        return '-'
       }
-      return "+";
-    });
-    const isShowTempale = ref(false);
+      return '+'
+    })
+    const isShowTempale = ref(false)
     const isTemplateActive = () => {
-      isShowTempale.value = !isShowTempale.value;
-      updateFlog.oepnTemplate = true;
-    };
-    const myId = 1;
-    const isMy = (id) => (id === myId ? "my" : "pair");
+      isShowTempale.value = !isShowTempale.value
+      updateFlog.oepnTemplate = true
+    }
+    const myId = 1
+    const isMy = id => (id === myId ? 'my' : 'pair')
     watch(
       () => state.chatInputText,
-      (inputText, _) => {
-        updateFlog.chatInput = true;
+      () => {
+        updateFlog.chatInput = true
       }
-    );
+    )
     return {
       myId,
       isMy,
@@ -292,12 +296,11 @@ export default {
       chatFooter,
       refTemplate,
       refInputContent,
-      ...toRefs(state),
-    };
-  },
-};
+      ...toRefs(state)
+    }
+  }
+}
 </script>
-
 
 <style lang="scss" scoped>
 $footerHeght: 100px;

@@ -10,22 +10,24 @@ export default {
   props: {
     value: {
       type: String,
+      default: ''
     },
     placeholder: {
       type: String,
-    },
+      default: ''
+    }
   },
   computed: {
     computedValue: {
-      get() {
-        return this.value;
+      get () {
+        return this.value
       },
-      set(value) {
-        this.$emit("input", value);
-      },
-    },
-  },
-};
+      set (value) {
+        this.$emit('input', value)
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

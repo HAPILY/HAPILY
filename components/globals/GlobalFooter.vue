@@ -1,7 +1,9 @@
 <template>
   <footer class="footer">
     <div class="l-container">
-      <p class="copy">© HAPILY</p>
+      <p class="copy">
+        © HAPILY
+      </p>
     </div>
   </footer>
 </template>

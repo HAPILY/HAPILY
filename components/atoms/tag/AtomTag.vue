@@ -1,5 +1,7 @@
 <template>
-  <h2 class="tag" :style="style"><slot></slot></h2>
+  <h2 class="tag" :style="style">
+    <slot></slot>
+  </h2>
 </template>
 
 <script>
@@ -7,17 +9,17 @@ export default {
   props: {
     color: {
       type: String,
-      default: "blue",
-    },
+      default: 'blue'
+    }
   },
   computed: {
-    style() {
+    style () {
       return {
-        "--color": this.color,
-      };
-    },
-  },
-};
+        '--color': this.color
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

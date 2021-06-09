@@ -1,9 +1,11 @@
 <template>
-  <h2 class="title-lines"><slot></slot></h2>
+  <h2 class="title-lines">
+    <slot></slot>
+  </h2>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
   <div>
     <div class="text-area">
       <textarea ref="textarea" v-model="computedValue"></textarea>
-      <div class="dummy" ref="dummy"></div>
+      <div ref="dummy" class="dummy"></div>
     </div>
     <div class="line"></div>
   </div>
@@ -13,22 +13,25 @@ export default {
   props: {
     value: {
       type: String,
-    },
+      default () {
+        return ''
+      }
+    }
   },
   computed: {
     computedValue: {
-      get() {
-        return this.value;
+      get () {
+        return this.value
       },
-      set(value) {
-        this.$refs.dummy.textContent = value + "\u200b";
-        this.$refs.textarea.style.width = this.$refs.dummy.width;
-        this.$refs.textarea.style.height = this.$refs.dummy.height;
-        this.$emit("input", value);
-      },
-    },
-  },
-};
+      set (value) {
+        this.$refs.dummy.textContent = value + '\u200B'
+        this.$refs.textarea.style.width = this.$refs.dummy.width
+        this.$refs.textarea.style.height = this.$refs.dummy.height
+        this.$emit('input', value)
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -6,9 +6,11 @@
           class="rounded-full company-icon"
           src="@/assets/img/students/students_img0.jpg"
         />
-        <h2 class="c-link text-2xl company-name">株式会社Libry</h2>
+        <h2 class="c-link text-2xl company-name">
+          株式会社Libry
+        </h2>
       </div>
-      <div class="campany-thumbnail"></div>
+      <div class="campany-thumbnail" />
       <div class="l-container">
         <div class="content">
           <div class="campany-message">
@@ -22,7 +24,7 @@
         <div class="content">
           <div class="campany-tags">
             <organism-tag-list
-              :tagList="[
+              :tag-list="[
                 'プログラマー',
                 'プロジェクトオーナー',
                 'フロントエンジニア',
@@ -34,7 +36,9 @@
       <div class="l-container">
         <div class="content">
           <div class="campany-contact">
-            <atom-tag :color="'red'">声をかける</atom-tag>
+            <atom-tag :color="'red'">
+              声をかける
+            </atom-tag>
           </div>
         </div>
       </div>
@@ -43,11 +47,11 @@
 </template>
 
 <script>
-import AtomTag from "@/components/atoms/tag/AtomTag.vue";
-import OrganismTagList from "@/components/organism/OrganismTagList.vue";
+import AtomTag from '@/components/atoms/tag/AtomTag.vue'
+import OrganismTagList from '@/components/organism/OrganismTagList.vue'
 export default {
-  components: { AtomTag, OrganismTagList },
-};
+  components: { AtomTag, OrganismTagList }
+}
 </script>
 
 <style lang="scss" scope>
@@ -80,10 +84,8 @@ export default {
   background-position: center center;
 
   @include pc {
-
   }
   @include pcL {
-    
   }
 }
 </style>

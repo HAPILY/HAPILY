@@ -1,5 +1,7 @@
 <template>
-  <div class="msg" :class="[type ? l : r]"><slot /></div>
+  <div class="msg" :class="[type ? l : r]">
+    <slot />
+  </div>
 </template>
 
 <script>
@@ -7,22 +9,22 @@ export default {
   props: {
     kind: {
       type: String,
-      default: "pair",
-      validator(val) {
-        return ["pair", "my"].includes(val);
-      },
-    },
+      default: 'pair',
+      validator (val) {
+        return ['pair', 'my'].includes(val)
+      }
+    }
   },
-  beforeMount() {
-    this.type = this.kind === "pair" ? true : false;
-  },
-  data() {
+  data () {
     return {
-      l: "l",
-      r: "r",
-    };
+      l: 'l',
+      r: 'r'
+    }
   },
-};
+  beforeMount () {
+    this.type = this.kind === 'pair'
+  }
+}
 </script>
 
 <style lang="scss" scoped>

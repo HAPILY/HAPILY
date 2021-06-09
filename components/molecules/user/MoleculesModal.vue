@@ -1,7 +1,7 @@
 <template>
   <transition name="modal">
     <portal to="modal">
-      <div id="overlay" class="is-active" v-if="isActive">
+      <div v-if="isActive" id="overlay" class="is-active">
         <div class="modal" :class="[{ 'is-full-screen': fullScreen }]">
           <div class="modal-header bl-justify-root">
             <atom-icon
@@ -9,10 +9,16 @@
               class="modal-header-cancel-icon"
               @click="beforeModalInvalid"
             />
-            <h6 class="header-title"><slot name="header" /></h6>
+            <h6 class="header-title">
+              <slot name="header" />
+            </h6>
           </div>
-          <div class="content"><slot name="content"></slot></div>
-          <div class="footer"><slot name="footer"></slot></div>
+          <div class="content">
+            <slot name="content"></slot>
+          </div>
+          <div class="footer">
+            <slot name="footer"></slot>
+          </div>
         </div>
       </div>
     </portal>
@@ -20,58 +26,58 @@
 </template>
 
 <script>
-import AtomIcon from "../../atoms/icon/AtomIcon.vue";
+import AtomIcon from '../../atoms/icon/AtomIcon.vue'
 
 export default {
   components: { AtomIcon },
   model: {
-    prop: "active",
-    event: "update",
+    prop: 'active',
+    event: 'update'
   },
   props: {
     fullScreen: {
-      type: Boolean,
+      type: Boolean
     },
     active: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
-  data() {
+  data () {
     return {
       savePageYOffset: 0,
-      isActive: false,
-    };
-  },
-  methods: {
-    beforeModalActive() {
-      this.savePageYOffset = parseInt(window.pageYOffset || "0") * -1;
-      document.body.style.top = `-${window.pageYOffset}px`;
-      document.body.style.position = "fixed";
-      document.body.style.width = "100vw"; //モーダル発火時、bodyの幅が縮むため、応急処置
-      this.isActive = true;
-    },
-    beforeModalInvalid() {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      window.scrollTo(0, parseInt(this.savePageYOffset || "0") * -1);
-      this.key++;
-      this.isActive = false;
-      this.$emit("update", false);
-    },
+      isActive: false
+    }
   },
   watch: {
-    active(newValue) {
+    active (newValue) {
       if (newValue) {
-        this.beforeModalActive();
+        this.beforeModalActive()
       } else {
-        this.beforeModalInvalid();
+        this.beforeModalInvalid()
       }
+    }
+  },
+  beforeDestroy () {
+    this.beforeModalInvalid()
+  },
+  methods: {
+    beforeModalActive () {
+      this.savePageYOffset = parseInt(window.pageYOffset || '0') * -1
+      document.body.style.top = `-${window.pageYOffset}px`
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100vw' // モーダル発火時、bodyの幅が縮むため、応急処置
+      this.isActive = true
     },
-  },
-  beforeDestroy() {
-    this.beforeModalInvalid();
-  },
-};
+    beforeModalInvalid () {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      window.scrollTo(0, parseInt(this.savePageYOffset || '0') * -1)
+      this.key++
+      this.isActive = false
+      this.$emit('update', false)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

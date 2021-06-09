@@ -1,9 +1,11 @@
 <template>
   <div>
-    <molecules-modal v-model="localAvtive" fullScreen>
-      <template v-slot:header>自己紹介文</template>
-      <template v-slot:content
-        ><div class="ly-modal">
+    <molecules-modal v-model="localAvtive" full-screen>
+      <template #header>
+        自己紹介文
+      </template>
+      <template #content>
+        <div class="ly-modal">
           <label>見出し</label>
           <atom-input-text
             v-model="cProfileTitle"
@@ -12,13 +14,17 @@
           <label>あなたの熱い夢を語ろう</label>
           <atom-textarea
             v-model="cProfileTextData"
-            　class="mb-10"
+            class="mb-10"
           ></atom-textarea>
-          <atom-button class="w-full" @click="saveProfile">保存</atom-button>
+          <atom-button class="w-full" @click="saveProfile">
+            保存
+          </atom-button>
         </div>
       </template>
     </molecules-modal>
-    <atom-button class="w-full" @click="showModal">編集</atom-button>
+    <atom-button class="w-full" @click="showModal">
+      編集
+    </atom-button>
   </div>
 </template>
 
@@ -28,72 +34,72 @@ import {
   computed,
   ref,
   reactive,
-  watch,
-} from "@nuxtjs/composition-api";
-import AtomButton from "../atoms/button/AtomButton.vue";
+  watch
+} from '@nuxtjs/composition-api'
+import AtomButton from '../atoms/button/AtomButton.vue'
 export default defineComponent({
   components: { AtomButton },
   props: {
     profileTitle: {
       type: String,
-      default: "",
+      default: ''
     },
     profileTextData: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
-  setup(props, { emit }) {
+  setup (props, { emit }) {
     const state = reactive({
       title: props.profileTitle,
-      textData: props.profileTextData,
-    });
+      textData: props.profileTextData
+    })
 
-    const localAvtive = ref(false);
+    const localAvtive = ref(false)
 
     watch(localAvtive, (_new, _old) => {
       if (!_new) {
-        emit("close", false);
+        emit('close', false)
       }
-    });
+    })
 
     const showModal = () => {
-      localAvtive.value = true;
-    };
+      localAvtive.value = true
+    }
 
     const saveProfile = () => {
-      emit("update:profileTitle", state.title);
-      emit("update:profileTextData", state.textData);
-      localAvtive.value = false;
-    };
+      emit('update:profileTitle', state.title)
+      emit('update:profileTextData', state.textData)
+      localAvtive.value = false
+    }
 
     const cProfileTitle = computed({
-      get() {
-        return state.title;
+      get () {
+        return state.title
       },
-      set(value) {
-        state.title = value;
-      },
-    });
+      set (value) {
+        state.title = value
+      }
+    })
 
     const cProfileTextData = computed({
-      get() {
-        return state.textData;
+      get () {
+        return state.textData
       },
-      set(value) {
-        state.textData = value;
-      },
-    });
+      set (value) {
+        state.textData = value
+      }
+    })
 
     return {
       cProfileTitle,
       cProfileTextData,
       showModal,
       localAvtive,
-      saveProfile,
-    };
-  },
-});
+      saveProfile
+    }
+  }
+})
 </script>
 
 <style>

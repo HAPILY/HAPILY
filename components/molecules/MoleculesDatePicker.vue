@@ -12,37 +12,39 @@
 </template>
 
 <script>
-import AtomDatePicker from "../atoms/input/AtomDatePicker";
+import AtomDatePicker from '../atoms/input/AtomDatePicker'
 export default {
   components: { AtomDatePicker },
   props: {
     beginDate: {
       type: String,
+      default: ''
     },
     endDate: {
       type: String,
-    },
+      default: ''
+    }
   },
 
   computed: {
     cBeginDate: {
-      get() {
-        return this.beginDate;
+      get () {
+        return this.beginDate
       },
-      set(date) {
-        this.$emit("update:beginDate", date);
-      },
+      set (date) {
+        this.$emit('update:beginDate', date)
+      }
     },
     cEndDate: {
-      get() {
-        return this.endDate;
+      get () {
+        return this.endDate
       },
-      set(date) {
-        this.$emit("update:endDate", date);
-      },
-    },
-  },
-};
+      set (date) {
+        this.$emit('update:endDate', date)
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

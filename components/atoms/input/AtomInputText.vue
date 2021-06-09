@@ -1,7 +1,7 @@
 <template>
   <input
-    :type="type"
     v-model="computedValue"
+    :type="type"
     :placeholder="placeholder"
     class="input-text"
   />
@@ -11,24 +11,24 @@ export default {
   props: {
     type: {
       type: String,
-      default: "text",
+      default: 'text'
     },
     placeholder: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
   computed: {
     computedValue: {
-      get() {
-        return this.value;
+      get () {
+        return this.value
       },
-      set(value) {
-        this.$emit("input", value);
-      },
-    },
-  },
-};
+      set (value) {
+        this.$emit('input', value)
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scope>

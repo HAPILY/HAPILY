@@ -1,22 +1,20 @@
 <template>
   <div class="dream-list">
     <section class="list">
-      <template>
-        <div class="dream-list-header">
-          <h1>学生の夢一覧</h1>
-        </div>
-      </template>
+      <div class="dream-list-header">
+        <h1>学生の夢一覧</h1>
+      </div>
       <organism-dream-list />
     </section>
   </div>
 </template>
 
 <script>
-import OrganismDreamList from "../components/organism/OrganismDreamList.vue";
+import OrganismDreamList from '../components/organism/OrganismDreamList.vue'
 export default {
   components: { OrganismDreamList },
-  layout: "NoCircleNoFooterLayout",
-};
+  layout: 'NoCircleNoFooterLayout'
+}
 </script>
 
 <style lang="scss" scoped>

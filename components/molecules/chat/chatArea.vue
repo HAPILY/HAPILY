@@ -1,27 +1,31 @@
 <template>
   <div class="chat-b">
-    <p :class="[kind === 'pair' ? 'l-time' : 'r-time']">{{ postTime }}</p>
+    <p :class="[kind === 'pair' ? 'l-time' : 'r-time']">
+      {{ postTime }}
+    </p>
     <div class="chat-b__inner">
-      <atom-msg-area ref="chat" :kind="kind"><slot /></atom-msg-area>
+      <atom-msg-area ref="chat" :kind="kind">
+        <slot />
+      </atom-msg-area>
     </div>
   </div>
 </template>
 
 <script>
-import atomMsgArea from "../../atoms/msg/atomMsgArea.vue";
+import atomMsgArea from '../../atoms/msg/atomMsgArea.vue'
 export default {
   components: { atomMsgArea },
   props: {
     kind: {
       type: String,
-      default: "pair",
+      default: 'pair'
     },
     postTime: {
       type: String,
-      require: true,
-    },
-  },
-};
+      default: ''
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

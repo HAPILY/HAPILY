@@ -10,32 +10,34 @@
 </template>
 
 <script>
-const marginBottom = 30;
+const marginBottom = 30
 const tileLineCalc = (EId) => {
   document.getElementById(EId).children.forEach((element, i, a) => {
-    if (i === a.length - 1) return;
+    if (i === a.length - 1) { return }
     element.lastElementChild.style.height = `${
       element.offsetHeight + marginBottom
-    }px`;
-  });
-};
+    }px`
+  })
+}
 
 export default {
   props: {
     items: {
       type: Array,
-      require: true,
-    },
+      default () {
+        return []
+      }
+    }
   },
-  mounted() {
-    tileLineCalc(this.EId);
-  },
-  data() {
+  data () {
     return {
-      EId: `#${Math.random().toString(32).substring(2)}`,
-    };
+      EId: `#${Math.random().toString(32).substring(2)}`
+    }
   },
-};
+  mounted () {
+    tileLineCalc(this.EId)
+  }
+}
 </script>
 
 <style lang="scss" scoped>

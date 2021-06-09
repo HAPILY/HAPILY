@@ -1,6 +1,6 @@
 <template>
   <div class="slider-wrap">
-    <swiper :options="swiperOption" ref="swiperMain" class="swiper-main">
+    <swiper ref="swiperMain" :options="swiperOption" class="swiper-main">
       <swiper-slide v-for="(item, index) in items" :key="index">
         <div class="slide-inner">
           <div
@@ -12,7 +12,7 @@
         </div>
       </swiper-slide>
     </swiper>
-    <swiper :options="swiperOptionNavi" ref="swiperNavi" class="swiper-navi">
+    <swiper ref="swiperNavi" :options="swiperOptionNavi" class="swiper-navi">
       <swiper-slide v-for="(item, index) in items" :key="index">
         <div class="slide-inner">
           <div
@@ -35,7 +35,7 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data () {
     return {
       swiperOption: {
         loopedSlides: 5,
@@ -43,7 +43,7 @@ export default {
         autoplay: false,
         slidesPerView: 1,
         centeredSlides: true,
-        centerPadding: "10%",
+        centerPadding: '10%',
         spaceBetween: 0,
         loop: true
       },
@@ -53,26 +53,26 @@ export default {
         autoplay: false,
         slidesPerView: 6,
         centeredSlides: true,
-        centerPadding: "10%",
+        centerPadding: '10%',
         spaceBetween: 0,
         navigation: {
-          nextEl: ".arrow-next",
-          prevEl: ".arrow-prev"
+          nextEl: '.arrow-next',
+          prevEl: '.arrow-prev'
         },
         loop: true,
         slideToClickedSlide: true
       }
-    };
+    }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
-      const swiperMain = this.$refs.swiperMain.$swiper;
-      const swiperNavi = this.$refs.swiperNavi.$swiper;
-      swiperMain.controller.control = swiperNavi;
-      swiperNavi.controller.control = swiperMain;
-    });
+      const swiperMain = this.$refs.swiperMain.$swiper
+      const swiperNavi = this.$refs.swiperNavi.$swiper
+      swiperMain.controller.control = swiperNavi
+      swiperNavi.controller.control = swiperMain
+    })
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

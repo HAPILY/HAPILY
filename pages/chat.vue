@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import OrganismChat from "../components/organism/OrganismChat.vue";
+import OrganismChat from '../components/organism/OrganismChat.vue'
 export default {
   components: { OrganismChat },
-  layout: "NoCircleNoFooterLayout",
-};
+  layout: 'NoCircleNoFooterLayout'
+}
 </script>
 
 <style>

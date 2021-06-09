@@ -1,14 +1,14 @@
 module.exports = {
   experimental: {
-    applyComplexClasses: true,
+    applyComplexClasses: true
   },
   theme: {
     screens: {
       pc: '768px',
       pcL: '1400px',
-      sp: { max: '767px' },
+      sp: { max: '767px' }
     },
-    extend: {},
+    extend: {}
   },
   variants: {},
   plugins: [],
@@ -17,6 +17,6 @@ module.exports = {
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
-    './nuxt.config.{js,ts}',
-  ],
-};
+    './nuxt.config.{js,ts}'
+  ]
+}

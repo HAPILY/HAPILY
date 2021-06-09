@@ -8,14 +8,14 @@ export default {
   props: {
     type: {
       type: String,
-      default: "text"
+      default: 'text'
     },
     placeholder: {
       type: String,
-      default: ""
+      default: ''
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scope>
@@ -26,7 +26,7 @@ export default {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  
+
   @include sp {
     @include noGutter;
   }

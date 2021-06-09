@@ -5,7 +5,7 @@
       v-model="computedValue"
       class="input-text"
     ></textarea>
-    <div class="dummy" ref="dummy"></div>
+    <div ref="dummy" class="dummy"></div>
   </div>
 </template>
 
@@ -14,25 +14,28 @@ export default {
   props: {
     value: {
       type: String,
-    },
-  },
-  mounted() {
-    this.$refs.dummy.textContent = this.value + "\u200b";
-    this.$refs.textarea.style.height = this.$refs.dummy.clientHeight + "px";
+      default () {
+        return ''
+      }
+    }
   },
   computed: {
     computedValue: {
-      get() {
-        return this.value;
+      get () {
+        return this.value
       },
-      set(value) {
-        this.$refs.dummy.textContent = value + "\u200b";
-        this.$refs.textarea.style.height = this.$refs.dummy.clientHeight + "px";
-        this.$emit("input", value);
-      },
-    },
+      set (value) {
+        this.$refs.dummy.textContent = value + '\u200B'
+        this.$refs.textarea.style.height = this.$refs.dummy.clientHeight + 'px'
+        this.$emit('input', value)
+      }
+    }
   },
-};
+  mounted () {
+    this.$refs.dummy.textContent = this.value + '\u200B'
+    this.$refs.textarea.style.height = this.$refs.dummy.clientHeight + 'px'
+  }
+}
 </script>
 
 <style lang="scss" scope>

@@ -2,8 +2,9 @@
   <div class="signup">
     <section class="section-inputs">
       <div class="l-container">
-        <h1 class="title">新規登録</h1>
-
+        <h1 class="title">
+          新規登録
+        </h1>
         <AtomBoxRounded>
           <form class="form">
             <ul class="inputs-list">
@@ -22,14 +23,20 @@
             </ul>
 
             <div class="btn">
-              <AtomButton class="m-auto"> 新規登録 </AtomButton>
+              <AtomButton class="m-auto">
+                新規登録
+              </AtomButton>
             </div>
           </form>
 
           <div class="login">
-            <h2 class="c-title-left">アカウントをお持ちの方はこちら</h2>
+            <h2 class="c-title-left">
+              アカウントをお持ちの方はこちら
+            </h2>
             <div class="btn">
-              <AtomButton color="red m-auto"> ログイン </AtomButton>
+              <AtomButton color="red m-auto">
+                ログイン
+              </AtomButton>
             </div>
           </div>
         </AtomBoxRounded>

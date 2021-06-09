@@ -2,9 +2,9 @@
   <div class="temp">
     <ul type="square">
       <li
-        class="temp-item"
         v-for="(item, i) in templates"
         :key="i"
+        class="temp-item"
         @click="selectTemplate(i)"
       >
         <span class="name">{{ item.name }}</span>
@@ -15,35 +15,35 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "@nuxtjs/composition-api";
+import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
-  setup(_, { emit }) {
-    const selectTemplate = (selectIndex) =>
-      emit("select", templates[selectIndex].content);
+  setup (_, { emit }) {
+    const selectTemplate = selectIndex =>
+      emit('select', templates[selectIndex].content)
     const templates = [
       {
-        name: "挨拶文",
-        content: "お問い合わせありがとうございます テキスト",
+        name: '挨拶文',
+        content: 'お問い合わせありがとうございます テキスト'
       },
       {
-        name: "挨拶文",
-        content: "お問い合わせありがとうございます テキスト",
+        name: '挨拶文',
+        content: 'お問い合わせありがとうございます テキスト'
       },
       {
-        name: "挨拶文",
-        content: "お問い合わせありがとうございます テキスト",
+        name: '挨拶文',
+        content: 'お問い合わせありがとうございます テキスト'
       },
       {
-        name: "挨拶文",
-        content: "お問い合わせありがとうございます テキスト",
-      },
-    ];
+        name: '挨拶文',
+        content: 'お問い合わせありがとうございます テキスト'
+      }
+    ]
     return {
       templates,
-      selectTemplate,
-    };
-  },
-});
+      selectTemplate
+    }
+  }
+})
 </script>
 
 <style lang='scss' scoped>

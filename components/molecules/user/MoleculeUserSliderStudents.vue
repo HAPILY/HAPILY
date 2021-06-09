@@ -10,7 +10,9 @@
             }"
           ></div>
           <div class="text">
-            <p class="name">@{{ item.name }}</p>
+            <p class="name">
+              @{{ item.name }}
+            </p>
             <p>{{ item.text }}</p>
           </div>
           <!-- <ul class="tags">
@@ -152,8 +154,7 @@
               fill-rule="evenodd"
               d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
               clip-rule="evenodd"
-            /></svg
-        ></i>
+            /></svg></i>
       </div>
       <div class="arrow-next arrow">
         <i>
@@ -166,8 +167,7 @@
               fill-rule="evenodd"
               d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
               clip-rule="evenodd"
-            /></svg
-        ></i>
+            /></svg></i>
       </div>
     </div>
   </div>
@@ -181,11 +181,11 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data () {
     return {
       swiperOption: {
         autoplay: {
-          delay: 1,
+          delay: 1
         },
         centeredSlides: true,
         spaceBetween: 0,
@@ -198,21 +198,21 @@ export default {
         breakpoints: {
           767: {
             slidesPerView: 1.4,
-            centerPadding: "10%",
+            centerPadding: '10%',
             speed: 600,
             autoplay: {
-              delay: 2000,
+              delay: 2000
             },
             navigation: {
-              nextEl: ".arrow-next",
-              prevEl: ".arrow-prev"
-            },
+              nextEl: '.arrow-next',
+              prevEl: '.arrow-prev'
+            }
           }
         }
       }
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

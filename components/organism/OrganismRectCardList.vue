@@ -6,15 +6,15 @@
       :url="item.url"
       class="rect-card"
     >
-      <template v-slot:content>
+      <template #content>
         <h2 class="font">
           {{ item.title }}
         </h2>
         <time>{{ item.postDate }}</time>
       </template>
-      <template v-slot:thumbnail>
-        <img class="card-thumbnail" :src="item.thumbnail || defaultImage"
-      /></template>
+      <template #thumbnail>
+        <img class="card-thumbnail" :src="item.thumbnail || defaultImage" />
+      </template>
     </molecules-rect-card>
   </div>
 </template>
@@ -24,15 +24,17 @@ export default {
   props: {
     posts: {
       type: Array,
-      require: true,
-    },
+      default () {
+        return []
+      }
+    }
   },
-  data() {
+  data () {
     return {
-      defaultImage: require("~/assets/img/students/students_img0.jpg"),
-    };
-  },
-};
+      defaultImage: require('~/assets/img/students/students_img0.jpg')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

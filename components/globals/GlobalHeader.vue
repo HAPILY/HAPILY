@@ -1,5 +1,5 @@
 <template>
-  <header class="header" id="header">
+  <header id="header" class="header">
     <div class="l-container header_inner">
       <nuxt-link to="/" class="logo">
         <AtomLogomark />

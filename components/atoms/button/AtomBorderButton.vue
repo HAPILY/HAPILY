@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-default" @click="click" :style="style">
+  <button class="btn-default" :style="style" @click="click">
     <slot />
   </button>
 </template>
@@ -8,26 +8,26 @@ export default {
   props: {
     type: {
       type: String,
-      default: "text",
+      default: 'text'
     },
     color: {
       type: String,
-      default: "#283233",
-    },
-  },
-  methods: {
-    click(e) {
-      this.$emit("click", e);
-    },
+      default: '#283233'
+    }
   },
   computed: {
-    style() {
+    style () {
       return {
-        "--color": this.color,
-      };
-    },
+        '--color': this.color
+      }
+    }
   },
-};
+  methods: {
+    click (e) {
+      this.$emit('click', e)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

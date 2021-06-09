@@ -21,10 +21,11 @@ interface NuxtContext {
   redirect: (path: string) => void
   error: (params: { statusCode?: String; message?: String }) => void
   beforeNuxtRender: ({ Conmponents, nuxtState }) => void
-  $axios: AxiosInstance  // axios-moduleを利用している場合
+  $axios: AxiosInstance // axios-moduleを利用している場合
 }
 
 declare module 'vue/types/options' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ComponentOptions<V extends Vue> {
     layout?: string
     middleware?: string | String[]

@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import MoleculeDreamListItem from "../molecules/user/MoleculeDreamListItem.vue";
+import MoleculeDreamListItem from '../molecules/user/MoleculeDreamListItem.vue'
 export default {
-  components: { MoleculeDreamListItem },
-};
+  components: { MoleculeDreamListItem }
+}
 </script>
 
 <style lang="scss" scoped>

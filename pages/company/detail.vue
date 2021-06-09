@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import Detail from "@/components/organism/company/detail.vue";
+import Detail from '@/components/organism/company/detail.vue'
 
 export default {
   components: { Detail },
-  layout: "NoCircleNoFooterLayout",
-};
+  layout: 'NoCircleNoFooterLayout'
+}
 </script>
 
 <style lang="scss" scoped>
@@ -16,4 +16,3 @@ export default {
   padding-top: 40px;
 }
 </style>
-

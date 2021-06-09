@@ -6,12 +6,18 @@
           class="rounded-full company-icon"
           src="@/assets/img/students/students_img0.jpg"
         />
-        <atom-button class="contact-btn" :color="'red'">声をかける</atom-button>
+        <atom-button class="contact-btn" :color="'red'">
+          声をかける
+        </atom-button>
       </div>
       <div class="company-sub-info">
-        <h1 class="company-name">株式会社ハピリー</h1>
+        <h1 class="company-name">
+          株式会社ハピリー
+        </h1>
         <div class="bl-justify-root">
-          <p class="contact">yamada@mail.jp</p>
+          <p class="contact">
+            yamada@mail.jp
+          </p>
           <p class="location">
             <atom-icon name="location" class="location-icon" />神奈川県
           </p>
@@ -19,7 +25,7 @@
       </div>
       <organism-tag-list
         class="company-tag"
-        :tagList="[
+        :tag-list="[
           { name: 'tag' },
           { name: 'tag' },
           { name: 'tag' },
@@ -34,18 +40,20 @@
       <div class="content">
         テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト
       </div>
-      <h1 class="title mt-6">企業概要</h1>
+      <h1 class="title mt-6">
+        企業概要
+      </h1>
     </div>
   </div>
 </template>
 
 <script>
-import AtomButton from "@/components/atoms/button/AtomButton.vue";
-import AtomIcon from "@/components/atoms/icon/AtomIcon.vue";
-import OrganismTagList from "@/components/organism/OrganismTagList.vue";
+import AtomButton from '@/components/atoms/button/AtomButton.vue'
+import AtomIcon from '@/components/atoms/icon/AtomIcon.vue'
+import OrganismTagList from '@/components/organism/OrganismTagList.vue'
 export default {
-  components: { AtomButton, AtomIcon, OrganismTagList },
-};
+  components: { AtomButton, AtomIcon, OrganismTagList }
+}
 </script>
 
 <style lang="scss" scoped>

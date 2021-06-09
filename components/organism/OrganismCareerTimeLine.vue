@@ -9,7 +9,7 @@
           <organism-campany-input-modal
             class=""
             :status="item"
-            headerTitle="職歴の編集"
+            header-title="職歴の編集"
           >
             <template #ignition>
               <div style="margin-top: 6px; margin-left: 10px; color: blue">
@@ -18,14 +18,18 @@
             </template>
           </organism-campany-input-modal>
         </div>
-        <dt class="font-black text-base">{{ item.jobList[0].jobName }}</dt>
+        <dt class="font-black text-base">
+          {{ item.jobList[0].jobName }}
+        </dt>
         <dd class="text-sm career-date">
           {{ item.beginDate }} -
           <span v-if="item.endDate">{{ item.endDate }}</span>
-          <atom-tag v-else>現在</atom-tag>
+          <atom-tag v-else>
+            現在
+          </atom-tag>x
         </dd>
         <ul>
-          <li class="job-list" v-for="(j, index) in item.jobList" :key="index">
+          <li v-for="(j, index) in item.jobList" :key="index" class="job-list">
             <dl>
               <dt>{{ j.jobName }}</dt>
               <dd>{{ j.jobDetail }}</dd>
@@ -38,23 +42,24 @@
 </template>
 
 <script>
-import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
-import AtomTag from "@/components/atoms/tag/AtomTag.vue";
-import OrganismCampanyInputModal from "./OrganismCampanyInputModal.vue";
-import AtomIcon from "../atoms/icon/AtomIcon.vue";
+import MoleculesProgressBox from '@/components/molecules/user/MoleculesProgressBox.vue'
+import AtomTag from '@/components/atoms/tag/AtomTag.vue'
+import OrganismCampanyInputModal from './OrganismCampanyInputModal.vue'
 export default {
-  props: {
-    career: {
-      type: Array,
-    },
-  },
   components: {
     MoleculesProgressBox,
     AtomTag,
-    OrganismCampanyInputModal,
-    AtomIcon,
+    OrganismCampanyInputModal
   },
-};
+  props: {
+    career: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,7 @@
+/* eslint no-tabs: ["error", { allowIndentationTabs: true }] */
 <template>
   <button @click="toggleMenu">
-    <div class="at-lottie-container" ref="lottieContainer"></div>
+    <div ref="lottieContainer" class="at-lottie-container"></div>
     <!-- <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
@@ -18,11 +19,11 @@
       <g v-else>
         <path
           d="M16.7,17.4c-0.4,0.4-1.1,0.3-1.6-0.2L2.8,4.9C2.3,4.4,2.2,3.7,2.6,3.3l0.7-0.7c0.4-0.4,1.1-0.3,1.6,0.2
-	l12.4,12.4c0.5,0.5,0.6,1.2,0.2,1.6L16.7,17.4z"
+l12.4,12.4c0.5,0.5,0.6,1.2,0.2,1.6L16.7,17.4z"
         />
         <path
           d="M17.4,3.3c0.4,0.4,0.3,1.1-0.2,1.6L4.9,17.2c-0.5,0.5-1.2,0.6-1.6,0.2l-0.7-0.7c-0.4-0.4-0.3-1.1,0.2-1.6
-	L15.1,2.8c0.5-0.5,1.2-0.6,1.6-0.2L17.4,3.3z"
+L15.1,2.8c0.5-0.5,1.2-0.6,1.6-0.2L17.4,3.3z"
         />
       </g>
     </svg> -->
@@ -30,8 +31,8 @@
 </template>
 
 <script>
-import lottie from "lottie-web";
-import animationData from "@/assets/json/animation/searchToX.json";
+import lottie from 'lottie-web'
+import animationData from '@/assets/json/animation/searchToX.json'
 
 export default {
   data: () => ({
@@ -39,45 +40,45 @@ export default {
       animationData,
       loop: false,
       autoplay: false,
-      rendererSettings: ""
+      rendererSettings: ''
     }
   }),
   computed: {
-    menuOpen() {
-      return this.$store.state["menu"].searchMenu;
+    menuOpen () {
+      return this.$store.state.menu.searchMenu
     }
   },
-  mounted() {
+  mounted () {
     this.anim = lottie.loadAnimation({
       container: this.$refs.lottieContainer,
-      renderer: "svg",
+      renderer: 'svg',
       loop: this.options.loop,
       autoplay: this.options.autoplay,
       animationData: this.options.animationData,
       rendererSettings: this.options.rendererSettings
-    });
+    })
     this.$store.watch(
-      () => this.$store.state["menu"].searchMenu,
+      () => this.$store.state.menu.searchMenu,
       result => this.playIcon(result)
-    );
+    )
   },
   methods: {
-    toggleMenu() {
-      this.$store.commit("menu/searchMenuToggle");
+    toggleMenu () {
+      this.$store.commit('menu/searchMenuToggle')
     },
-    playIcon(e) {
+    playIcon (e) {
       if (e) {
-        this.anim.setSpeed(3);
-        this.anim.setDirection(1);
-        this.anim.play();
+        this.anim.setSpeed(3)
+        this.anim.setDirection(1)
+        this.anim.play()
       } else {
-        this.anim.setSpeed(4);
-        this.anim.setDirection(-1);
-        this.anim.play();
+        this.anim.setSpeed(4)
+        this.anim.setDirection(-1)
+        this.anim.play()
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

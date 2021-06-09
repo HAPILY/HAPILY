@@ -2,7 +2,9 @@
   <div>
     <section class="mv">
       <div class="mv_inner l-container relative">
-        <p class="copy">コピー入ります<br />コピー入ります<br />コピー</p>
+        <p class="copy">
+          コピー入ります<br />コピー入ります<br />コピー
+        </p>
         <div class="mv_img">
           <img src="@/assets/img/top/mv1.svg" alt="" />
         </div>
@@ -35,21 +37,21 @@
     </section>
 
     <section class="students">
-        <div class="students__slider">
-          <MoleculeUserSliderStudents :items="students" />
-        </div>
+      <div class="students__slider">
+        <MoleculeUserSliderStudents :items="students" />
+      </div>
     </section>
   </div>
 </template>
 
 <script>
 export default {
-  asyncData() {
+  asyncData () {
     return {
-      students: require(`~/assets/json/students.json`)
-    };
+      students: require('~/assets/json/students.json')
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-<!-- 
+<!--
 https://tailwindcss.com/docs/grid-column
 tailwindcssに依存。
 grid grid-cols-3 col-span-2
@@ -16,10 +16,10 @@ export default {
   props: {
     url: {
       type: String,
-      default: "#",
-    },
-  },
-};
+      default: '#'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
