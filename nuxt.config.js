@@ -12,9 +12,6 @@ export default {
     NODE_ENV: process.env.NODE_ENV,
   },
 
-  // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'HAPILY 〜やりたいことをやる〜',
