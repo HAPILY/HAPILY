@@ -1,8 +1,16 @@
 const globImporter = require('node-sass-glob-importer');
 
+require('dotenv').config()
+const nodeEnv = `${process.env.NODE_ENV || 'development'}`
+const env = require(`./env.${nodeEnv}.js`)
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+  env: {
+    ...env,
+    NODE_ENV: process.env.NODE_ENV,
+  },
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -45,7 +53,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', "portal-vue/nuxt"],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', '@nuxtjs/dotenv', "portal-vue/nuxt"],
 
   axios: {
     proxy: true,
