@@ -18,7 +18,7 @@ const company = {
 export const getAll = {
   status: 200,
   message: 'SUCCESS',
-  data: [...company],
+  data: [{ ...company }],
 };
 
 export const create = {

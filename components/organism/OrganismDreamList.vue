@@ -1,11 +1,16 @@
 <template>
   <div class="dream-list">
     <div class="dream-list__inner">
-      <molecule-dream-list-item />
-      <molecule-dream-list-item />
-      <molecule-dream-list-item />
-      <molecule-dream-list-item />
-      <molecule-dream-list-item />
+      <template v-for="dream in dreams" >
+        <molecule-dream-list-item
+          :key="dream.id"
+          :title="dream.title"
+          :money="dream.money"
+          :thumbnail="dream.thumnail_url"
+          :user-name="dream.user_name"
+          :user-icon-url="dream.user_icon_url"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -14,6 +19,12 @@
 import MoleculeDreamListItem from "../molecules/user/MoleculeDreamListItem.vue";
 export default {
   components: { MoleculeDreamListItem },
+  props: {
+    dreams: {
+      type: Array,
+      default: () => []
+    }
+  },
 };
 </script>
 

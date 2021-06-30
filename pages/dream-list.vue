@@ -6,16 +6,23 @@
           <h1>学生の夢一覧</h1>
         </div>
       </template>
-      <organism-dream-list />
+      <organism-dream-list :dreams="dreams" />
     </section>
   </div>
 </template>
 
 <script>
 import OrganismDreamList from "../components/organism/OrganismDreamList.vue";
+
 export default {
   components: { OrganismDreamList },
   layout: "NoCircleNoFooterLayout",
+  async asyncData({ $axios }) {
+    const dreams = await $axios.get('/dreams')
+    return {
+      dreams: dreams.data
+    };
+  },
 };
 </script>
 

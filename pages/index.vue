@@ -44,11 +44,12 @@
 
 <script>
 export default {
-  asyncData() {
+  async asyncData({ $axios }) {
+    const students = await $axios.get('/tops')
     return {
-      students: require(`~/assets/json/students.json`)
+      students: students.data
     };
-  }
+  },
 };
 </script>
 

@@ -44,10 +44,10 @@ export default ({ $axios }) => {
   mock.onPost('/users/1').reply(200, userUpdate);
 
   // Companies
-  mock.onGet('/dreams').reply(200, companyAll);
-  mock.onPost('/dreams').reply(200, companyCreate);
-  mock.onGet('/dreams/1').reply(200, companyOne);
-  mock.onPost('/dreams/1').reply(200, companyUpdate);
+  mock.onGet('/companies').reply(200, companyAll);
+  mock.onPost('/companies').reply(200, companyCreate);
+  mock.onGet('/companies/1').reply(200, companyOne);
+  mock.onPost('/companies/1').reply(200, companyUpdate);
 
   // Chats
   mock.onPost('/chats').reply(200, send);

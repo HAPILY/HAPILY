@@ -3,7 +3,7 @@
     <div class="dream-item__inner">
       <div class="left">
         <div class="left__inner">
-          <div class="dream-thumbnail">
+          <div class="dream-thumbnail" :style="{ backgroundImage: 'url(' + thumbnail + ')' }">
             <img class="icon-heart" src="@/assets/img/common/heart.svg" />
           </div>
         </div>
@@ -11,17 +11,17 @@
       <div class="right">
         <div class="right__inner">
           <p class="title">
-            テストテスト・テストテストテスト・テストテストテスト・テスト
+            {{ title }}
           </p>
-          <span class="username">@hasegawa</span>
+          <span class="username">@{{ userName }}</span>
           <div class="money">
             <img class="en-icon" src="@/assets/img/common/en.svg" />
-            <span class="font-bold">1500,000</span
+            <span class="font-bold">{{ money.toLocaleString() }}</span
             ><span class="text-sm">円</span>
           </div>
           <img
             class="rounded-full user-thumbnail"
-            src="@/assets/img/students/students_img0.jpg"
+            :src="userIconUrl"
           />
         </div>
       </div>
@@ -30,7 +30,31 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'MoleculeDreamListItem',
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    money: {
+      type: Number,
+      default: 0,
+    },
+    thumbnail: {
+      type: String,
+      default: '',
+    },
+    userName: {
+      type: String,
+      default: ''
+    },
+    userIconUrl: {
+      type: String,
+      default: ''
+    }
+  }
+};
 </script>
 
 <style lang="scss" scope>
@@ -46,7 +70,7 @@ export default {};
     width: 55%;
     .dream-thumbnail {
       padding-top: 56.25%;
-      background-image: url("~@/assets/img/students/students_img0.jpg");
+      // background-image: url("~@/assets/img/students/students_img0.jpg");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
