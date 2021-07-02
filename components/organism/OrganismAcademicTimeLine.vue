@@ -4,7 +4,7 @@
       <template slot-scope="{ item }">
         <div class="flex" style="padding: 0">
           <h1 class="academic-title font-black text-xl">
-            {{ item.orgName }}
+            {{ item.title }}
           </h1>
           <organism-academic-input-modal
             :status="item"
@@ -18,14 +18,14 @@
           </organism-academic-input-modal>
         </div>
 
-        <template v-for="(_item, index) in item.classList">
+        <template v-for="(_item, index) in item">
           <div :key="index" style="padding: 0" class="mb-1">
-            <dt class="font-black text-base">{{ _item.className }}</dt>
-            <p>{{ _item.classDetail }}</p>
+            <dt class="font-black text-base">{{ _item.class_name }}</dt>
+            <!-- <p>{{ _item.classDetail }}</p> -->
           </div>
         </template>
         <dd class="text-sm career-date">
-          <span v-if="item.endDate">{{ item.endDate }} 卒業</span>
+          <span v-if="item.end_date">{{ item.end_date }} 卒業</span>
           <atom-tag v-else>在籍中</atom-tag>
         </dd>
       </template>
@@ -41,6 +41,7 @@ export default {
   props: {
     academic: {
       type: Array,
+      default: () => []
     },
   },
   components: {

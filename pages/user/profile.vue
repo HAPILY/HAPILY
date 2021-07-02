@@ -6,19 +6,19 @@
           <div class="profile__inner">
             <div class="user-info">
               <h1 class="user-info_name font-extrabold text-white">
-                <span class="sp:block pc:inline-block pc:mr-1">Taichiro</span>
-                <span class="sp:block pc:inline-block">Hasegawa</span>
+                <span class="sp:block pc:inline-block pc:mr-1 text-2xl">{{ profile.user_detail.first_name }}</span>
+                <span class="sp:block pc:inline-block text-2xl">{{ profile.user_detail.last_name }}</span>
               </h1>
-              <p class="mt-1 text-white text-base">東京大学 法学部</p>
+              <p class="mt-1 text-white text-base">{{ profile.user_detail.position }}</p>
             </div>
-            <!-- <img
+            <img
               class="rounded-full user-img"
               src="@/assets/img/students/students_img0.jpg"
-            /> -->
+            />
           </div>
         </div>
         <div class="slider">
-          <MoleculeUserSliderProfile :items="students" />
+          <MoleculeUserSliderProfile :items="students" :is-show-main="false" />
         </div>
       </div>
     </section>
@@ -27,7 +27,7 @@
       <div class="l-container -max-900">
         <h1 class="title">
           <span class="date sp:text-gray-400 pc:text-black">2021.01.07</span>
-          {{ saveProfileData.title }}
+          {{ profile.user_detail.title }}
         </h1>
         <organism-profile-input-modal
           class="w-12 bl-margin-left"
@@ -38,10 +38,9 @@
           @close="inputCloseAction('profile')"
           :key="closeKey.profile"
         />
-        <p class="name">@usernameusername</p>
         <div class="content">
-          <p>
-            {{ saveProfileData.textData }}
+          <p class="whitespace-pre-line">
+            {{ profile.user_detail.detail }}
           </p>
         </div>
       </div>
@@ -62,7 +61,7 @@
             </template>
           </organism-campany-input-modal>
           <organism-career-time-line
-            :career="students[0].career"
+            :career="profile.work_history"
             :key="`careerTimeLine-${closeKey.careerTimeLine}`"
           />
         </div>
@@ -83,7 +82,7 @@
             </template></organism-academic-input-modal
           >
           <organism-academic-time-line
-            :academic="students[0].academic"
+            :academic="profile.school"
             :key="`academicTimeLine-${closeKey.academicTimeLine}`"
           />
         </div>
@@ -173,12 +172,14 @@ import OrganismTagInputModal from "../../components/organism/OrganismTagInputMod
 import OrganismWriterPostInputModal from "../../components/organism/OrganismPostInputModal.vue";
 
 export default {
-  asyncData() {
+  async asyncData({ $axios }) {
+    const profile = await $axios.get('/users/1')
     const saveProfileData = {
       title: "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
       textData: "testtesttesttesttesttesttesttesttesttesttesttest",
     };
     return {
+      profile: profile.data,
       students: require(`~/assets/json/students.json`),
       saveProfileData: saveProfileData,
     };
@@ -403,7 +404,7 @@ export default {
 .profile {
   z-index: 100;
   @include sp {
-    height: 150px;
+    height: 160px;
   }
   @include pc {
     width: 40%;
@@ -416,6 +417,8 @@ export default {
 
   .profile__inner {
     position: relative;
+    display: flex;
+    justify-content: space-between;
     .user-info {
       @include sp {
         margin-top: 1.5rem;
@@ -432,7 +435,7 @@ export default {
     }
     .user-img {
       @include sp {
-        margin-top: 6rem;
+        margin-top: 5rem;
       }
     }
   }
