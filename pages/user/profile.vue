@@ -93,7 +93,7 @@
       <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>やりたいこと</atoms-section-title-line>
-          <organism-tag-list :tagList="students[0].dreamList" />
+          <organism-tag-list :tagList="profile.want_tags" />
           <organism-tag-input-modal
             @add="addTag"
             @close="inputCloseAction('todo')"
@@ -117,7 +117,7 @@
       <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>執筆</atoms-section-title-line>
-          <organism-rect-card-list :posts="students[0].write" />
+          <organism-rect-card-list :posts="profile.writings" />
           <organism-writer-post-input-modal @add="addWrite" class="mt-4">
             <template #ignition>
               <atom-border-button class="add-job-btn">
@@ -136,7 +136,7 @@
       <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>実績</atoms-section-title-line>
-          <organism-rect-card-list :posts="students[0].achievements" />
+          <organism-rect-card-list :posts="profile.performances" />
           <organism-writer-post-input-modal @add="addAchievements" class="mt-4">
             <template #ignition>
               <atom-border-button class="add-job-btn">
