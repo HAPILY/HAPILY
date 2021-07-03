@@ -34,23 +34,27 @@ export default ({ $axios }) => {
   mock.onPost('/auth/login').reply(200, login);
 
   // Dreams
+  const DreamsPathRegex = new RegExp(`/dreams\/*`);
   mock.onGet('/dreams').reply(200, dreamAll);
   mock.onPost('/dreams').reply(200, dreamCreate);
-  mock.onGet('/dreams/1').reply(200, dreamOne);
-  mock.onPost('/dreams/1').reply(200, dreamUpdate);
+  mock.onGet(DreamsPathRegex).reply(200, dreamOne);
+  mock.onPost(DreamsPathRegex).reply(200, dreamUpdate);
 
   // Users
-  mock.onGet('/users/1').reply(200, userOne);
-  mock.onPost('/users/1').reply(200, userUpdate);
+  const UsersPathRegex = new RegExp(`/users\/*`);
+  mock.onGet(UsersPathRegex).reply(200, userOne);
+  mock.onPost(UsersPathRegex).reply(200, userUpdate);
 
   // Companies
+  const CompaniesPathRegex = new RegExp(`/companies\/*`);
   mock.onGet('/companies').reply(200, companyAll);
   mock.onPost('/companies').reply(200, companyCreate);
-  mock.onGet('/companies/1').reply(200, companyOne);
-  mock.onPost('/companies/1').reply(200, companyUpdate);
+  mock.onGet(CompaniesPathRegex).reply(200, companyOne);
+  mock.onPost(CompaniesPathRegex).reply(200, companyUpdate);
 
   // Chats
+  const ChatsPathRegex = new RegExp(`/chats\/*`);
   mock.onPost('/chats').reply(200, send);
-  mock.onGet('/chats/1').reply(200, chatAll);
-  mock.onPost('/chats/1').reply(200, chatUpdate);
+  mock.onGet(ChatsPathRegex).reply(200, chatAll);
+  mock.onPost(ChatsPathRegex).reply(200, chatUpdate);
 };

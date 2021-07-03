@@ -26,14 +26,14 @@
     <section class="body">
       <div class="l-container -max-900">
         <h1 class="title">
-          <span class="date sp:text-gray-400 pc:text-black">2021.01.07</span>
+          <span class="date sp:text-gray-400 pc:text-black">{{ profile.user_detail.created_at }}</span>
           {{ profile.user_detail.title }}
         </h1>
         <organism-profile-input-modal
           class="w-12 bl-margin-left"
-          :profileTextData="saveProfileData.textData"
+          :profileTextData="profile.user_detail.detail"
+          :profileTitle="profile.user_detail.title"
           @update:profileTextData="getProfileTextData"
-          :profileTitle="saveProfileData.title"
           @update:profileTitle="getProfileTitle"
           @close="inputCloseAction('profile')"
           :key="closeKey.profile"
@@ -159,32 +159,27 @@ import OrganismAcademicTimeLine from "@/components/organism/OrganismAcademicTime
 import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
 import MoleculesRectCard from "@/components/molecules/user/MoleculesRectCard.vue";
 import AtomsSectionTitleLine from "@/components/atoms/line/AtomsSectionTitleLine.vue";
-import OrganismTagList from "../../components/organism/OrganismTagList.vue";
-import OrganismRectCardList from "../../components/organism/OrganismRectCardList.vue";
-import MoleculesModal from "../../components/molecules/user/MoleculesModal.vue";
-import AtomButton from "../../components/atoms/button/AtomButton.vue";
-import AtomTextarea from "../../components/atoms/input/AtomTextarea.vue";
-import AtomInputText from "../../components/atoms/input/AtomInputText.vue";
-import OrganismProfileInputModal from "../../components/organism/OrganismProfileInputModal.vue";
-import OrganismCampanyInputModal from "../../components/organism/OrganismCampanyInputModal.vue";
-import OrganismAcademicInputModal from "../../components/organism/OrganismAcademicInputModal.vue";
-import OrganismTagInputModal from "../../components/organism/OrganismTagInputModal.vue";
-import OrganismWriterPostInputModal from "../../components/organism/OrganismPostInputModal.vue";
+import OrganismTagList from "@/components/organism/OrganismTagList.vue";
+import OrganismRectCardList from "@/components/organism/OrganismRectCardList.vue";
+import MoleculesModal from "@/components/molecules/user/MoleculesModal.vue";
+import AtomButton from "@/components/atoms/button/AtomButton.vue";
+import AtomTextarea from "@/components/atoms/input/AtomTextarea.vue";
+import AtomInputText from "@/components/atoms/input/AtomInputText.vue";
+import OrganismProfileInputModal from "@/components/organism/OrganismProfileInputModal.vue";
+import OrganismCampanyInputModal from "@/components/organism/OrganismCampanyInputModal.vue";
+import OrganismAcademicInputModal from "@/components/organism/OrganismAcademicInputModal.vue";
+import OrganismTagInputModal from "@/components/organism/OrganismTagInputModal.vue";
+import OrganismWriterPostInputModal from "@/components/organism/OrganismPostInputModal.vue";
 
 export default {
-  async asyncData({ $axios }) {
-    const profile = await $axios.get('/users/1')
-    const saveProfileData = {
-      title: "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
-      textData: "testtesttesttesttesttesttesttesttesttesttesttest",
-    };
+  async asyncData({ $axios, params }) {
+    const profile = await $axios.get(`/users/${params.id}`)
+
     return {
       profile: profile.data,
       students: require(`~/assets/json/students.json`),
-      saveProfileData: saveProfileData,
     };
   },
-  beforeMount() {},
   components: {
     MoleculesProgressBox,
     MoleculesRectCard,
@@ -216,16 +211,20 @@ export default {
     };
   },
   methods: {
+    // profile detail更新
     getProfileTextData(value) {
       this.saveProfileData.textData = value;
     },
+    // profile title更新
     getProfileTitle(value) {
       this.saveProfileData.title = value;
     },
+    // 学歴更新
     getAcademicInputData(value) {
       this.students[0].academic.push(value);
       this.inputCloseAction("academicTimeLine");
     },
+    // 職歴更新
     getCareerInputData(value) {
       this.students[0].career.push(value);
       this.inputCloseAction("careerTimeLine");
@@ -252,17 +251,19 @@ export default {
           break;
       }
     },
+    // やりたいこと更新
     addTag(newTag) {
       this.students[0].dreamList.push({ name: newTag });
     },
+    // 執筆更新
     addWrite(newPost) {
       this.students[0].write.push(newPost);
     },
+    // 実績更新
     addAchievements(newPost) {
       this.students[0].achievements.push(newPost);
     },
   },
-  watch: {},
 };
 </script>
 <style lang="scss" scoped>

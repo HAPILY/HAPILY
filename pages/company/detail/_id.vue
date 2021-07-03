@@ -17,8 +17,8 @@ import Detail from "@/components/organism/company/detail.vue";
 export default {
   components: { Detail },
   layout: "NoCircleNoFooterLayout",
-  async asyncData({ $axios }) {
-    const company = await $axios.get('/companies/1')
+  async asyncData({ $axios, params }) {
+    const company = await $axios.get(`/companies/${params.id}`)
     return {
       company: company.data
     };

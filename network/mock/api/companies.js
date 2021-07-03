@@ -2,7 +2,7 @@ const company = {
   id: 0,
   name: '株式会社Libry',
   vision: '一人ひとりが自分の可能性を最大限発揮できる会社を創る',
-  company_url: '#',
+  company_url: 'https://example.jp',
   company_thumbnail_url: 'https://dummyimage.com/600x400/000/fff',
   icon_url: 'https://dummyimage.com/600x400/ffb0ff/fff',
   address: '東京都',

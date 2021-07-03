@@ -106,6 +106,10 @@ export default {
 
 .company-tag {
   margin-top: 15px;
+  @include sp {
+    height: 85px;
+    overflow-y: scroll;
+  }
 }
 
 .location {
