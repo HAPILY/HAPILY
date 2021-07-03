@@ -21,7 +21,8 @@
       <div class="l-container">
         <div class="content">
           <div class="campany-tags">
-            <organism-tag-list :tagList="tags" />
+            <organism-tag-list :tagList="companyTags" />
+            <div v-if="otherTagsNum > 0" class="company-tags-other">他{{ otherTagsNum }}つ</div>
           </div>
         </div>
       </div>
@@ -39,6 +40,7 @@
 <script>
 import AtomTag from "@/components/atoms/tag/AtomTag.vue";
 import OrganismTagList from "@/components/organism/OrganismTagList.vue";
+import { computed } from '@vue/composition-api';
 export default {
   components: { AtomTag, OrganismTagList },
   props: {
@@ -62,6 +64,19 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  setup(props) {
+    const companyTags = computed(() => {
+      return props.tags.slice(0, 5);
+    });
+    const otherTagsNum = computed(() => {
+      return props.tags.length - 5;
+    });
+
+    return {
+      companyTags,
+      otherTagsNum,
+    }
   }
 };
 </script>
@@ -74,6 +89,7 @@ export default {
   height: 60px;
 }
 .company-name {
+  font-weight: bold;
   margin-left: 15px;
   padding-bottom: 10px;
   text-decoration: none;
@@ -106,5 +122,10 @@ export default {
   @include pcL {
     
   }
+}
+.company-tags-other {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: right;
 }
 </style>
