@@ -1,5 +1,14 @@
 <template>
-  <detail class="company-detail" />
+  <detail class="company-detail"
+    :name="company.name"
+    :vision="company.vision"
+    :company-url="company.company_url"
+    :icon-url="company.icon_url"
+    :address="company.address"
+    :title="company.title"
+    :detail="company.detail"
+    :tags="company.tags"
+  />
 </template>
 
 <script>
@@ -8,6 +17,12 @@ import Detail from "@/components/organism/company/detail.vue";
 export default {
   components: { Detail },
   layout: "NoCircleNoFooterLayout",
+  async asyncData({ $axios }) {
+    const company = await $axios.get('/companies/1')
+    return {
+      company: company.data
+    };
+  },
 };
 </script>
 

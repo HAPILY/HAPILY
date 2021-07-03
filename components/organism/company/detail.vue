@@ -4,35 +4,26 @@
       <div class="bl-justify-root info__inner">
         <img
           class="rounded-full company-icon"
-          src="@/assets/img/students/students_img0.jpg"
+          :src="iconUrl"
         />
         <atom-button class="contact-btn" :color="'red'">声をかける</atom-button>
       </div>
       <div class="company-sub-info">
-        <h1 class="company-name">株式会社ハピリー</h1>
+        <h1 class="company-name">{{ name }}</h1>
         <div class="bl-justify-root">
-          <p class="contact">yamada@mail.jp</p>
+          <p class="contact">{{ companyUrl }}</p>
           <p class="location">
-            <atom-icon name="location" class="location-icon" />神奈川県
+            <atom-icon name="location" class="location-icon" />{{ address }}
           </p>
         </div>
       </div>
-      <organism-tag-list
-        class="company-tag"
-        :tagList="[
-          { name: 'tag' },
-          { name: 'tag' },
-          { name: 'tag' },
-          { name: 'tag' },
-          { name: 'tag' },
-        ]"
-      />
+      <organism-tag-list class="company-tag" :tagList="tags" />
       <h1 class="title mt-6">
         <span class="date">2021.01.07</span>
-        あなたの夢を応援させてください
+        {{ title }}
       </h1>
-      <div class="content">
-        テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト
+      <div class="content whitespace-pre-line">
+        {{ detail }}
       </div>
       <h1 class="title mt-6">企業概要</h1>
     </div>
@@ -45,12 +36,47 @@ import AtomIcon from "@/components/atoms/icon/AtomIcon.vue";
 import OrganismTagList from "@/components/organism/OrganismTagList.vue";
 export default {
   components: { AtomButton, AtomIcon, OrganismTagList },
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    vision: {
+      type: String,
+      default: ''
+    },
+    companyUrl: {
+      type: String,
+      default: ''
+    },
+    iconUrl: {
+      type: String,
+      default: ''
+    },
+    address: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    detail: {
+      type: String,
+      default: ''
+    },
+    tags: {
+      type: Array,
+      default: () => []
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .company-icon {
   width: 60px;
+  height: 60px;
 }
 .contact-btn {
   width: 115px;
