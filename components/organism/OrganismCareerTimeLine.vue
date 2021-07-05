@@ -10,6 +10,7 @@
             class=""
             :status="item"
             headerTitle="職歴の編集"
+            @save="updateCareerInputData($event, item.id)"
           >
             <template #ignition>
               <div style="margin-top: 6px; margin-left: 10px; color: blue">
@@ -55,6 +56,15 @@ export default {
     OrganismCampanyInputModal,
     AtomIcon,
   },
+  setup(_, { emit }) {
+    const updateCareerInputData = (value) => {
+      emit('update', value);
+    };
+
+    return {
+      updateCareerInputData,
+    }
+  }
 };
 </script>
 

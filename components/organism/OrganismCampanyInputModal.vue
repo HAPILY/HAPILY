@@ -2,32 +2,32 @@
   <div class="campany-input-main">
     <molecules-modal v-model="localAvtive" fullScreen>
       <template v-slot:header>{{ headerTitle }}</template>
-      <template v-slot:content
-        ><div class="ly-modal">
+      <template v-slot:content>
+        <div class="ly-modal">
           <div class="campany-input-area p-4 bl-box1">
             <label>会社名</label>
-            <atom-border-input class="bl-mb-20" v-model="orgName" />
+            <atom-border-input class="bl-mb-20" v-model="state.title" />
             <molecules-date-picker
               class="bl-mb-20"
-              :beginDate.sync="beginDate"
-              :endDate.sync="endDate"
+              :beginDate.sync="state.start_date"
+              :endDate.sync="state.end_date"
             >
               <template #begin>入社</template>
               <template #end>退社</template>
             </molecules-date-picker>
             <molecule-nested-area
-              v-for="(item, index) in jobList"
+              v-for="(job, index) in state.detail"
               :key="index"
               :index="index"
-              @remove="removeJob()"
+              @remove="removeJob(index)"
               class="bl-mb-20 clild"
             >
               <label>ポジションについて書いてみよう</label>
-              <atom-border-input class="bl-mb-20" v-model="item.jobName" />
+              <atom-border-input class="bl-mb-20" v-model="job.position" />
               <label>やってきたことを記載してみよう</label>
               <atom-border-text-area
                 class="bl-mb-20"
-                v-model="item.jobDetail"
+                v-model="job.job_detail"
               />
             </molecule-nested-area>
             <atom-border-button class="add-job-btn" @click="addJobArea">
@@ -50,11 +50,9 @@
 <script>
 import {
   defineComponent,
-  computed,
   ref,
   reactive,
   watch,
-  toRefs,
 } from "@nuxtjs/composition-api";
 import AtomButton from "@/components/atoms/button/AtomButton.vue";
 import AtomBorderInput from "@/components/atoms/input/AtomBorderInput.vue";
@@ -65,8 +63,8 @@ import MoleculesDatePicker from "@/components/molecules/MoleculesDatePicker.vue"
 import MoleculeNestedArea from "@/components/molecules/user/MoleculeNestedArea.vue";
 
 const tempJob = {
-  jobName: "",
-  jobDetail: "",
+  position: "",
+  job_detail: "",
 };
 
 export default defineComponent({
@@ -84,11 +82,16 @@ export default defineComponent({
       type: Object,
       default() {
         return {
-          orgName: "",
-          beginDate: "",
-          endDate: "",
-          jobList: [Object.assign({}, tempJob)],
-        };
+          title: '',
+          start_date: '',
+          end_date: '',
+          detail: [
+            {
+              position: "",
+              job_detail: "",
+            }
+          ]
+        }
       },
     },
     headerTitle: {
@@ -101,12 +104,14 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const status = reactive(Object.assign({}, props.status));
+    const state = reactive(Object.assign({}, props.status));
     const localAvtive = ref(props.isActive);
 
-    const removeJob = (index) => status.jobList.splice(index, 1);
+    const removeJob = (index) => {
+      state.detail.splice(index, 1);
+    }
     const addJobArea = () => {
-      status.jobList.push(Object.assign({}, tempJob));
+      state.detail.push(Object.assign({}, tempJob));
     };
 
     watch(localAvtive, (_new, _old) => {
@@ -120,7 +125,7 @@ export default defineComponent({
     };
 
     const saveData = () => {
-      emit("save", status);
+      emit("save", state);
       localAvtive.value = false;
     };
 
@@ -130,7 +135,7 @@ export default defineComponent({
       saveData,
       removeJob,
       addJobArea,
-      ...toRefs(status),
+      state,
     };
   },
 });

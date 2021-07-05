@@ -33,8 +33,7 @@
           class="w-12 bl-margin-left"
           :profileTextData="profile.user_detail.detail"
           :profileTitle="profile.user_detail.title"
-          @update:profileTextData="getProfileTextData"
-          @update:profileTitle="getProfileTitle"
+          @update:profile="updateProfile"
           @close="inputCloseAction('profile')"
           :key="closeKey.profile"
         />
@@ -53,7 +52,7 @@
           <organism-campany-input-modal
             class="w-12 bl-margin-left"
             @close="inputCloseAction('career')"
-            @save="getCareerInputData"
+            @save="addCareerInputData"
             :key="`career-${closeKey.career}`"
           >
             <template #ignition>
@@ -62,6 +61,7 @@
           </organism-campany-input-modal>
           <organism-career-time-line
             :career="profile.work_history"
+            @update="updateCareerInputData"
             :key="`careerTimeLine-${closeKey.careerTimeLine}`"
           />
         </div>
@@ -200,6 +200,7 @@ export default {
   },
   data() {
     return {
+      profile: {},
       closeKey: {
         todo: 0,
         career: 0,
@@ -211,23 +212,51 @@ export default {
     };
   },
   methods: {
-    // profile detail更新
-    getProfileTextData(value) {
-      this.saveProfileData.textData = value;
-    },
-    // profile title更新
-    getProfileTitle(value) {
-      this.saveProfileData.title = value;
+    // profile更新
+    async updateProfile(value) {
+      const params = {
+        title: value.title,
+        detail: value.textData,
+      }
+      const res = await this.$axios.patch(`/users/${this.$route.params.id}`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
     // 学歴更新
     getAcademicInputData(value) {
       this.students[0].academic.push(value);
       this.inputCloseAction("academicTimeLine");
     },
-    // 職歴更新
-    getCareerInputData(value) {
-      this.students[0].career.push(value);
+    // 職歴追加
+    async addCareerInputData(value) {
+      const params = {
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        detail: value.detail
+      }
+      console.log('addCareerInputData', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/work_histories`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
       this.inputCloseAction("careerTimeLine");
+    },
+    // 職歴更新
+    async updateCareerInputData(value) {
+      const params = {
+        id: value.id,
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        detail: value.detail
+      }
+      console.log('updateCareerInputData', params)
+      const res = await this.$axios.patch(`/users/${this.$route.params.id}/work_histories/${value.id}`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
     inputCloseAction(closeModalName) {
       switch (closeModalName) {
