@@ -310,13 +310,31 @@ export default {
     addTag(newTag) {
       this.students[0].dreamList.push({ name: newTag });
     },
-    // 執筆更新
-    addWrite(newPost) {
-      this.students[0].write.push(newPost);
+    // 執筆追加
+    async addWrite(newPost) {
+      const params = {
+        title: newPost.title,
+        thumbnail: newPost.thumbnail,
+        redirect_url: newPost.redirect_url,
+      }
+      console.log('addWrite', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/writings`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
-    // 実績更新
-    addAchievements(newPost) {
-      this.students[0].achievements.push(newPost);
+    // 実績追加
+    async addAchievements(newPost) {
+      const params = {
+        title: newPost.title,
+        thumbnail: newPost.thumbnail,
+        redirect_url: newPost.redirect_url,
+      }
+      console.log('addAchievements', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/performances`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
   },
 };

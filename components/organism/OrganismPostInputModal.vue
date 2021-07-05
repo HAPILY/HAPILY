@@ -6,9 +6,9 @@
         ><div class="ly-modal">
           <div class="tag-input-area p-4 bl-box1">
             <label>タイトル</label>
-            <atom-border-input class="bl-mb-20" v-model="title" />
+            <atom-border-input class="bl-mb-20" v-model="state.title" />
             <label>URL</label>
-            <atom-border-input class="bl-mb-20" v-model="url" />
+            <atom-border-input class="bl-mb-20" v-model="state.redirect_url" />
           </div>
           <atom-button class="w-full" @click="addItem">追加する</atom-button>
         </div>
@@ -23,11 +23,9 @@
 <script>
 import {
   defineComponent,
-  computed,
   ref,
   reactive,
   watch,
-  toRefs,
 } from "@nuxtjs/composition-api";
 import AtomButton from "@/components/atoms/button/AtomButton.vue";
 import AtomBorderInput from "@/components/atoms/input/AtomBorderInput.vue";
@@ -49,16 +47,16 @@ export default defineComponent({
     MoleculesDatePicker,
     MoleculeNestedArea,
   },
-  setup(props, { emit }) {
-    const newItem = reactive({
+  setup(_, { emit }) {
+    const state = reactive({
       title: "",
-      url: "",
+      redirect_url: "",
       thumbnail: "",
       postDate: moment(new Date()).format("YYYY年M月DD日"),
     });
     const addItem = () => {
       localAvtive.value = false;
-      emit("add", newItem);
+      emit("add", state);
     };
     const showModal = () => (localAvtive.value = true);
     const localAvtive = ref(false);
@@ -70,7 +68,7 @@ export default defineComponent({
     });
 
     return {
-      ...toRefs(newItem),
+      state,
       addItem,
       showModal,
       localAvtive,
