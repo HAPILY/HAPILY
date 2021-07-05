@@ -44,6 +44,8 @@ export default ({ $axios }) => {
   const UsersPathRegex = new RegExp(`/users\/*`);
   mock.onGet(UsersPathRegex).reply(200, userOne);
   mock.onPost(UsersPathRegex).reply(200, userUpdate);
+  mock.onPatch(UsersPathRegex).reply(200, userUpdate);
+  mock.onDelete(UsersPathRegex).reply(200, userUpdate);
 
   // Companies
   const CompaniesPathRegex = new RegExp(`/companies\/*`);
