@@ -2,8 +2,8 @@
   <div>
     <molecules-modal v-model="localAvtive" fullScreen>
       <template v-slot:header>やりたいことの追加</template>
-      <template v-slot:content
-        ><div class="ly-modal">
+      <template v-slot:content>
+        <div class="ly-modal">
           <div class="tag-input-area p-4 bl-box1">
             <label>やりたいこと</label>
             <atom-border-input class="bl-mb-20" v-model="newToDo" />
@@ -21,11 +21,8 @@
 <script>
 import {
   defineComponent,
-  computed,
   ref,
-  reactive,
   watch,
-  toRefs,
 } from "@nuxtjs/composition-api";
 import AtomButton from "@/components/atoms/button/AtomButton.vue";
 import AtomBorderInput from "@/components/atoms/input/AtomBorderInput.vue";
@@ -50,11 +47,11 @@ export default defineComponent({
       type: Object,
     },
   },
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     const newToDo = ref("");
     const addTag = () => {
-      localAvtive.value = false;
       emit("add", newToDo.value);
+      localAvtive.value = false;
     };
     const showModal = () => (localAvtive.value = true);
     const localAvtive = ref(false);

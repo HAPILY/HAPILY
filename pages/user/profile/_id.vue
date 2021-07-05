@@ -307,8 +307,15 @@ export default {
       }
     },
     // やりたいこと更新
-    addTag(newTag) {
-      this.students[0].dreamList.push({ name: newTag });
+    async addTag(value) {
+      const params = {
+        name: value,
+      }
+      console.log('addTag', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/want_tags`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
     // 執筆追加
     async addWrite(newPost) {
