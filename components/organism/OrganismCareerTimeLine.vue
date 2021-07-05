@@ -7,7 +7,6 @@
             {{ item.title }}
           </h1>
           <organism-campany-input-modal
-            class=""
             :status="item"
             headerTitle="職歴の編集"
             @save="updateCareerInputData($event, item.id)"

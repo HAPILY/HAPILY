@@ -75,7 +75,7 @@
           <organism-academic-input-modal
             class="w-12 bl-margin-left"
             @close="inputCloseAction('academic')"
-            @save="getAcademicInputData"
+            @save="addAcademicInputData"
             :key="`academic-${closeKey.academic}`"
             ><template #ignition>
               <atom-button class="w-full">追加</atom-button>
@@ -83,6 +83,7 @@
           >
           <organism-academic-time-line
             :academic="profile.school"
+            @update="updateAcademicInputData"
             :key="`academicTimeLine-${closeKey.academicTimeLine}`"
           />
         </div>
@@ -223,11 +224,6 @@ export default {
         this.profile = { ...res.data }
       }
     },
-    // 学歴更新
-    getAcademicInputData(value) {
-      this.students[0].academic.push(value);
-      this.inputCloseAction("academicTimeLine");
-    },
     // 職歴追加
     async addCareerInputData(value) {
       const params = {
@@ -254,6 +250,36 @@ export default {
       }
       console.log('updateCareerInputData', params)
       const res = await this.$axios.patch(`/users/${this.$route.params.id}/work_histories/${value.id}`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
+    },
+    // 学歴追加
+    async addAcademicInputData(value) {
+      const params = {
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        class_name: value.class_name
+      }
+      console.log('addAcademicInputData', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/ed_backgrounds`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
+      this.inputCloseAction("academicTimeLine");
+    },
+    // 学歴更新
+    async updateAcademicInputData(value) {
+      const params = {
+        id: value.id,
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        class_name: value.class_name
+      }
+      console.log('updateAcademicInputData', params)
+      const res = await this.$axios.patch(`/users/${this.$route.params.id}/ed_backgrounds/${value.id}`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }

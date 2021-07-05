@@ -9,6 +9,7 @@
           <organism-academic-input-modal
             :status="item"
             headerTitle="学歴の編集"
+            @save="updateAcademicInputData($event, item.id)"
           >
             <template #ignition>
               <div style="margin-top: 6px; margin-left: 10px; color: blue">
@@ -49,6 +50,15 @@ export default {
     AtomTag,
     OrganismAcademicInputModal,
   },
+  setup(_, { emit }) {
+    const updateAcademicInputData = (value) => {
+      emit('update', value);
+    };
+
+    return {
+      updateAcademicInputData,
+    }
+  }
 };
 </script>
 
