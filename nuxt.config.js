@@ -4,6 +4,19 @@ require('dotenv').config();
 const nodeEnv = `${process.env.NODE_ENV || 'development'}`;
 const env = require(`./env.${nodeEnv}.js`);
 
+// Plugin決める
+const plugins = [
+  { src: '@/plugins/swiper', ssr: false },
+  { src: '@/plugins/routerSetting' },
+  { src: '@/plugins/lottie.js', ssr: false },
+  { src: '@/plugins/axios/index', ssr: false },
+  { src: '~/plugins/window', ssr: false },
+  { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false },
+];
+if (nodeEnv === 'development') {
+  plugins.push({ src: '@/plugins/mock', ssr: false });
+}
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -30,15 +43,7 @@ export default {
   css: ['~/assets/css/main'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '@/plugins/mock', ssr: false },
-    { src: '@/plugins/swiper', ssr: false },
-    { src: '@/plugins/routerSetting' },
-    { src: '@/plugins/lottie.js', ssr: false },
-    { src: '@/plugins/axios/index', ssr: false },
-    { src: '~/plugins/window', ssr: false },
-    { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false },
-  ],
+  plugins: plugins,
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
