@@ -2,7 +2,7 @@
   <div class="slider-wrap">
     <swiper :options="swiperOption">
       <swiper-slide v-for="(item, index) in items" :key="index">
-        <nuxt-link to="/user/profile" class="slide-inner">
+        <nuxt-link :to="`/user/profile/${item.id}`" class="slide-inner">
           <div
             class="thumb"
             :style="{ backgroundImage: 'url(' + item.thumbnail_url + ')' }"
