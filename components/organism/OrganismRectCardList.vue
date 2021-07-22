@@ -3,14 +3,14 @@
     <molecules-rect-card
       v-for="(item, index) in posts"
       :key="index"
-      :url="item.url"
+      :url="item.redirect_url"
       class="rect-card"
     >
       <template v-slot:content>
         <h2 class="font">
           {{ item.title }}
         </h2>
-        <time>{{ item.postDate }}</time>
+        <time>{{ item.created_date }}</time>
       </template>
       <template v-slot:thumbnail>
         <img class="card-thumbnail" :src="item.thumbnail || defaultImage"
@@ -40,7 +40,7 @@ export default {
   font-weight: 700;
 }
 .card-thumbnail {
-  width: 60px;
+  width: 100px;
   border-radius: 10px;
   margin: auto;
 }

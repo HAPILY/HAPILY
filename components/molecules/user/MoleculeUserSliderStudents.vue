@@ -5,13 +5,11 @@
         <nuxt-link to="/user/profile" class="slide-inner">
           <div
             class="thumb"
-            :style="{
-              'background-image': `url(${require(`@/assets/img/students/students_img${index}.jpg`)})`
-            }"
+            :style="{ backgroundImage: 'url(' + item.thumnail_url + ')' }"
           ></div>
           <div class="text">
-            <p class="name">@{{ item.name }}</p>
-            <p>{{ item.text }}</p>
+            <p class="name">@{{ item.user_name }}</p>
+            <p>{{ item.title }}</p>
           </div>
           <!-- <ul class="tags">
             <li>
@@ -61,7 +59,7 @@
                 />
               </svg>
             </i>
-            <span class="large">1050,000</span>円
+            <span class="large">{{ item.money.toLocaleString() }}</span>円
           </p>
           <!-- <div class="profile">
             <div class="img">

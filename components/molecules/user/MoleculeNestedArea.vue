@@ -23,6 +23,7 @@ export default {
   props: {
     index: {
       type: Number,
+      default: 0,
     },
   },
   methods: {

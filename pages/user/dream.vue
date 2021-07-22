@@ -12,33 +12,45 @@
       <div class="l-container -max-900">
         <h1 class="title">
           <span class="date">2021.01.07</span>
-          【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを
+          {{ dream.title }}
         </h1>
-        <p class="name">@usernameusername</p>
+        <p class="name">@{{ dream.user_name }}</p>
         <div class="content">
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますΩテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
+          <h2 class="title-lines">なぜ叶えたい</h2>
+          <div class="future__inner">
+            <div class="future__txt">
+              <p>
+                {{ dream.why_text }}
+              </p>
+            </div>
+
+            <div class="future__avator">
+              <img class="rounded-full" :src="dream.user_icon_url" alt="" />
+            </div>
+          </div>
         </div>
-        <div class="price"><span>必要金額</span>1500,000<span>円</span></div>
-        <div class="condition">
+        <div class="content">
+          <h2 class="title-lines">具合的なアクション</h2>
+          <div>
+            {{ dream.how_text }}
+          </div>
+        </div>
+        <div class="price">
+          <span>必要金額</span>
+          {{ dream.money.toLocaleString() }}<span>円</span>
+        </div>
+        <!-- <div class="condition">
           <h2 class="title-center">条件</h2>
           <ul class="list-condition">
             <li>てxtてxtてxtてxtてxtてxtてxtてxt</li>
             <li>てxtてxtてxtてxtてxtてxtててxtてxtててxtてxtてxtてxt</li>
             <li>てxtてxtてxtてxtてxtてxtてxtてxt</li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </section>
 
-    <section class="future">
+    <!-- <section class="future">
       <div class="l-container -max-900">
         <div class="content">
           <h2 class="title-lines">将来の夢</h2>
@@ -55,12 +67,12 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section class="experience">
       <div class="l-container -max-900">
         <div class="content">
-          <h2 class="title-center">実績</h2>
+          <h2 class="title-center">こんなことやります</h2>
           <p>
             テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
           </p>
@@ -76,9 +88,12 @@
 <script>
 import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
 export default {
-  asyncData() {
+  async asyncData({ $axios }) {
+    const students = await $axios.get('/tops')
+    const dream = await $axios.get('/dreams/1')
     return {
-      students: require(`~/assets/json/students.json`),
+      students: students.data,
+      dream: dream.data,
     };
   },
   components: {
@@ -211,6 +226,7 @@ export default {
 
     img {
       width: 100%;
+      height: 100%;
     }
   }
 }
@@ -238,9 +254,9 @@ export default {
   border-radius: 50px;
   text-align: center;
   font-weight: bold;
-  padding: 4px 4px 6px;
+  padding: 8px 12px;
   line-height: 1.4;
-  min-width: 160px;
+  min-width: 220px;
   margin: 0 auto 12px;
   background-color: map-get($color, blue, default);
   font-size: 1.1rem;

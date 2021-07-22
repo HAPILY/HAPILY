@@ -1,6 +1,6 @@
 <template>
   <div class="slider-wrap">
-    <swiper :options="swiperOption" ref="swiperMain" class="swiper-main">
+    <swiper v-show="isShowMain" :options="swiperOption" ref="swiperMain" class="swiper-main">
       <swiper-slide v-for="(item, index) in items" :key="index">
         <div class="slide-inner">
           <div
@@ -33,6 +33,10 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    isShowMain: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

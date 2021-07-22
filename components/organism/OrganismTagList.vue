@@ -1,8 +1,8 @@
 <template>
   <div class="dream-list">
     <div class="dream-list__inner">
-      <atom-tag class="tag" v-for="(item, index) in tagList" :key="index">
-        {{ item.name || item }}
+      <atom-tag class="tag" v-for="item in tagList" :key="item.id">
+        {{ item.name }}
       </atom-tag>
     </div>
   </div>
@@ -13,6 +13,7 @@ export default {
   props: {
     tagList: {
       type: Array,
+      default: () => []
     },
   },
 };

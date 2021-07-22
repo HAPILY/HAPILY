@@ -35,6 +35,7 @@ export default {
     },
     cEndDate: {
       get() {
+        if (this.endDate === "在籍中") return "";
         return this.endDate;
       },
       set(date) {

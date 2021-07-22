@@ -6,19 +6,19 @@
           <div class="profile__inner">
             <div class="user-info">
               <h1 class="user-info_name font-extrabold text-white">
-                <span class="sp:block pc:inline-block pc:mr-1">Taichiro</span>
-                <span class="sp:block pc:inline-block">Hasegawa</span>
+                <span class="sp:block pc:inline-block pc:mr-1 text-2xl">{{ profile.user_detail.first_name }}</span>
+                <span class="sp:block pc:inline-block text-2xl">{{ profile.user_detail.last_name }}</span>
               </h1>
-              <p class="mt-1 text-white text-base">東京大学 法学部</p>
+              <p class="mt-1 text-white text-base">{{ profile.user_detail.position }}</p>
             </div>
-            <!-- <img
+            <img
               class="rounded-full user-img"
               src="@/assets/img/students/students_img0.jpg"
-            /> -->
+            />
           </div>
         </div>
         <div class="slider">
-          <MoleculeUserSliderProfile :items="students" />
+          <MoleculeUserSliderProfile :items="students" :is-show-main="false" />
         </div>
       </div>
     </section>
@@ -26,22 +26,20 @@
     <section class="body">
       <div class="l-container -max-900">
         <h1 class="title">
-          <span class="date sp:text-gray-400 pc:text-black">2021.01.07</span>
-          {{ saveProfileData.title }}
+          <span class="date sp:text-gray-400 pc:text-black">{{ profile.user_detail.created_at }}</span>
+          {{ profile.user_detail.title }}
         </h1>
         <organism-profile-input-modal
           class="w-12 bl-margin-left"
-          :profileTextData="saveProfileData.textData"
-          @update:profileTextData="getProfileTextData"
-          :profileTitle="saveProfileData.title"
-          @update:profileTitle="getProfileTitle"
+          :profileTextData="profile.user_detail.detail"
+          :profileTitle="profile.user_detail.title"
+          @update:profile="updateProfile"
           @close="inputCloseAction('profile')"
           :key="closeKey.profile"
         />
-        <p class="name">@usernameusername</p>
         <div class="content">
-          <p>
-            {{ saveProfileData.textData }}
+          <p class="whitespace-pre-line">
+            {{ profile.user_detail.detail }}
           </p>
         </div>
       </div>
@@ -54,7 +52,7 @@
           <organism-campany-input-modal
             class="w-12 bl-margin-left"
             @close="inputCloseAction('career')"
-            @save="getCareerInputData"
+            @save="addCareerInputData"
             :key="`career-${closeKey.career}`"
           >
             <template #ignition>
@@ -62,7 +60,8 @@
             </template>
           </organism-campany-input-modal>
           <organism-career-time-line
-            :career="students[0].career"
+            :career="profile.work_history"
+            @update="updateCareerInputData"
             :key="`careerTimeLine-${closeKey.careerTimeLine}`"
           />
         </div>
@@ -76,14 +75,15 @@
           <organism-academic-input-modal
             class="w-12 bl-margin-left"
             @close="inputCloseAction('academic')"
-            @save="getAcademicInputData"
+            @save="addAcademicInputData"
             :key="`academic-${closeKey.academic}`"
             ><template #ignition>
               <atom-button class="w-full">追加</atom-button>
             </template></organism-academic-input-modal
           >
           <organism-academic-time-line
-            :academic="students[0].academic"
+            :academic="profile.school"
+            @update="updateAcademicInputData"
             :key="`academicTimeLine-${closeKey.academicTimeLine}`"
           />
         </div>
@@ -94,7 +94,7 @@
       <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>やりたいこと</atoms-section-title-line>
-          <organism-tag-list :tagList="students[0].dreamList" />
+          <organism-tag-list :tagList="profile.want_tags" />
           <organism-tag-input-modal
             @add="addTag"
             @close="inputCloseAction('todo')"
@@ -118,7 +118,7 @@
       <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>執筆</atoms-section-title-line>
-          <organism-rect-card-list :posts="students[0].write" />
+          <organism-rect-card-list :posts="profile.writings" />
           <organism-writer-post-input-modal @add="addWrite" class="mt-4">
             <template #ignition>
               <atom-border-button class="add-job-btn">
@@ -137,7 +137,7 @@
       <div class="l-container -max-900">
         <div class="content">
           <atoms-section-title-line>実績</atoms-section-title-line>
-          <organism-rect-card-list :posts="students[0].achievements" />
+          <organism-rect-card-list :posts="profile.performances" />
           <organism-writer-post-input-modal @add="addAchievements" class="mt-4">
             <template #ignition>
               <atom-border-button class="add-job-btn">
@@ -160,30 +160,27 @@ import OrganismAcademicTimeLine from "@/components/organism/OrganismAcademicTime
 import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
 import MoleculesRectCard from "@/components/molecules/user/MoleculesRectCard.vue";
 import AtomsSectionTitleLine from "@/components/atoms/line/AtomsSectionTitleLine.vue";
-import OrganismTagList from "../../components/organism/OrganismTagList.vue";
-import OrganismRectCardList from "../../components/organism/OrganismRectCardList.vue";
-import MoleculesModal from "../../components/molecules/user/MoleculesModal.vue";
-import AtomButton from "../../components/atoms/button/AtomButton.vue";
-import AtomTextarea from "../../components/atoms/input/AtomTextarea.vue";
-import AtomInputText from "../../components/atoms/input/AtomInputText.vue";
-import OrganismProfileInputModal from "../../components/organism/OrganismProfileInputModal.vue";
-import OrganismCampanyInputModal from "../../components/organism/OrganismCampanyInputModal.vue";
-import OrganismAcademicInputModal from "../../components/organism/OrganismAcademicInputModal.vue";
-import OrganismTagInputModal from "../../components/organism/OrganismTagInputModal.vue";
-import OrganismWriterPostInputModal from "../../components/organism/OrganismPostInputModal.vue";
+import OrganismTagList from "@/components/organism/OrganismTagList.vue";
+import OrganismRectCardList from "@/components/organism/OrganismRectCardList.vue";
+import MoleculesModal from "@/components/molecules/user/MoleculesModal.vue";
+import AtomButton from "@/components/atoms/button/AtomButton.vue";
+import AtomTextarea from "@/components/atoms/input/AtomTextarea.vue";
+import AtomInputText from "@/components/atoms/input/AtomInputText.vue";
+import OrganismProfileInputModal from "@/components/organism/OrganismProfileInputModal.vue";
+import OrganismCampanyInputModal from "@/components/organism/OrganismCampanyInputModal.vue";
+import OrganismAcademicInputModal from "@/components/organism/OrganismAcademicInputModal.vue";
+import OrganismTagInputModal from "@/components/organism/OrganismTagInputModal.vue";
+import OrganismWriterPostInputModal from "@/components/organism/OrganismPostInputModal.vue";
 
 export default {
-  asyncData() {
-    const saveProfileData = {
-      title: "【諦めたくない！】コロナで海外留学打ち切り…十年越しの夢の続きを",
-      textData: "testtesttesttesttesttesttesttesttesttesttesttest",
-    };
+  async asyncData({ $axios, params }) {
+    const profile = await $axios.get(`/users/${params.id}`)
+
     return {
+      profile: profile.data,
       students: require(`~/assets/json/students.json`),
-      saveProfileData: saveProfileData,
     };
   },
-  beforeMount() {},
   components: {
     MoleculesProgressBox,
     MoleculesRectCard,
@@ -204,6 +201,7 @@ export default {
   },
   data() {
     return {
+      profile: {},
       closeKey: {
         todo: 0,
         career: 0,
@@ -215,19 +213,76 @@ export default {
     };
   },
   methods: {
-    getProfileTextData(value) {
-      this.saveProfileData.textData = value;
+    // profile更新
+    async updateProfile(value) {
+      const params = {
+        title: value.title,
+        detail: value.textData,
+      }
+      const res = await this.$axios.patch(`/users/${this.$route.params.id}`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
-    getProfileTitle(value) {
-      this.saveProfileData.title = value;
+    // 職歴追加
+    async addCareerInputData(value) {
+      const params = {
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        detail: value.detail
+      }
+      console.log('addCareerInputData', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/work_histories`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
+      this.inputCloseAction("careerTimeLine");
     },
-    getAcademicInputData(value) {
-      this.students[0].academic.push(value);
+    // 職歴更新
+    async updateCareerInputData(value) {
+      const params = {
+        id: value.id,
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        detail: value.detail
+      }
+      console.log('updateCareerInputData', params)
+      const res = await this.$axios.patch(`/users/${this.$route.params.id}/work_histories/${value.id}`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
+    },
+    // 学歴追加
+    async addAcademicInputData(value) {
+      const params = {
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        class_name: value.class_name
+      }
+      console.log('addAcademicInputData', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/ed_backgrounds`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
       this.inputCloseAction("academicTimeLine");
     },
-    getCareerInputData(value) {
-      this.students[0].career.push(value);
-      this.inputCloseAction("careerTimeLine");
+    // 学歴更新
+    async updateAcademicInputData(value) {
+      const params = {
+        id: value.id,
+        title: value.title,
+        start_date: value.start_date,
+        end_date: value.end_date,
+        class_name: value.class_name
+      }
+      console.log('updateAcademicInputData', params)
+      const res = await this.$axios.patch(`/users/${this.$route.params.id}/ed_backgrounds/${value.id}`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
     inputCloseAction(closeModalName) {
       switch (closeModalName) {
@@ -251,17 +306,44 @@ export default {
           break;
       }
     },
-    addTag(newTag) {
-      this.students[0].dreamList.push({ name: newTag });
+    // やりたいこと更新
+    async addTag(value) {
+      const params = {
+        name: value,
+      }
+      console.log('addTag', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/want_tags`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
-    addWrite(newPost) {
-      this.students[0].write.push(newPost);
+    // 執筆追加
+    async addWrite(newPost) {
+      const params = {
+        title: newPost.title,
+        thumbnail: newPost.thumbnail,
+        redirect_url: newPost.redirect_url,
+      }
+      console.log('addWrite', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/writings`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
-    addAchievements(newPost) {
-      this.students[0].achievements.push(newPost);
+    // 実績追加
+    async addAchievements(newPost) {
+      const params = {
+        title: newPost.title,
+        thumbnail: newPost.thumbnail,
+        redirect_url: newPost.redirect_url,
+      }
+      console.log('addAchievements', params)
+      const res = await this.$axios.post(`/users/${this.$route.params.id}/performances`, { ...params });
+      if (res.status === 200) {
+        this.profile = { ...res.data }
+      }
     },
   },
-  watch: {},
 };
 </script>
 <style lang="scss" scoped>
@@ -403,7 +485,7 @@ export default {
 .profile {
   z-index: 100;
   @include sp {
-    height: 150px;
+    height: 160px;
   }
   @include pc {
     width: 40%;
@@ -416,6 +498,8 @@ export default {
 
   .profile__inner {
     position: relative;
+    display: flex;
+    justify-content: space-between;
     .user-info {
       @include sp {
         margin-top: 1.5rem;
@@ -432,7 +516,7 @@ export default {
     }
     .user-img {
       @include sp {
-        margin-top: 6rem;
+        margin-top: 5rem;
       }
     }
   }

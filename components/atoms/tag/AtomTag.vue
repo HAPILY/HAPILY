@@ -31,7 +31,7 @@ export default {
   line-height: 1.4;
   min-width: 60px;
   background-color: var(--color);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 
   @include pc {
     font-size: 0.7rem;

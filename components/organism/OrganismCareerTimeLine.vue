@@ -4,12 +4,12 @@
       <template slot-scope="{ item }">
         <div class="flex" style="padding: 0">
           <h1 class="career-title font-black text-xl">
-            {{ item.orgName }}
+            {{ item.title }}
           </h1>
           <organism-campany-input-modal
-            class=""
             :status="item"
             headerTitle="職歴の編集"
+            @save="updateCareerInputData($event, item.id)"
           >
             <template #ignition>
               <div style="margin-top: 6px; margin-left: 10px; color: blue">
@@ -18,17 +18,17 @@
             </template>
           </organism-campany-input-modal>
         </div>
-        <dt class="font-black text-base">{{ item.jobList[0].jobName }}</dt>
+        <dt class="font-black text-base">{{ item.detail[0].position }}</dt>
         <dd class="text-sm career-date">
-          {{ item.beginDate }} -
-          <span v-if="item.endDate">{{ item.endDate }}</span>
-          <atom-tag v-else>現在</atom-tag>
+          {{ item.start_date }} -
+          <span v-if="item.end_date !== '在籍中'">{{ item.end_date }}</span>
+          <atom-tag v-else>在籍中</atom-tag>
         </dd>
         <ul>
-          <li class="job-list" v-for="(j, index) in item.jobList" :key="index">
+          <li class="job-list" v-for="(j, index) in item.detail" :key="index">
             <dl>
-              <dt>{{ j.jobName }}</dt>
-              <dd>{{ j.jobDetail }}</dd>
+              <dt>{{ j.position }}</dt>
+              <dd>{{ j.job_detail }}</dd>
             </dl>
           </li>
         </ul>
@@ -46,6 +46,7 @@ export default {
   props: {
     career: {
       type: Array,
+      default: () => []
     },
   },
   components: {
@@ -54,6 +55,15 @@ export default {
     OrganismCampanyInputModal,
     AtomIcon,
   },
+  setup(_, { emit }) {
+    const updateCareerInputData = (value) => {
+      emit('update', value);
+    };
+
+    return {
+      updateCareerInputData,
+    }
+  }
 };
 </script>
 

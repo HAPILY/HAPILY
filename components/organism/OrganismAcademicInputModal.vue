@@ -6,35 +6,23 @@
         ><div class="ly-modal">
           <div class="campany-input-area p-4 bl-box1">
             <label>学校名</label>
-            <atom-border-input class="bl-mb-20" v-model="orgName" />
+            <atom-border-input class="bl-mb-20" v-model="state.title" />
             <molecules-date-picker
               class="bl-mb-20"
-              :beginDate.sync="beginDate"
-              :endDate.sync="endDate"
+              :beginDate.sync="state.start_date"
+              :endDate.sync="state.end_date"
               ><template #begin>入学</template>
               <template #end>卒業</template>
             </molecules-date-picker>
-            <molecule-nested-area
-              v-for="(item, index) in classList"
-              :key="index"
-              :index="index"
-              @remove="removeClass()"
-              class="bl-mb-20 clild"
-            >
+            <molecule-nested-area class="bl-mb-20 clild">
               <label>学科</label>
-              <atom-border-input class="bl-mb-20" v-model="item.className" />
-              <label>学んできたことを記載してみよう</label>
+              <atom-border-input class="bl-mb-20" v-model="state.class_name" />
+              <!-- <label>学んできたことを記載してみよう</label>
               <atom-border-text-area
                 class="bl-mb-20"
                 v-model="item.classDetail"
-              />
+              /> -->
             </molecule-nested-area>
-            <atom-border-button class="add-job-btn" @click="addClassArea">
-              <div class="flex justify-center">
-                <atom-icon class="w-4" name="plus" />
-                <span>ポジションを追加</span>
-              </div>
-            </atom-border-button>
           </div>
           <atom-button class="w-full" @click="saveData">保存</atom-button>
         </div>
@@ -49,11 +37,9 @@
 <script>
 import {
   defineComponent,
-  computed,
   ref,
   reactive,
   watch,
-  toRefs,
 } from "@nuxtjs/composition-api";
 import AtomButton from "@/components/atoms/button/AtomButton.vue";
 import AtomBorderInput from "@/components/atoms/input/AtomBorderInput.vue";
@@ -62,11 +48,6 @@ import AtomBorderButton from "@/components/atoms/button/AtomBorderButton.vue";
 import AtomIcon from "@/components/atoms/icon/AtomIcon.vue";
 import MoleculesDatePicker from "@/components/molecules/MoleculesDatePicker.vue";
 import MoleculeNestedArea from "@/components/molecules/user/MoleculeNestedArea.vue";
-
-const tempJob = {
-  jobName: "",
-  jobDetail: "",
-};
 
 export default defineComponent({
   components: {
@@ -83,10 +64,10 @@ export default defineComponent({
       type: Object,
       default() {
         return {
-          orgName: "",
-          beginDate: "",
-          endDate: "",
-          classList: [Object.assign({}, tempJob)],
+          title: "",
+          tart_date: '',
+          end_date: '',
+          class_name: ''
         };
       },
     },
@@ -96,13 +77,8 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const status = reactive(Object.assign({}, props.status));
+    const state = reactive(Object.assign({}, props.status));
     const localAvtive = ref(false);
-
-    const removeClass = (index) => status.classList.splice(index, 1);
-    const addClassArea = () => {
-      status.classList.push(Object.assign({}, tempJob));
-    };
 
     watch(localAvtive, (_new, _old) => {
       if (!_new) {
@@ -115,7 +91,7 @@ export default defineComponent({
     };
 
     const saveData = () => {
-      emit("save", status);
+      emit("save", state);
       localAvtive.value = false;
     };
 
@@ -123,9 +99,7 @@ export default defineComponent({
       showModal,
       localAvtive,
       saveData,
-      removeClass,
-      addClassArea,
-      ...toRefs(status),
+      state,
     };
   },
 });

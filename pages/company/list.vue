@@ -5,8 +5,14 @@
         <p class="title-border">会社一覧</p>
       </template>
       <div class="company-list__container">
-        <div v-for="(item, index) in [1, 2, 3, 4, 5]" :key="index">
-          <organism-campany-list-item />
+        <div v-for="(company) in companies" :key="company.id">
+          <organism-campany-list-item
+            :name="company.name"
+            :vision="company.vision"
+            :thumbnail="company.company_thumbnail_url"
+            :icon-url="company.icon_url"
+            :tags="company.tags"
+          />
           <p class="company-border"></p>
         </div>
       </div>
@@ -19,6 +25,12 @@ import OrganismCampanyListItem from "@/components/organism/OrganismCampanyListIt
 export default {
   components: { OrganismCampanyListItem },
   layout: "NoCircleNoFooterLayout",
+  async asyncData({ $axios }) {
+    const companies = await $axios.get('/companies')
+    return {
+      companies: companies.data
+    };
+  },
 };
 </script>
 

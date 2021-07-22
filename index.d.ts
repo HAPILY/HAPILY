@@ -3,6 +3,7 @@ import { Route } from 'vue-router'
 import { Store } from 'vuex'
 import { MetaInfo } from 'vue-meta'
 import { AxiosInstance } from 'axios'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
 
 interface NuxtContext {
   isClient: boolean
@@ -34,5 +35,6 @@ declare module 'vue/types/options' {
     transition?: string | object | Function
     validate?: (context: NuxtContext) => boolean
     head?: MetaInfo
+    $axios: NuxtAxiosInstance
   }
 }

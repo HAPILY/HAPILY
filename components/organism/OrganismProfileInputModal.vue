@@ -62,8 +62,7 @@ export default defineComponent({
     };
 
     const saveProfile = () => {
-      emit("update:profileTitle", state.title);
-      emit("update:profileTextData", state.textData);
+      emit("update:profile", state);
       localAvtive.value = false;
     };
 
