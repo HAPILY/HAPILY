@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="dream-item">
+  <a :href="`/user/dream/${id}`" class="dream-item">
     <div class="dream-item__inner">
       <div class="left">
         <div class="left__inner">
@@ -33,6 +33,10 @@
 export default {
   name: 'MoleculeDreamListItem',
   props: {
+    id: {
+      type: Number,
+      default: 0,
+    },
     title: {
       type: String,
       default: '',
@@ -64,13 +68,11 @@ export default {
   display: block;
   .dream-item__inner {
     display: flex;
-    
   }
   .left {
     width: 55%;
     .dream-thumbnail {
       padding-top: 56.25%;
-      // background-image: url("~@/assets/img/students/students_img0.jpg");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;

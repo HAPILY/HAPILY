@@ -12,10 +12,12 @@
 </template>
 
 <script>
-import OrganismDreamList from "../components/organism/OrganismDreamList.vue";
+import OrganismDreamList from "@/components/organism/OrganismDreamList.vue";
 
 export default {
-  components: { OrganismDreamList },
+  components: {
+    OrganismDreamList
+  },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios }) {
     const dreams = await $axios.get('/dreams')
