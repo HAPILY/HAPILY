@@ -5,7 +5,7 @@
         <nuxt-link to="/user/profile" class="slide-inner">
           <div
             class="thumb"
-            :style="{ backgroundImage: 'url(' + item.thumnail_url + ')' }"
+            :style="{ backgroundImage: 'url(' + item.thumbnail_url + ')' }"
           ></div>
           <div class="text">
             <p class="name">@{{ item.user_name }}</p>

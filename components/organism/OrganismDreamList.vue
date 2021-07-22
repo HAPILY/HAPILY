@@ -6,7 +6,7 @@
           :key="dream.id"
           :title="dream.title"
           :money="dream.money"
-          :thumbnail="dream.thumnail_url"
+          :thumbnail="dream.thumbnail_url"
           :user-name="dream.user_name"
           :user-icon-url="dream.user_icon_url"
         />
