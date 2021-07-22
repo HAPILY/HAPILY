@@ -1,10 +1,4 @@
 export default ({ $axios }) => {
-  console.log('plugin axios');
-  $axios.create({
-    baseURL: process.env.API_ENDPOINT,
-    timeout: 600000,
-  });
-
   $axios.interceptors.request.use(
     (config) => {
       // Todo: config.headerにauthorizationを付ける

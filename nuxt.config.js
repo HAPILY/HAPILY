@@ -64,7 +64,8 @@ export default {
   ],
 
   axios: {
-    proxy: true,
+    proxy: nodeEnv === 'development',
+    baseURL: env.API_ENDPOINT,
   },
   proxy: {
     '/api/v1': {
