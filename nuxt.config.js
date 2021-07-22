@@ -61,7 +61,18 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
     'portal-vue/nuxt',
+    '@nuxtjs/dayjs',
   ],
+
+  dayjs: {
+    locales: ['ja'],
+    defaultLocale: 'ja',
+    defaultTimeZone: 'Asia/Tokyo',
+    plugins: [
+      'utc', // import 'dayjs/plugin/utc'
+      'timezone', // import 'dayjs/plugin/timezone'
+    ],
+  },
 
   axios: {
     proxy: nodeEnv === 'development',

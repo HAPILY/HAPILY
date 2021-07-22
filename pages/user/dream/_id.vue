@@ -11,7 +11,7 @@
     <section class="body">
       <div class="l-container -max-900">
         <h1 class="title">
-          <span class="date">2021.01.07</span>
+          <span class="date">{{ $dayjs(dream.created_at).format('YYYY.MM.DD') }}</span>
           {{ dream.title }}
         </h1>
         <p class="name">@{{ dream.first_name }} {{ dream.last_name }}</p>
@@ -82,6 +82,7 @@
 
 <script>
 import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
+
 export default {
   async asyncData({ $axios, params }) {
     const students = await $axios.get('/tops')
