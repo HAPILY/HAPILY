@@ -65,7 +65,6 @@ export default {
 
   axios: {
     proxy: true,
-    baseURL: env.API_ENDPOINT,
   },
   proxy: {
     '/api/v1': {
