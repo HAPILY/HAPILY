@@ -14,7 +14,7 @@
           <span class="date">2021.01.07</span>
           {{ dream.title }}
         </h1>
-        <p class="name">@{{ dream.user_name }}</p>
+        <p class="name">@{{ dream.first_name }} {{ dream.last_name }}</p>
         <div class="content">
           <h2 class="title-lines">なぜ叶えたい</h2>
           <div class="future__inner">

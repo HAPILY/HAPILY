@@ -9,7 +9,8 @@ const dream = {
     'テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります\nテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますΩテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります',
   money: 10000,
   thumbnail_url: 'https://dummyimage.com/600x400/000/fff',
-  user_name: 'user0',
+  first_name: 'user0',
+  last_name: 'user0',
   user_icon_url: 'https://dummyimage.com/600x400/ffb0ff/fff',
 };
 

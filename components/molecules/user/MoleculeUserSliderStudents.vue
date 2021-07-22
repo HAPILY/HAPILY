@@ -8,7 +8,7 @@
             :style="{ backgroundImage: 'url(' + item.thumbnail_url + ')' }"
           ></div>
           <div class="text">
-            <p class="name">@{{ item.user_name }}</p>
+            <p class="name">@{{ item.first_name }} {{ item.last_name }}</p>
             <p>{{ item.title }}</p>
           </div>
           <!-- <ul class="tags">

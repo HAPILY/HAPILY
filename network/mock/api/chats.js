@@ -7,16 +7,38 @@ export const getAll = {
   status: 200,
   message: 'SUCCESS',
   data: {
+    user: {
+      id: 0,
+      first_name: 'string',
+      last_name: 'string',
+      position: 'string',
+      icon_url: 'string',
+      title: 'string',
+      detail: 'string',
+      created_at: 'string',
+    },
+    company: {
+      id: 0,
+      name: 'string',
+      vision: 'string',
+      company_url: 'string',
+      icon_url: 'string',
+      address: 'string',
+      title: 'string',
+      detail: 'string',
+      tags: [
+        {
+          id: 0,
+          name: 'string',
+        },
+      ],
+    },
     messages: [
       {
         id: 0,
-        user_message_id: 0,
         content: 'string',
         image: 'string',
         send_date: 'string',
-        user_name: 'string',
-        user_position: 'string',
-        user_icon_url: 'string',
         user_type: 'user',
       },
     ],
