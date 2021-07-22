@@ -73,12 +73,7 @@
       <div class="l-container -max-900">
         <div class="content">
           <h2 class="title-center">こんなことやります</h2>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
-          <p>
-            テキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますΩテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入りますテキスト入ります
-          </p>
+          <p>{{ dream.can_text }}</p>
         </div>
       </div>
     </section>
@@ -88,9 +83,9 @@
 <script>
 import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
 export default {
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, params }) {
     const students = await $axios.get('/tops')
-    const dream = await $axios.get('/dreams/1')
+    const dream = await $axios.get(`/dreams/${params.id}`)
     return {
       students: students.data,
       dream: dream.data,
@@ -101,6 +96,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .slider {
   @include noGutter;
@@ -219,10 +215,12 @@ export default {
     margin-top: 20px;
   }
   &__txt {
-    width: 65%;
+    width: calc(100% - 120px);
+    margin-right: 20px;
   }
   &__avator {
-    width: 30%;
+    height: 120px;
+    width: 120px;
 
     img {
       width: 100%;
