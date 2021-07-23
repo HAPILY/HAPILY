@@ -66,6 +66,7 @@ export default {
       if (res.status === "success") {
         window.location.href = "/"
       } else {
+        // Todo: 失敗時の表記
         console.log('fail login', res)
       }
     }
