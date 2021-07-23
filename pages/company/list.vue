@@ -26,7 +26,7 @@ export default {
   components: { OrganismCampanyListItem },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios }) {
-    const companies = await $axios.get('/companies')
+    const companies = await $axios.get('/v1/companies')
     return {
       companies: companies.data
     };

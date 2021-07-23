@@ -5,38 +5,78 @@
         <h1 class="title">新規登録</h1>
 
         <AtomBoxRounded>
-          <form class="form">
-            <ul class="inputs-list">
-              <li>
-                <AtomInputText type="email" placeholder="メールアドレス" />
-              </li>
-              <li>
-                <AtomInputText type="email" placeholder="メールアドレス" />
-              </li>
-              <li>
-                <AtomInputText type="password" placeholder="パスワード" />
-              </li>
-              <li>
-                <AtomInputText type="password" placeholder="パスワード" />
-              </li>
-            </ul>
+          <ValidationObserver ref="myform" v-slot="{ handleSubmit }">
+            <form class="form" @submit.stop.prevent="handleSubmit(sendSignup)">
+              <ul class="inputs-list">
+                <li>
+                  <validation-provider v-slot="{ errors }" name="email" rules="email|required">
+                    <AtomInputText v-model="state.email" type="email" name="email" placeholder="メールアドレス" />
+                    <div class="validate">{{ errors[0] }}</div>
+                  </validation-provider>
+                </li>
+                <li>
+                  <validation-provider v-slot="{ errors }" name="password" rules="required|min:6">
+                    <AtomInputText v-model="state.password" type="password" name="password" placeholder="パスワード" />
+                    <div class="validate">{{ errors[0] }}</div>
+                  </validation-provider>
+                </li>
+                <li>
+                  <AtomInputText v-model="state.password_confirmation" type="password" name="password_confirmation" placeholder="パスワード(確認)" />
+                </li>
+              </ul>
 
-            <div class="btn">
-              <AtomButton class="m-auto"> 新規登録 </AtomButton>
-            </div>
-          </form>
+              <div class="btn">
+                <SubmitButton class="m-auto"> 新規登録 </SubmitButton>
+              </div>
+            </form>
+          </ValidationObserver>
 
           <div class="login">
             <h2 class="c-title-left">アカウントをお持ちの方はこちら</h2>
-            <div class="btn">
-              <AtomButton color="red m-auto"> ログイン </AtomButton>
-            </div>
+            <nuxt-link to="/login">
+              <div class="btn">
+                <AtomButton color="red m-auto"> ログイン </AtomButton>
+              </div>
+            </nuxt-link>
           </div>
         </AtomBoxRounded>
       </div>
     </section>
   </div>
 </template>
+
+<script>
+import { reactive } from '@vue/composition-api'
+import SubmitButton from '@/components/atoms/button/Submit.vue'
+
+export default {
+  components: {
+    SubmitButton
+  },
+  setup(_, { root }) {
+    const state = reactive({
+      email: '',
+      password: '',
+      password_confirmation: '',
+    });
+
+    const sendSignup = async () => {
+      console.log('sendSignup', state)
+      const res = await root.$axios.post('/auth', { ...state })
+      if (res.status === "success") {
+        window.location.href = "/"
+      } else {
+        console.log('fail login', res)
+      }
+    }
+
+    return {
+      state,
+      sendSignup,
+    }
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 .signup {
@@ -78,5 +118,9 @@
 }
 .login {
   margin-top: 36px;
+}
+.validate {
+  color: #F00;
+  font-size: 10px;
 }
 </style>

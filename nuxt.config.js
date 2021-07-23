@@ -12,6 +12,7 @@ const plugins = [
   { src: '@/plugins/axios/index', ssr: false },
   { src: '~/plugins/window', ssr: false },
   { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false },
+  { src: '@plugins/vee-validate', ssr: false },
 ];
 if (nodeEnv === 'development') {
   plugins.push({ src: '@/plugins/mock', ssr: false });
@@ -98,6 +99,7 @@ export default {
       sassOptions.importer = globImporter();
       scss.sassOptions = sassOptions;
     },
+    transpile: ['vee-validate/dist/rules'],
   },
   server: {
     host: '0.0.0.0',

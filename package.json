@@ -24,6 +24,7 @@
     "nuxt": "^2.14.12",
     "portal-vue": "^2.1.7",
     "swiper": "^4.4.5",
+    "vee-validate": "^3.4.11",
     "vue-awesome-swiper": "^4.1.1",
     "vuejs-datepicker": "^1.6.2"
   },

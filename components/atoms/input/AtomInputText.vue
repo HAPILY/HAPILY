@@ -3,6 +3,7 @@
     :type="type"
     v-model="computedValue"
     :placeholder="placeholder"
+    :name="name"
     class="input-text"
   />
 </template>
@@ -14,6 +15,10 @@ export default {
       default: "text",
     },
     placeholder: {
+      type: String,
+      default: "",
+    },
+    name: {
       type: String,
       default: "",
     },

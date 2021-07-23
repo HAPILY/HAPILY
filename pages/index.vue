@@ -45,7 +45,7 @@
 <script>
 export default {
   async asyncData({ $axios }) {
-    const students = await $axios.get('/tops')
+    const students = await $axios.get('/v1/tops')
     return {
       students: students.data
     };

@@ -20,7 +20,7 @@ export default {
   },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios }) {
-    const dreams = await $axios.get('/dreams')
+    const dreams = await $axios.get('/v1/dreams')
     return {
       dreams: dreams.data
     };

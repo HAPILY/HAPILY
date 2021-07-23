@@ -85,8 +85,8 @@ import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressB
 
 export default {
   async asyncData({ $axios, params }) {
-    const students = await $axios.get('/tops')
-    const dream = await $axios.get(`/dreams/${params.id}`)
+    const students = await $axios.get('/v1/tops')
+    const dream = await $axios.get(`/v1/dreams/${params.id}`)
     return {
       students: students.data,
       dream: dream.data,

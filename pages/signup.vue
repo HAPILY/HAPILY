@@ -4,6 +4,7 @@
 
 <script>
 import signup from "@/components/organism/signup/index.vue";
+
 export default {
   components: {
     signup,

@@ -18,7 +18,7 @@ export default {
   components: { Detail },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios, params }) {
-    const company = await $axios.get(`/companies/${params.id}`)
+    const company = await $axios.get(`/v1/companies/${params.id}`)
     return {
       company: company.data
     };

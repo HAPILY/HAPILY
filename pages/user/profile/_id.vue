@@ -174,7 +174,7 @@ import OrganismWriterPostInputModal from "@/components/organism/OrganismPostInpu
 
 export default {
   async asyncData({ $axios, params }) {
-    const profile = await $axios.get(`/users/${params.id}`)
+    const profile = await $axios.get(`/v1/users/${params.id}`)
 
     return {
       profile: profile.data,
@@ -219,7 +219,7 @@ export default {
         title: value.title,
         detail: value.textData,
       }
-      const res = await this.$axios.patch(`/users/${this.$route.params.id}`, { ...params });
+      const res = await this.$axios.patch(`/v1/users/${this.$route.params.id}`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }
@@ -233,7 +233,7 @@ export default {
         detail: value.detail
       }
       console.log('addCareerInputData', params)
-      const res = await this.$axios.post(`/users/${this.$route.params.id}/work_histories`, { ...params });
+      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/work_histories`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }
@@ -249,7 +249,7 @@ export default {
         detail: value.detail
       }
       console.log('updateCareerInputData', params)
-      const res = await this.$axios.patch(`/users/${this.$route.params.id}/work_histories/${value.id}`, { ...params });
+      const res = await this.$axios.patch(`/v1/users/${this.$route.params.id}/work_histories/${value.id}`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }
@@ -263,7 +263,7 @@ export default {
         class_name: value.class_name
       }
       console.log('addAcademicInputData', params)
-      const res = await this.$axios.post(`/users/${this.$route.params.id}/ed_backgrounds`, { ...params });
+      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/ed_backgrounds`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }
@@ -279,7 +279,7 @@ export default {
         class_name: value.class_name
       }
       console.log('updateAcademicInputData', params)
-      const res = await this.$axios.patch(`/users/${this.$route.params.id}/ed_backgrounds/${value.id}`, { ...params });
+      const res = await this.$axios.patch(`/v1/users/${this.$route.params.id}/ed_backgrounds/${value.id}`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }
@@ -312,7 +312,7 @@ export default {
         name: value,
       }
       console.log('addTag', params)
-      const res = await this.$axios.post(`/users/${this.$route.params.id}/want_tags`, { ...params });
+      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/want_tags`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }
@@ -325,7 +325,7 @@ export default {
         redirect_url: newPost.redirect_url,
       }
       console.log('addWrite', params)
-      const res = await this.$axios.post(`/users/${this.$route.params.id}/writings`, { ...params });
+      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/writings`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }
@@ -338,7 +338,7 @@ export default {
         redirect_url: newPost.redirect_url,
       }
       console.log('addAchievements', params)
-      const res = await this.$axios.post(`/users/${this.$route.params.id}/performances`, { ...params });
+      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/performances`, { ...params });
       if (res.status === 200) {
         this.profile = { ...res.data }
       }

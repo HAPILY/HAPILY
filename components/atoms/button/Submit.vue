@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-default" @click="click" :class="color">
+  <button type="submit" class="btn-default" :class="color">
     <slot />
   </button>
 </template>
@@ -14,11 +14,6 @@ export default {
     color: {
       type: String,
       default: "",
-    },
-  },
-  methods: {
-    click(e) {
-      this.$emit("click", e);
     },
   },
 };
