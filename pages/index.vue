@@ -8,10 +8,10 @@
         </div>
         <div class="search-box">
           <div class="input">
-            <AtomInputText type="search" placeholder="応援したい人材を探す" />
+            <AtomInputText v-model="search" type="search" placeholder="応援したい人材を探す" />
           </div>
           <div class="btn">
-            <AtomButton>
+            <AtomButton @click="onSearch">
               <i>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -44,12 +44,31 @@
 
 <script>
 export default {
+  data() {
+    return {
+      search: ''
+    }
+  },
   async asyncData({ $axios }) {
     const students = await $axios.get('/v1/tops')
     return {
       students: students.data
     };
   },
+  methods: {
+    onSearch() {
+      if (!this.search) {
+        return
+      }
+      console.log('onSearch', this.search)
+      this.$router.push({
+        name: 'dream-list',
+        params: {
+          search: this.search
+        }
+      })
+    }
+  }
 };
 </script>
 

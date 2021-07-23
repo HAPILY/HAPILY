@@ -25,6 +25,16 @@ export default {
       dreams: dreams.data
     };
   },
+  computed: {
+    search() {
+      // 検索ワード
+      console.log('search', this.$route.params)
+      return ''
+    }
+  },
+  mounted() {
+    console.log(this.search)
+  }
 };
 </script>
 

@@ -15,13 +15,22 @@
                   </validation-provider>
                 </li>
                 <li>
-                  <validation-provider v-slot="{ errors }" name="password" rules="required|min:6">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="password"
+                    :rules="`required|min:6|is:${state.password_confirmation}`"
+                  >
                     <AtomInputText v-model="state.password" type="password" name="password" placeholder="パスワード" />
                     <div class="validate">{{ errors[0] }}</div>
                   </validation-provider>
                 </li>
                 <li>
-                  <AtomInputText v-model="state.password_confirmation" type="password" name="password_confirmation" placeholder="パスワード(確認)" />
+                  <AtomInputText
+                    v-model="state.password_confirmation"
+                    type="password"
+                    name="password_confirmation"
+                    placeholder="パスワード(確認)"
+                  />
                 </li>
               </ul>
 
