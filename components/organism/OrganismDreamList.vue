@@ -1,7 +1,7 @@
 <template>
   <div class="dream-list">
     <div class="dream-list__inner">
-      <template v-for="dream in dreams" >
+      <template v-for="dream in dreams">
         <molecule-dream-list-item
           :key="dream.id"
           :id="dream.id"
@@ -21,19 +21,18 @@ import MoleculeDreamListItem from "@/components/molecules/user/MoleculeDreamList
 
 export default {
   components: {
-    MoleculeDreamListItem
+    MoleculeDreamListItem,
   },
   props: {
     dreams: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .dream-list__inner {
   display: flex;
   flex-wrap: wrap;

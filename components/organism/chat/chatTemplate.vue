@@ -46,7 +46,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .temp {
   padding-left: 26px;
   &-item {

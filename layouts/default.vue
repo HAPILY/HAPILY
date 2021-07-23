@@ -67,13 +67,13 @@ export default {
     transition: border-radius 0.3s;
     background: map-get($color, gradient, yellow);
 
-    @include pc{
+    @include pc {
       transform: translate(-36%, -70%);
       width: vw-pc(270) * 12;
       height: vw-pc(270) * 12;
     }
 
-    @include pcL{
+    @include pcL {
       width: 270px * 12;
       height: 270px * 12;
     }

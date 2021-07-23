@@ -42,7 +42,7 @@ export default {
   props: {
     academic: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
   },
   components: {
@@ -52,16 +52,15 @@ export default {
   },
   setup(_, { emit }) {
     const updateAcademicInputData = (value) => {
-      emit('update', value);
+      emit("update", value);
     };
 
     return {
       updateAcademicInputData,
-    }
-  }
+    };
+  },
 };
 </script>
 
-<style>
-</style>
-    OrganismAcademicInputModal
+<style></style>
+OrganismAcademicInputModal

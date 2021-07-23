@@ -12,6 +12,7 @@
     "build-prod": "NODE_ENV=production nuxt build",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
+    "lint:fix": "eslint --fix --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint": "npm run lint:js"
   },
   "dependencies": {

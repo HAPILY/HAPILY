@@ -1,5 +1,5 @@
 module.exports = {
-  API_ENDPOINT: 'http://localhost:3200/api/v1',
-  BASE_URL: 'http://localhost:8000/',
-  STORAGE_ENDPOINT: '',
-}
+  API_ENDPOINT: "http://localhost:3200/api/v1",
+  BASE_URL: "http://localhost:8000/",
+  STORAGE_ENDPOINT: "",
+};

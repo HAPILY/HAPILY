@@ -9,8 +9,17 @@
             <form class="form" @submit.stop.prevent="handleSubmit(sendSignup)">
               <ul class="inputs-list">
                 <li>
-                  <validation-provider v-slot="{ errors }" name="email" rules="email|required">
-                    <AtomInputText v-model="state.email" type="email" name="email" placeholder="メールアドレス" />
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="email"
+                    rules="email|required"
+                  >
+                    <AtomInputText
+                      v-model="state.email"
+                      type="email"
+                      name="email"
+                      placeholder="メールアドレス"
+                    />
                     <div class="validate">{{ errors[0] }}</div>
                   </validation-provider>
                 </li>
@@ -20,7 +29,12 @@
                     name="password"
                     :rules="`required|min:6|is:${state.password_confirmation}`"
                   >
-                    <AtomInputText v-model="state.password" type="password" name="password" placeholder="パスワード" />
+                    <AtomInputText
+                      v-model="state.password"
+                      type="password"
+                      name="password"
+                      placeholder="パスワード"
+                    />
                     <div class="validate">{{ errors[0] }}</div>
                   </validation-provider>
                 </li>
@@ -55,37 +69,37 @@
 </template>
 
 <script>
-import { reactive } from '@vue/composition-api'
-import SubmitButton from '@/components/atoms/button/Submit.vue'
+import { reactive } from "@vue/composition-api";
+import SubmitButton from "@/components/atoms/button/Submit.vue";
 
 export default {
   components: {
-    SubmitButton
+    SubmitButton,
   },
   setup(_, { root }) {
     const state = reactive({
-      email: '',
-      password: '',
-      password_confirmation: '',
+      email: "",
+      password: "",
+      password_confirmation: "",
     });
 
     const sendSignup = async () => {
-      console.log('sendSignup', state)
-      const res = await root.$axios.post('/auth', { ...state })
+      console.log("sendSignup", state);
+      const res = await root.$axios.post("/auth", { ...state });
       if (res.status === "success") {
-        window.location.href = "/"
+        window.location.href = "/";
       } else {
         // Todo: 失敗時の表記
-        console.log('fail login', res)
+        console.log("fail login", res);
       }
-    }
+    };
 
     return {
       state,
       sendSignup,
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -94,8 +108,9 @@ export default {
     display: flex;
     flex-direction: column;
     height: 70vh;
-    &:before,&:after {
-      content: '';
+    &:before,
+    &:after {
+      content: "";
       display: block;
       flex: 1;
       min-height: 50px;
@@ -130,7 +145,7 @@ export default {
   margin-top: 36px;
 }
 .validate {
-  color: #F00;
+  color: #f00;
   font-size: 10px;
 }
 </style>

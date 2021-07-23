@@ -53,4 +53,5 @@ export default {
   align-content: space-around;
   height: 20%;
 }
-</style>x
+</style>
+x

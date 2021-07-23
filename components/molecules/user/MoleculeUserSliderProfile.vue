@@ -1,12 +1,17 @@
 <template>
   <div class="slider-wrap">
-    <swiper v-show="isShowMain" :options="swiperOption" ref="swiperMain" class="swiper-main">
+    <swiper
+      v-show="isShowMain"
+      :options="swiperOption"
+      ref="swiperMain"
+      class="swiper-main"
+    >
       <swiper-slide v-for="(item, index) in items" :key="index">
         <div class="slide-inner">
           <div
             class="thumb"
             :style="{
-              'background-image': `url(${require(`@/assets/img/students/students_img${index}.jpg`)})`
+              'background-image': `url(${require(`@/assets/img/students/students_img${index}.jpg`)})`,
             }"
           ></div>
         </div>
@@ -18,7 +23,7 @@
           <div
             class="thumb"
             :style="{
-              'background-image': `url(${require(`@/assets/img/students/students_img${index}.jpg`)})`
+              'background-image': `url(${require(`@/assets/img/students/students_img${index}.jpg`)})`,
             }"
           ></div>
         </div>
@@ -32,12 +37,12 @@ export default {
   props: {
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     isShowMain: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
@@ -49,7 +54,7 @@ export default {
         centeredSlides: true,
         centerPadding: "10%",
         spaceBetween: 0,
-        loop: true
+        loop: true,
       },
       swiperOptionNavi: {
         loopedSlides: 5,
@@ -61,11 +66,11 @@ export default {
         spaceBetween: 0,
         navigation: {
           nextEl: ".arrow-next",
-          prevEl: ".arrow-prev"
+          prevEl: ".arrow-prev",
         },
         loop: true,
-        slideToClickedSlide: true
-      }
+        slideToClickedSlide: true,
+      },
     };
   },
   mounted() {
@@ -75,7 +80,7 @@ export default {
       swiperMain.controller.control = swiperNavi;
       swiperNavi.controller.control = swiperMain;
     });
-  }
+  },
 };
 </script>
 

@@ -11,8 +11,8 @@ export default {
       animationData,
       loop: false,
       autoplay: false,
-      rendererSettings: ""
-    }
+      rendererSettings: "",
+    },
   }),
   mounted() {
     this.anim = lottie.loadAnimation({
@@ -21,7 +21,7 @@ export default {
       loop: this.options.loop !== false,
       autoplay: this.options.autoplay !== false,
       animationData: this.options.animationData,
-      rendererSettings: this.options.rendererSettings
+      rendererSettings: this.options.rendererSettings,
     });
   },
   methods: {
@@ -30,7 +30,7 @@ export default {
     },
     finish() {
       this.anim.stop();
-    }
-  }
+    },
+  },
 };
 </script>

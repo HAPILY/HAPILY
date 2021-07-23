@@ -1,21 +1,22 @@
-const globImporter = require('node-sass-glob-importer')
+// eslint-disable-next-line nuxt/no-cjs-in-config
+const globImporter = require("node-sass-glob-importer");
 
-require('dotenv').config()
-const nodeEnv = `${process.env.NODE_ENV || 'development'}`
-const env = require(`./env.${nodeEnv}.js`)
+require("dotenv").config();
+const nodeEnv = `${process.env.NODE_ENV || "development"}`;
+const env = require(`./env.${nodeEnv}.js`);
 
 // Plugin決める
 const plugins = [
-  { src: '@/plugins/swiper', ssr: false },
-  { src: '@/plugins/routerSetting' },
-  { src: '@/plugins/lottie.js', ssr: false },
-  { src: '@/plugins/axios/index', ssr: false },
-  { src: '~/plugins/window', ssr: false },
-  { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false },
-  { src: '@plugins/vee-validate', ssr: false }
-]
-if (nodeEnv === 'development') {
-  plugins.push({ src: '@/plugins/mock', ssr: false })
+  { src: "@/plugins/swiper", ssr: false },
+  { src: "@/plugins/routerSetting" },
+  { src: "@/plugins/lottie.js", ssr: false },
+  { src: "@/plugins/axios/index", ssr: false },
+  { src: "~/plugins/window", ssr: false },
+  { src: "@/plugins/vue-datepicker", mode: "client", ssr: false },
+  { src: "@plugins/vee-validate", ssr: false },
+];
+if (nodeEnv === "development") {
+  plugins.push({ src: "@/plugins/mock", ssr: false });
 }
 
 export default {
@@ -23,25 +24,25 @@ export default {
   ssr: false,
   env: {
     ...env,
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'HAPILY 〜やりたいことをやる〜',
+    title: "HAPILY 〜やりたいことをやる〜",
     htmlAttrs: {
-      lang: 'ja'
+      lang: "ja",
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/css/main'],
+  css: ["~/assets/css/main"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: plugins,
@@ -51,79 +52,79 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/eslint-module',
+    "@nuxtjs/eslint-module",
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api/module'
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/composition-api/module",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/style-resources',
-    '@nuxtjs/axios',
-    '@nuxtjs/dotenv',
-    'portal-vue/nuxt',
-    '@nuxtjs/dayjs'
+    "@nuxtjs/style-resources",
+    "@nuxtjs/axios",
+    "@nuxtjs/dotenv",
+    "portal-vue/nuxt",
+    "@nuxtjs/dayjs",
   ],
 
   dayjs: {
-    locales: ['ja'],
-    defaultLocale: 'ja',
-    defaultTimeZone: 'Asia/Tokyo',
+    locales: ["ja"],
+    defaultLocale: "ja",
+    defaultTimeZone: "Asia/Tokyo",
     plugins: [
-      'utc', // import 'dayjs/plugin/utc'
-      'timezone' // import 'dayjs/plugin/timezone'
-    ]
+      "utc", // import 'dayjs/plugin/utc'
+      "timezone", // import 'dayjs/plugin/timezone'
+    ],
   },
 
   axios: {
     // proxy: nodeEnv === 'development',
-    baseURL: env.API_ENDPOINT
+    baseURL: env.API_ENDPOINT,
   },
   proxy: {
-    '/api/v1': {
-      target: env.API_ENDPOINT
-    }
+    "/api/v1": {
+      target: env.API_ENDPOINT,
+    },
   },
 
   styleResources: {
     scss: [
-      '@/assets/css/variable/**/*.scss',
-      '@/assets/css/mixin/**/*.scss',
-      '@/assets/css/function/**/*.scss'
-    ]
+      "@/assets/css/variable/**/*.scss",
+      "@/assets/css/mixin/**/*.scss",
+      "@/assets/css/function/**/*.scss",
+    ],
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend(config, { isDev, isClient, loaders: { scss } }) {
-      const sassOptions = scss.sassOptions || {}
-      sassOptions.importer = globImporter()
-      scss.sassOptions = sassOptions
+      const sassOptions = scss.sassOptions || {};
+      sassOptions.importer = globImporter();
+      scss.sassOptions = sassOptions;
 
       config.node = {
-        fs: 'empty'
-      }
+        fs: "empty",
+      };
 
       // Run ESLint on save
       if (isDev && isClient) {
         config.module.rules.push({
-          enforce: 'pre',
+          enforce: "pre",
           test: /\.(js|vue|ts)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+          loader: "eslint-loader",
+          exclude: /(node_modules)/,
+        });
       }
     },
-    transpile: ['vee-validate/dist/rules']
+    transpile: ["vee-validate/dist/rules"],
   },
   server: {
-    host: '0.0.0.0',
-    port: 8000
+    host: "0.0.0.0",
+    port: 8000,
   },
   vue: {
     config: {
       productionTip: true,
-      devtools: true
-    }
-  }
-}
+      devtools: true,
+    },
+  },
+};

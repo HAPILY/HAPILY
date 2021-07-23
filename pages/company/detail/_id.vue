@@ -1,5 +1,6 @@
 <template>
-  <detail class="company-detail"
+  <detail
+    class="company-detail"
     :name="company.name"
     :vision="company.vision"
     :company-url="company.company_url"
@@ -18,9 +19,9 @@ export default {
   components: { Detail },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios, params }) {
-    const company = await $axios.get(`/v1/companies/${params.id}`)
+    const company = await $axios.get(`/v1/companies/${params.id}`);
     return {
-      company: company.data
+      company: company.data,
     };
   },
 };
@@ -31,4 +32,3 @@ export default {
   padding-top: 40px;
 }
 </style>
-

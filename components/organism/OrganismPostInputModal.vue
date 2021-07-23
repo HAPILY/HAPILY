@@ -21,12 +21,7 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  ref,
-  reactive,
-  watch,
-} from "@nuxtjs/composition-api";
+import { defineComponent, ref, reactive, watch } from "@nuxtjs/composition-api";
 import AtomButton from "@/components/atoms/button/AtomButton.vue";
 import AtomBorderInput from "@/components/atoms/input/AtomBorderInput.vue";
 import AtomInputText from "@/components/atoms/input/AtomInputText.vue";

@@ -59,7 +59,8 @@
                 />
               </svg>
             </i>
-            <span class="large">{{ item.money.toLocaleString() }}</span>円
+            <span class="large">{{ item.money.toLocaleString() }}</span
+            >円
           </p>
           <!-- <div class="profile">
             <div class="img">
@@ -176,8 +177,8 @@ export default {
   props: {
     items: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -190,7 +191,7 @@ export default {
         loop: true,
         centerPadding: 0,
         speed: 7000,
-        slidesPerView: 'auto',
+        slidesPerView: "auto",
         allowTouchMove: false,
         disableOnInteraction: true,
         breakpoints: {
@@ -203,13 +204,13 @@ export default {
             },
             navigation: {
               nextEl: ".arrow-next",
-              prevEl: ".arrow-prev"
+              prevEl: ".arrow-prev",
             },
-          }
-        }
-      }
+          },
+        },
+      },
     };
-  }
+  },
 };
 </script>
 
@@ -250,7 +251,7 @@ export default {
 .swiper-slide {
   padding: 0 16px;
 
-  @include pc{
+  @include pc {
     width: vw-pc(400);
   }
 
@@ -284,7 +285,7 @@ export default {
   background-color: #fff;
 
   &:hover > * {
-    opacity: .7;
+    opacity: 0.7;
   }
 
   .thumb {

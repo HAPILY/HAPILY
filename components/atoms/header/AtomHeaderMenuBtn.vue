@@ -41,13 +41,13 @@ export default {
       animationData,
       loop: false,
       autoplay: false,
-      rendererSettings: ""
-    }
+      rendererSettings: "",
+    },
   }),
   computed: {
     menuOpen() {
       return this.$store.state["menu"].globalMenu;
-    }
+    },
   },
   mounted() {
     this.anim = lottie.loadAnimation({
@@ -56,11 +56,11 @@ export default {
       loop: this.options.loop,
       autoplay: this.options.autoplay,
       animationData: this.options.animationData,
-      rendererSettings: this.options.rendererSettings
+      rendererSettings: this.options.rendererSettings,
     });
     this.$store.watch(
       () => this.$store.state["menu"].globalMenu,
-      result => this.playIcon(result)
+      (result) => this.playIcon(result)
     );
   },
   methods: {
@@ -77,8 +77,8 @@ export default {
         this.anim.setDirection(-1);
         this.anim.play();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

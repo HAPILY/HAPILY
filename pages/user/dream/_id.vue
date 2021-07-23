@@ -11,7 +11,9 @@
     <section class="body">
       <div class="l-container -max-900">
         <h1 class="title">
-          <span class="date">{{ $dayjs(dream.created_at).format('YYYY.MM.DD') }}</span>
+          <span class="date">{{
+            $dayjs(dream.created_at).format("YYYY.MM.DD")
+          }}</span>
           {{ dream.title }}
         </h1>
         <p class="name">@{{ dream.first_name }} {{ dream.last_name }}</p>
@@ -85,8 +87,8 @@ import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressB
 
 export default {
   async asyncData({ $axios, params }) {
-    const students = await $axios.get('/v1/tops')
-    const dream = await $axios.get(`/v1/dreams/${params.id}`)
+    const students = await $axios.get("/v1/tops");
+    const dream = await $axios.get(`/v1/dreams/${params.id}`);
     return {
       students: students.data,
       dream: dream.data,

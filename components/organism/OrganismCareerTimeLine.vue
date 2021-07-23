@@ -46,7 +46,7 @@ export default {
   props: {
     career: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
   },
   components: {
@@ -57,13 +57,13 @@ export default {
   },
   setup(_, { emit }) {
     const updateCareerInputData = (value) => {
-      emit('update', value);
+      emit("update", value);
     };
 
     return {
       updateCareerInputData,
-    }
-  }
+    };
+  },
 };
 </script>
 

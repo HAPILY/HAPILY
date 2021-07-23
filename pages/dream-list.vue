@@ -16,25 +16,25 @@ import OrganismDreamList from "@/components/organism/OrganismDreamList.vue";
 
 export default {
   components: {
-    OrganismDreamList
+    OrganismDreamList,
   },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios }) {
-    const dreams = await $axios.get('/v1/dreams')
+    const dreams = await $axios.get("/v1/dreams");
     return {
-      dreams: dreams.data
+      dreams: dreams.data,
     };
   },
   computed: {
     search() {
       // 検索ワード
-      console.log('search', this.$route.params)
-      return ''
-    }
+      console.log("search", this.$route.params);
+      return "";
+    },
   },
   mounted() {
-    console.log(this.search)
-  }
+    console.log(this.search);
+  },
 };
 </script>
 

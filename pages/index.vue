@@ -8,7 +8,11 @@
         </div>
         <div class="search-box">
           <div class="input">
-            <AtomInputText v-model="search" type="search" placeholder="応援したい人材を探す" />
+            <AtomInputText
+              v-model="search"
+              type="search"
+              placeholder="応援したい人材を探す"
+            />
           </div>
           <div class="btn">
             <AtomButton @click="onSearch">
@@ -35,9 +39,9 @@
     </section>
 
     <section class="students">
-        <div class="students__slider">
-          <MoleculeUserSliderStudents :items="students" />
-        </div>
+      <div class="students__slider">
+        <MoleculeUserSliderStudents :items="students" />
+      </div>
     </section>
   </div>
 </template>
@@ -46,29 +50,29 @@
 export default {
   data() {
     return {
-      search: ''
-    }
+      search: "",
+    };
   },
   async asyncData({ $axios }) {
-    const students = await $axios.get('/v1/tops')
+    const students = await $axios.get("/v1/tops");
     return {
-      students: students.data
+      students: students.data,
     };
   },
   methods: {
     onSearch() {
       if (!this.search) {
-        return
+        return;
       }
-      console.log('onSearch', this.search)
+      console.log("onSearch", this.search);
       this.$router.push({
-        name: 'dream-list',
+        name: "dream-list",
         params: {
-          search: this.search
-        }
-      })
-    }
-  }
+          search: this.search,
+        },
+      });
+    },
+  },
 };
 </script>
 
@@ -85,7 +89,7 @@ export default {
     margin-bottom: 220px;
   }
 
-  &_inner{
+  &_inner {
     padding-top: 74%;
 
     @include pc {
@@ -105,7 +109,7 @@ export default {
     @include pc {
       top: vw-pc(50);
       right: 0;
-      transform: translate(10%,0);
+      transform: translate(10%, 0);
       width: vw-pc(900);
     }
 
@@ -136,7 +140,7 @@ export default {
   }
 }
 .title {
-  @include sp{
+  @include sp {
     width: 40%;
     margin: 10% auto 0;
   }

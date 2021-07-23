@@ -298,7 +298,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 $footerHeght: 100px;
 

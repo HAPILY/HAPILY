@@ -5,7 +5,7 @@
         <p class="title-border">会社一覧</p>
       </template>
       <div class="company-list__container">
-        <div v-for="(company) in companies" :key="company.id">
+        <div v-for="company in companies" :key="company.id">
           <organism-campany-list-item
             :name="company.name"
             :vision="company.vision"
@@ -26,9 +26,9 @@ export default {
   components: { OrganismCampanyListItem },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios }) {
-    const companies = await $axios.get('/v1/companies')
+    const companies = await $axios.get("/v1/companies");
     return {
-      companies: companies.data
+      companies: companies.data,
     };
   },
 };
@@ -46,7 +46,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
 
-    >* {
+    > * {
       width: 48%;
       margin-top: 2%;
       margin-bottom: 2%;

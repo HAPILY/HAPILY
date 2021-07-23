@@ -3,7 +3,10 @@
     <div class="dream-item__inner">
       <div class="left">
         <div class="left__inner">
-          <div class="dream-thumbnail" :style="{ backgroundImage: 'url(' + thumbnail + ')' }">
+          <div
+            class="dream-thumbnail"
+            :style="{ backgroundImage: 'url(' + thumbnail + ')' }"
+          >
             <img class="icon-heart" src="@/assets/img/common/heart.svg" />
           </div>
         </div>
@@ -19,10 +22,7 @@
             <span class="font-bold">{{ money.toLocaleString() }}</span
             ><span class="text-sm">円</span>
           </div>
-          <img
-            class="rounded-full user-thumbnail"
-            :src="userIconUrl"
-          />
+          <img class="rounded-full user-thumbnail" :src="userIconUrl" />
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'MoleculeDreamListItem',
+  name: "MoleculeDreamListItem",
   props: {
     id: {
       type: Number,
@@ -39,7 +39,7 @@ export default {
     },
     title: {
       type: String,
-      default: '',
+      default: "",
     },
     money: {
       type: Number,
@@ -47,17 +47,17 @@ export default {
     },
     thumbnail: {
       type: String,
-      default: '',
+      default: "",
     },
     userName: {
       type: String,
-      default: ''
+      default: "",
     },
     userIconUrl: {
       type: String,
-      default: ''
-    }
-  }
+      default: "",
+    },
+  },
 };
 </script>
 

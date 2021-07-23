@@ -13,7 +13,7 @@ export default {
   props: {
     tagList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
   },
 };

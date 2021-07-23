@@ -2,13 +2,13 @@
   <div class="company-item">
     <div class="company__inner">
       <div class="campany-header bl-justify-root">
-        <img
-          class="rounded-full company-icon"
-          :src="iconUrl"
-        />
+        <img class="rounded-full company-icon" :src="iconUrl" />
         <h2 class="c-link text-2xl company-name">{{ name }}</h2>
       </div>
-      <div class="campany-thumbnail" :style="{ backgroundImage: 'url(' + thumbnail + ')' }"></div>
+      <div
+        class="campany-thumbnail"
+        :style="{ backgroundImage: 'url(' + thumbnail + ')' }"
+      ></div>
       <div class="l-container">
         <div class="content">
           <div class="campany-message">
@@ -22,7 +22,9 @@
         <div class="content">
           <div class="campany-tags">
             <organism-tag-list :tagList="companyTags" />
-            <div v-if="otherTagsNum > 0" class="company-tags-other">他{{ otherTagsNum }}つ</div>
+            <div v-if="otherTagsNum > 0" class="company-tags-other">
+              他{{ otherTagsNum }}つ
+            </div>
           </div>
         </div>
       </div>
@@ -40,30 +42,30 @@
 <script>
 import AtomTag from "@/components/atoms/tag/AtomTag.vue";
 import OrganismTagList from "@/components/organism/OrganismTagList.vue";
-import { computed } from '@vue/composition-api';
+import { computed } from "@vue/composition-api";
 export default {
   components: { AtomTag, OrganismTagList },
   props: {
     name: {
       type: String,
-      default: '',
+      default: "",
     },
     vision: {
       type: String,
-      default: '',
+      default: "",
     },
     thumbnail: {
       type: String,
-      default: '',
+      default: "",
     },
     iconUrl: {
       type: String,
-      default: '',
+      default: "",
     },
     tags: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   setup(props) {
     const companyTags = computed(() => {
@@ -76,8 +78,8 @@ export default {
     return {
       companyTags,
       otherTagsNum,
-    }
-  }
+    };
+  },
 };
 </script>
 
@@ -105,7 +107,7 @@ export default {
 .campany-contact {
   margin-top: 10px;
 
-  >.tag {
+  > .tag {
     min-width: 160px;
     padding: 8px 0;
   }
@@ -117,10 +119,8 @@ export default {
   background-position: center center;
 
   @include pc {
-
   }
   @include pcL {
-    
   }
 }
 .company-tags-other {

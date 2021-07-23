@@ -1,17 +1,17 @@
 export default ({ $axios }) => {
   $axios.interceptors.request.use(
     (config) => {
-      const token = window.localStorage.getItem('token');
+      const token = window.localStorage.getItem("token");
       if (token) {
         const token = JSON.parse(token);
-        config.header['access-token'] = token['access-token'];
-        config.header['client'] = token.client;
-        config.header['uid'] = token.uid;
+        config.header["access-token"] = token["access-token"];
+        config.header["client"] = token.client;
+        config.header["uid"] = token.uid;
       }
       return config;
     },
     (error) => {
-      console.log('request error', error);
+      console.log("request error", error);
       return Promise.reject(error);
     }
   );
@@ -19,16 +19,16 @@ export default ({ $axios }) => {
     (response) => {
       // auth系のAPIの場合、response headerからtokenを取得する必要あり
       if (
-        response.config.url === '/auth' ||
-        response.config.url === '/auth/login'
+        response.config.url === "/auth" ||
+        response.config.url === "/auth/login"
       ) {
         const headers = response.headers;
         const token = {
-          token: headers['access-token'],
+          token: headers["access-token"],
           client: headers.client,
           uid: headers.uid,
         };
-        window.localStorage.setItem('token', JSON.stringify(token));
+        window.localStorage.setItem("token", JSON.stringify(token));
       }
       return response.data;
     },

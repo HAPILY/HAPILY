@@ -21,8 +21,8 @@
       x2="47.5045"
       y2="103.677"
     >
-      <stop offset="0" style="stop-color:#FFE371" />
-      <stop offset="1" style="stop-color:#FEC22E" />
+      <stop offset="0" style="stop-color: #ffe371" />
+      <stop offset="1" style="stop-color: #fec22e" />
     </linearGradient>
     <path
       class="st0"

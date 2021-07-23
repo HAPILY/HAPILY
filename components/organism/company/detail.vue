@@ -2,10 +2,7 @@
   <div class="detail">
     <div class="company-info l-container -max-900">
       <div class="bl-justify-root info__inner">
-        <img
-          class="rounded-full company-icon"
-          :src="iconUrl"
-        />
+        <img class="rounded-full company-icon" :src="iconUrl" />
         <atom-button class="contact-btn" :color="'red'">声をかける</atom-button>
       </div>
       <div class="company-sub-info">
@@ -39,37 +36,37 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: "",
     },
     vision: {
       type: String,
-      default: ''
+      default: "",
     },
     companyUrl: {
       type: String,
-      default: ''
+      default: "",
     },
     iconUrl: {
       type: String,
-      default: ''
+      default: "",
     },
     address: {
       type: String,
-      default: ''
+      default: "",
     },
     title: {
       type: String,
-      default: ''
+      default: "",
     },
     detail: {
       type: String,
-      default: ''
+      default: "",
     },
     tags: {
       type: Array,
-      default: () => []
-    }
-  }
+      default: () => [],
+    },
+  },
 };
 </script>
 

@@ -1,6 +1,6 @@
 export const state = () => ({
   globalMenu: false,
-  searchMenu: false
+  searchMenu: false,
 });
 
 export const mutations = {
@@ -21,5 +21,5 @@ export const mutations = {
   },
   searchMenuClose(state) {
     state.searchMenu = false;
-  }
+  },
 };

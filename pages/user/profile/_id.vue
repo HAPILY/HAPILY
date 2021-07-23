@@ -6,10 +6,16 @@
           <div class="profile__inner">
             <div class="user-info">
               <h1 class="user-info_name font-extrabold text-white">
-                <span class="sp:block pc:inline-block pc:mr-1 text-2xl">{{ profile.user_detail.first_name }}</span>
-                <span class="sp:block pc:inline-block text-2xl">{{ profile.user_detail.last_name }}</span>
+                <span class="sp:block pc:inline-block pc:mr-1 text-2xl">{{
+                  profile.user_detail.first_name
+                }}</span>
+                <span class="sp:block pc:inline-block text-2xl">{{
+                  profile.user_detail.last_name
+                }}</span>
               </h1>
-              <p class="mt-1 text-white text-base">{{ profile.user_detail.position }}</p>
+              <p class="mt-1 text-white text-base">
+                {{ profile.user_detail.position }}
+              </p>
             </div>
             <img
               class="rounded-full user-img"
@@ -26,7 +32,9 @@
     <section class="body">
       <div class="l-container -max-900">
         <h1 class="title">
-          <span class="date sp:text-gray-400 pc:text-black">{{ profile.user_detail.created_at }}</span>
+          <span class="date sp:text-gray-400 pc:text-black">{{
+            profile.user_detail.created_at
+          }}</span>
           {{ profile.user_detail.title }}
         </h1>
         <organism-profile-input-modal
@@ -174,7 +182,7 @@ import OrganismWriterPostInputModal from "@/components/organism/OrganismPostInpu
 
 export default {
   async asyncData({ $axios, params }) {
-    const profile = await $axios.get(`/v1/users/${params.id}`)
+    const profile = await $axios.get(`/v1/users/${params.id}`);
 
     return {
       profile: profile.data,
@@ -218,10 +226,13 @@ export default {
       const params = {
         title: value.title,
         detail: value.textData,
-      }
-      const res = await this.$axios.patch(`/v1/users/${this.$route.params.id}`, { ...params });
+      };
+      const res = await this.$axios.patch(
+        `/v1/users/${this.$route.params.id}`,
+        { ...params }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
     },
     // 職歴追加
@@ -230,12 +241,17 @@ export default {
         title: value.title,
         start_date: value.start_date,
         end_date: value.end_date,
-        detail: value.detail
-      }
-      console.log('addCareerInputData', params)
-      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/work_histories`, { ...params });
+        detail: value.detail,
+      };
+      console.log("addCareerInputData", params);
+      const res = await this.$axios.post(
+        `/v1/users/${this.$route.params.id}/work_histories`,
+        {
+          ...params,
+        }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
       this.inputCloseAction("careerTimeLine");
     },
@@ -246,12 +262,15 @@ export default {
         title: value.title,
         start_date: value.start_date,
         end_date: value.end_date,
-        detail: value.detail
-      }
-      console.log('updateCareerInputData', params)
-      const res = await this.$axios.patch(`/v1/users/${this.$route.params.id}/work_histories/${value.id}`, { ...params });
+        detail: value.detail,
+      };
+      console.log("updateCareerInputData", params);
+      const res = await this.$axios.patch(
+        `/v1/users/${this.$route.params.id}/work_histories/${value.id}`,
+        { ...params }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
     },
     // 学歴追加
@@ -260,12 +279,17 @@ export default {
         title: value.title,
         start_date: value.start_date,
         end_date: value.end_date,
-        class_name: value.class_name
-      }
-      console.log('addAcademicInputData', params)
-      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/ed_backgrounds`, { ...params });
+        class_name: value.class_name,
+      };
+      console.log("addAcademicInputData", params);
+      const res = await this.$axios.post(
+        `/v1/users/${this.$route.params.id}/ed_backgrounds`,
+        {
+          ...params,
+        }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
       this.inputCloseAction("academicTimeLine");
     },
@@ -276,12 +300,15 @@ export default {
         title: value.title,
         start_date: value.start_date,
         end_date: value.end_date,
-        class_name: value.class_name
-      }
-      console.log('updateAcademicInputData', params)
-      const res = await this.$axios.patch(`/v1/users/${this.$route.params.id}/ed_backgrounds/${value.id}`, { ...params });
+        class_name: value.class_name,
+      };
+      console.log("updateAcademicInputData", params);
+      const res = await this.$axios.patch(
+        `/v1/users/${this.$route.params.id}/ed_backgrounds/${value.id}`,
+        { ...params }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
     },
     inputCloseAction(closeModalName) {
@@ -310,11 +337,16 @@ export default {
     async addTag(value) {
       const params = {
         name: value,
-      }
-      console.log('addTag', params)
-      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/want_tags`, { ...params });
+      };
+      console.log("addTag", params);
+      const res = await this.$axios.post(
+        `/v1/users/${this.$route.params.id}/want_tags`,
+        {
+          ...params,
+        }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
     },
     // 執筆追加
@@ -323,11 +355,16 @@ export default {
         title: newPost.title,
         thumbnail: newPost.thumbnail,
         redirect_url: newPost.redirect_url,
-      }
-      console.log('addWrite', params)
-      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/writings`, { ...params });
+      };
+      console.log("addWrite", params);
+      const res = await this.$axios.post(
+        `/v1/users/${this.$route.params.id}/writings`,
+        {
+          ...params,
+        }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
     },
     // 実績追加
@@ -336,11 +373,16 @@ export default {
         title: newPost.title,
         thumbnail: newPost.thumbnail,
         redirect_url: newPost.redirect_url,
-      }
-      console.log('addAchievements', params)
-      const res = await this.$axios.post(`/v1/users/${this.$route.params.id}/performances`, { ...params });
+      };
+      console.log("addAchievements", params);
+      const res = await this.$axios.post(
+        `/v1/users/${this.$route.params.id}/performances`,
+        {
+          ...params,
+        }
+      );
       if (res.status === 200) {
-        this.profile = { ...res.data }
+        this.profile = { ...res.data };
       }
     },
   },

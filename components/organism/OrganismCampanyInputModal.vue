@@ -48,12 +48,7 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  ref,
-  reactive,
-  watch,
-} from "@nuxtjs/composition-api";
+import { defineComponent, ref, reactive, watch } from "@nuxtjs/composition-api";
 import AtomButton from "@/components/atoms/button/AtomButton.vue";
 import AtomBorderInput from "@/components/atoms/input/AtomBorderInput.vue";
 import AtomInputText from "@/components/atoms/input/AtomInputText.vue";
@@ -82,16 +77,16 @@ export default defineComponent({
       type: Object,
       default() {
         return {
-          title: '',
-          start_date: '',
-          end_date: '',
+          title: "",
+          start_date: "",
+          end_date: "",
           detail: [
             {
               position: "",
               job_detail: "",
-            }
-          ]
-        }
+            },
+          ],
+        };
       },
     },
     headerTitle: {
@@ -109,7 +104,7 @@ export default defineComponent({
 
     const removeJob = (index) => {
       state.detail.splice(index, 1);
-    }
+    };
     const addJobArea = () => {
       state.detail.push(Object.assign({}, tempJob));
     };
