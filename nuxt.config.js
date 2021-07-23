@@ -1,8 +1,8 @@
-const globImporter = require('node-sass-glob-importer');
+const globImporter = require('node-sass-glob-importer')
 
-require('dotenv').config();
-const nodeEnv = `${process.env.NODE_ENV || 'development'}`;
-const env = require(`./env.${nodeEnv}.js`);
+require('dotenv').config()
+const nodeEnv = `${process.env.NODE_ENV || 'development'}`
+const env = require(`./env.${nodeEnv}.js`)
 
 // Plugin決める
 const plugins = [
@@ -12,10 +12,10 @@ const plugins = [
   { src: '@/plugins/axios/index', ssr: false },
   { src: '~/plugins/window', ssr: false },
   { src: '@/plugins/vue-datepicker', mode: 'client', ssr: false },
-  { src: '@plugins/vee-validate', ssr: false },
-];
+  { src: '@plugins/vee-validate', ssr: false }
+]
 if (nodeEnv === 'development') {
-  plugins.push({ src: '@/plugins/mock', ssr: false });
+  plugins.push({ src: '@/plugins/mock', ssr: false })
 }
 
 export default {
@@ -23,21 +23,21 @@ export default {
   ssr: false,
   env: {
     ...env,
-    NODE_ENV: process.env.NODE_ENV,
+    NODE_ENV: process.env.NODE_ENV
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'HAPILY 〜やりたいことをやる〜',
     htmlAttrs: {
-      lang: 'ja',
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: '' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -51,9 +51,10 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api/module',
+    '@nuxtjs/composition-api/module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -62,7 +63,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
     'portal-vue/nuxt',
-    '@nuxtjs/dayjs',
+    '@nuxtjs/dayjs'
   ],
 
   dayjs: {
@@ -71,44 +72,58 @@ export default {
     defaultTimeZone: 'Asia/Tokyo',
     plugins: [
       'utc', // import 'dayjs/plugin/utc'
-      'timezone', // import 'dayjs/plugin/timezone'
-    ],
+      'timezone' // import 'dayjs/plugin/timezone'
+    ]
   },
 
   axios: {
-    proxy: nodeEnv === 'development',
-    baseURL: env.API_ENDPOINT,
+    // proxy: nodeEnv === 'development',
+    baseURL: env.API_ENDPOINT
   },
   proxy: {
     '/api/v1': {
-      target: env.API_ENDPOINT,
-    },
+      target: env.API_ENDPOINT
+    }
   },
 
   styleResources: {
     scss: [
       '@/assets/css/variable/**/*.scss',
       '@/assets/css/mixin/**/*.scss',
-      '@/assets/css/function/**/*.scss',
-    ],
+      '@/assets/css/function/**/*.scss'
+    ]
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(_, { loaders: { scss } }) {
-      const sassOptions = scss.sassOptions || {};
-      sassOptions.importer = globImporter();
-      scss.sassOptions = sassOptions;
+    extend(config, { isDev, isClient, loaders: { scss } }) {
+      const sassOptions = scss.sassOptions || {}
+      sassOptions.importer = globImporter()
+      scss.sassOptions = sassOptions
+
+      config.node = {
+        fs: 'empty'
+      }
+
+      // Run ESLint on save
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue|ts)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
     },
-    transpile: ['vee-validate/dist/rules'],
+    transpile: ['vee-validate/dist/rules']
   },
   server: {
     host: '0.0.0.0',
-    port: 8000,
+    port: 8000
   },
   vue: {
     config: {
       productionTip: true,
-      devtools: true,
-    },
-  },
-};
+      devtools: true
+    }
+  }
+}

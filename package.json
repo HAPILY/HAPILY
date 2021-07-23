@@ -10,7 +10,9 @@
     "build-dev": "NODE_ENV=development nuxt build",
     "build-stg": "NODE_ENV=staging nuxt build",
     "build-prod": "NODE_ENV=production nuxt build",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
+    "lint": "npm run lint:js"
   },
   "dependencies": {
     "@nuxtjs/axios": "5.13.6",
@@ -32,11 +34,20 @@
     "@babel/preset-env": "^7.14.2",
     "@nuxt/types": "^2.15.4",
     "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/style-resources": "^1.0.0",
     "@nuxtjs/tailwindcss": "^3.4.2",
     "axios-mock-adapter": "^1.19.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "fibers": "^5.0.0",
     "node-sass-glob-importer": "^5.3.2",
+    "prettier": "^2.3.2",
     "sass": "^1.32.5",
     "sass-loader": "^10.1.1"
   }
