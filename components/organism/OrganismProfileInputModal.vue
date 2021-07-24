@@ -12,7 +12,7 @@
           <label>あなたの熱い夢を語ろう</label>
           <atom-textarea
             v-model="cProfileTextData"
-            　class="mb-10"
+            class="mb-10"
           ></atom-textarea>
           <atom-button class="w-full" @click="saveProfile">保存</atom-button>
         </div>
@@ -51,7 +51,7 @@ export default defineComponent({
 
     const localAvtive = ref(false);
 
-    watch(localAvtive, (_new, _old) => {
+    watch(localAvtive, (_new) => {
       if (!_new) {
         emit("close", false);
       }

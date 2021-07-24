@@ -1,6 +1,6 @@
 <template>
   <div class="job bl-box1 bl-mb-20 p-6">
-    　<slot />
+    <slot />
     <atom-border-button
       v-if="index !== 0"
       @click="remove"

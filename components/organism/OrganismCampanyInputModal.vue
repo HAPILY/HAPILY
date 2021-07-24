@@ -109,7 +109,7 @@ export default defineComponent({
       state.detail.push(Object.assign({}, tempJob));
     };
 
-    watch(localAvtive, (_new, _old) => {
+    watch(localAvtive, (_new) => {
       if (!_new) {
         emit("close", false);
       }

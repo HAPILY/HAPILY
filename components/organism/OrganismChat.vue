@@ -9,7 +9,7 @@
           />
         </div>
         <div class="profile-info">
-          <h1 class="user-name">山田　太郎</h1>
+          <h1 class="user-name">山田 太郎</h1>
           <div class="sub-info">
             <p class="contact">yamada@mail.jp</p>
             <p class="location">
@@ -75,13 +75,11 @@
 
 <script>
 import {
-  defineComponent,
   computed,
   ref,
   reactive,
   watch,
   toRefs,
-  nextTick,
   onMounted,
   onUpdated,
 } from "@nuxtjs/composition-api";
@@ -93,7 +91,7 @@ import AtomTextarea from "../atoms/input/AtomTextarea.vue";
 const moment = require("moment");
 export default {
   components: { AtomIcon, ChatArea, AtomInputText, ChatTemplate, AtomTextarea },
-  setup(_, ctx) {
+  setup() {
     const chatFooter = ref();
     const footerBlanc = ref();
     const chatContent = ref();
@@ -274,7 +272,7 @@ export default {
     const isMy = (id) => (id === myId ? "my" : "pair");
     watch(
       () => state.chatInputText,
-      (inputText, _) => {
+      () => {
         updateFlog.chatInput = true;
       }
     );

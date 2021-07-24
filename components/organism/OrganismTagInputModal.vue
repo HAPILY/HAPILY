@@ -52,7 +52,7 @@ export default defineComponent({
     const showModal = () => (localAvtive.value = true);
     const localAvtive = ref(false);
 
-    watch(localAvtive, (_new, _old) => {
+    watch(localAvtive, (_new) => {
       if (!_new) {
         emit("close", false);
       }
