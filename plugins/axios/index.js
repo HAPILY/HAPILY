@@ -12,7 +12,7 @@ export default ({ $axios }) => {
     },
     (error) => {
       console.log("request error", error);
-      return Promise.reject(error);
+      return error;
     }
   );
   $axios.interceptors.response.use(
@@ -20,7 +20,7 @@ export default ({ $axios }) => {
       // auth系のAPIの場合、response headerからtokenを取得する必要あり
       if (
         response.config.url === "/auth" ||
-        response.config.url === "/auth/login"
+        response.config.url === "/auth/sign_in"
       ) {
         const headers = response.headers;
         const token = {
@@ -34,7 +34,8 @@ export default ({ $axios }) => {
     },
     (error) => {
       const apiError = normalizeError(error);
-      return Promise.reject(apiError);
+      console.log("response error", apiError);
+      return apiError;
     }
   );
 };

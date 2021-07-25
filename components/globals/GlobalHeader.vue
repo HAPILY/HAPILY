@@ -7,13 +7,33 @@
       <div class="navi">
         <AtomHeaderSearchBtn class="search-btn btn" />
         <AtomHeaderMenuBtn class="menu-btn btn" />
-        <div class="avator">
-          <img src="@/assets/img/common/avator.svg" alt="" />
-        </div>
+        <template v-if="userId">
+          <nuxt-link :to="`/user/profile${userId}`">
+            <div class="avator">
+              <img src="@/assets/img/common/avator.svg" alt="" />
+            </div>
+          </nuxt-link>
+        </template>
+        <template v-else>
+          <div class="avator">
+            <img src="@/assets/img/common/avator.svg" alt="" />
+          </div>
+        </template>
       </div>
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  computed: {
+    userId() {
+      const id = window.localStorage.getItem("id") || "";
+      return id;
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .header {

@@ -84,9 +84,10 @@ export default {
     });
 
     const sendSignup = async () => {
-      console.log("sendSignup", state);
       const res = await root.$axios.post("/auth", { ...state });
+      console.log("sendSignup", res);
       if (res.status === "success") {
+        window.localStorage.setItem("id", res.data.id);
         window.location.href = "/";
       } else {
         // Todo: 失敗時の表記

@@ -78,9 +78,10 @@ export default {
     });
 
     const sendLogin = async () => {
-      console.log("sendLogin", state);
-      const res = await root.$axios.post("/auth/login", { ...state });
+      const res = await root.$axios.post("/auth/sign_in", { ...state });
+      console.log("sendLogin", res);
       if (res.status === "success") {
+        window.localStorage.setItem("id", res.data.id);
         window.location.href = "/";
       } else {
         // Todo: 失敗時の表記
