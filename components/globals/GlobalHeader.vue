@@ -8,7 +8,7 @@
         <AtomHeaderSearchBtn class="search-btn btn" />
         <AtomHeaderMenuBtn class="menu-btn btn" />
         <template v-if="userId">
-          <nuxt-link :to="`/user/profile${userId}`">
+          <nuxt-link :to="`/mypage`">
             <div class="avator">
               <img src="@/assets/img/common/avator.svg" alt="" />
             </div>

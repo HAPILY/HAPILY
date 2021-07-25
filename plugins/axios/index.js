@@ -3,10 +3,10 @@ export default ({ $axios }) => {
     (config) => {
       const token = window.localStorage.getItem("token");
       if (token) {
-        const token = JSON.parse(token);
-        config.header["access-token"] = token["access-token"];
-        config.header["client"] = token.client;
-        config.header["uid"] = token.uid;
+        const _token = JSON.parse(token);
+        config.headers["access-token"] = _token["access-token"];
+        config.headers["client"] = _token.client;
+        config.headers["uid"] = _token.uid;
       }
       return config;
     },
