@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :class="wrapperClass">
+  <div class="wrapper">
     <header class="header" id="header">
       <div class="l-container header_inner">
         <div class="logo">
