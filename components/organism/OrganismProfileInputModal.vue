@@ -18,7 +18,9 @@
         </div>
       </template>
     </molecules-modal>
-    <atom-button class="w-full" @click="showModal">編集</atom-button>
+    <atom-button v-if="isMypage" class="w-full" @click="showModal"
+      >編集</atom-button
+    >
   </div>
 </template>
 
@@ -41,6 +43,10 @@ export default defineComponent({
     profileTextData: {
       type: String,
       default: "",
+    },
+    isMypage: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, { emit }) {

@@ -1,32 +1,7 @@
 <template>
   <div class="user-profile">
     <section class="images">
-      <div class="user-profile_inner l-container">
-        <div class="profile">
-          <div class="profile__inner">
-            <div class="user-info">
-              <h1 class="user-info_name font-extrabold text-white">
-                <span class="sp:block pc:inline-block pc:mr-1 text-2xl">{{
-                  profile.user_detail.first_name
-                }}</span>
-                <span class="sp:block pc:inline-block text-2xl">{{
-                  profile.user_detail.last_name
-                }}</span>
-              </h1>
-              <p class="mt-1 text-white text-base">
-                {{ profile.user_detail.position }}
-              </p>
-            </div>
-            <img
-              class="rounded-full user-img"
-              src="@/assets/img/students/students_img0.jpg"
-            />
-          </div>
-        </div>
-        <div class="slider">
-          <MoleculeUserSliderProfile :items="students" :is-show-main="false" />
-        </div>
-      </div>
+      <UserProfile :user-detail="profile.user_detail" :students="students" />
     </section>
 
     <section class="body">
@@ -41,6 +16,7 @@
           class="w-12 bl-margin-left"
           :profileTextData="profile.user_detail.detail"
           :profileTitle="profile.user_detail.title"
+          :is-mypage="false"
           @update:profile="updateProfile"
           @close="inputCloseAction('profile')"
           :key="closeKey.profile"
@@ -62,11 +38,7 @@
             @close="inputCloseAction('career')"
             @save="addCareerInputData"
             :key="`career-${closeKey.career}`"
-          >
-            <template #ignition>
-              <atom-button class="w-full">追加</atom-button>
-            </template>
-          </organism-campany-input-modal>
+          />
           <organism-career-time-line
             :career="profile.work_history"
             @update="updateCareerInputData"
@@ -85,10 +57,7 @@
             @close="inputCloseAction('academic')"
             @save="addAcademicInputData"
             :key="`academic-${closeKey.academic}`"
-            ><template #ignition>
-              <atom-button class="w-full">追加</atom-button>
-            </template></organism-academic-input-modal
-          >
+          />
           <organism-academic-time-line
             :academic="profile.school"
             @update="updateAcademicInputData"
@@ -108,16 +77,7 @@
             @close="inputCloseAction('todo')"
             :key="closeKey.todo"
             class="mt-4"
-          >
-            <template #ignition>
-              <atom-border-button class="add-job-btn">
-                <div class="flex justify-center">
-                  <atom-icon class="w-4" name="plus" />
-                  <span>やりたいことを追加</span>
-                </div>
-              </atom-border-button>
-            </template>
-          </organism-tag-input-modal>
+          />
         </div>
       </div>
     </section>
@@ -127,16 +87,7 @@
         <div class="content">
           <atoms-section-title-line>執筆</atoms-section-title-line>
           <organism-rect-card-list :posts="profile.writings" />
-          <organism-writer-post-input-modal @add="addWrite" class="mt-4">
-            <template #ignition>
-              <atom-border-button class="add-job-btn">
-                <div class="flex justify-center">
-                  <atom-icon class="w-4" name="plus" />
-                  <span>執筆を追加</span>
-                </div>
-              </atom-border-button>
-            </template>
-          </organism-writer-post-input-modal>
+          <organism-writer-post-input-modal @add="addWrite" class="mt-4" />
         </div>
       </div>
     </section>
@@ -146,16 +97,10 @@
         <div class="content">
           <atoms-section-title-line>実績</atoms-section-title-line>
           <organism-rect-card-list :posts="profile.performances" />
-          <organism-writer-post-input-modal @add="addAchievements" class="mt-4">
-            <template #ignition>
-              <atom-border-button class="add-job-btn">
-                <div class="flex justify-center">
-                  <atom-icon class="w-4" name="plus" />
-                  <span>実績を追加</span>
-                </div>
-              </atom-border-button>
-            </template>
-          </organism-writer-post-input-modal>
+          <organism-writer-post-input-modal
+            @add="addAchievements"
+            class="mt-4"
+          />
         </div>
       </div>
     </section>
@@ -163,6 +108,7 @@
 </template>
 
 <script>
+import UserProfile from "@/components/organism/UserProfile.vue";
 import OrganismCareerTimeLine from "@/components/organism/OrganismCareerTimeLine.vue";
 import OrganismAcademicTimeLine from "@/components/organism/OrganismAcademicTimeLine.vue";
 import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
@@ -171,9 +117,6 @@ import AtomsSectionTitleLine from "@/components/atoms/line/AtomsSectionTitleLine
 import OrganismTagList from "@/components/organism/OrganismTagList.vue";
 import OrganismRectCardList from "@/components/organism/OrganismRectCardList.vue";
 import MoleculesModal from "@/components/molecules/user/MoleculesModal.vue";
-import AtomButton from "@/components/atoms/button/AtomButton.vue";
-import AtomTextarea from "@/components/atoms/input/AtomTextarea.vue";
-import AtomInputText from "@/components/atoms/input/AtomInputText.vue";
 import OrganismProfileInputModal from "@/components/organism/OrganismProfileInputModal.vue";
 import OrganismCampanyInputModal from "@/components/organism/OrganismCampanyInputModal.vue";
 import OrganismAcademicInputModal from "@/components/organism/OrganismAcademicInputModal.vue";
@@ -190,6 +133,7 @@ export default {
     };
   },
   components: {
+    UserProfile,
     MoleculesProgressBox,
     MoleculesRectCard,
     OrganismCareerTimeLine,
@@ -198,9 +142,6 @@ export default {
     OrganismTagList,
     OrganismRectCardList,
     MoleculesModal,
-    AtomButton,
-    AtomTextarea,
-    AtomInputText,
     OrganismProfileInputModal,
     OrganismCampanyInputModal,
     OrganismAcademicInputModal,
@@ -388,24 +329,8 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.user-profile_inner {
-  @include pc {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-.slider {
-  margin-bottom: 8%;
 
-  @include sp {
-    @include noGutter;
-  }
-  @include pc {
-    width: 54%;
-  }
-}
+<style lang="scss" scoped>
 .title {
   vertical-align: top;
   position: relative;
@@ -435,6 +360,7 @@ export default {
     font-weight: normal;
   }
 }
+
 .price {
   border-radius: 16px;
   padding: 20px;
@@ -450,9 +376,11 @@ export default {
     margin: 0 0.8em;
   }
 }
+
 .condition {
   margin-top: 8%;
 }
+
 .list-condition {
   font-weight: bold;
   > li {
@@ -486,6 +414,7 @@ export default {
     }
   }
 }
+
 .future {
   margin-top: 8%;
   &__inner {
@@ -504,6 +433,7 @@ export default {
     }
   }
 }
+
 .experience {
   background-color: #f5f5f5;
   padding-top: 8%;
@@ -520,46 +450,6 @@ export default {
       top: 0;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
-    }
-  }
-}
-
-.profile {
-  z-index: 100;
-  @include sp {
-    height: 160px;
-  }
-  @include pc {
-    width: 40%;
-    margin-bottom: 10%;
-  }
-
-  .user-img {
-    width: 28%;
-  }
-
-  .profile__inner {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    .user-info {
-      @include sp {
-        margin-top: 1.5rem;
-        margin-left: 1rem;
-      }
-      &_name {
-        @include pc {
-          font-size: vw-pc(36);
-        }
-        @include pcL {
-          font-size: 36px;
-        }
-      }
-    }
-    .user-img {
-      @include sp {
-        margin-top: 5rem;
-      }
     }
   }
 }

@@ -1,32 +1,7 @@
 <template>
   <div class="user-profile">
     <section class="images">
-      <div class="user-profile_inner l-container">
-        <div class="profile">
-          <div class="profile__inner">
-            <div class="user-info">
-              <h1 class="user-info_name font-extrabold text-white">
-                <span class="sp:block pc:inline-block pc:mr-1 text-2xl">{{
-                  profile.user_detail.first_name
-                }}</span>
-                <span class="sp:block pc:inline-block text-2xl">{{
-                  profile.user_detail.last_name
-                }}</span>
-              </h1>
-              <p class="mt-1 text-white text-base">
-                {{ profile.user_detail.position }}
-              </p>
-            </div>
-            <img
-              class="rounded-full user-img"
-              src="@/assets/img/students/students_img0.jpg"
-            />
-          </div>
-        </div>
-        <div class="slider">
-          <MoleculeUserSliderProfile :items="students" :is-show-main="false" />
-        </div>
-      </div>
+      <UserProfile :user-detail="profile.user_detail" :students="students" />
     </section>
 
     <section class="body">
@@ -41,6 +16,7 @@
           class="w-12 bl-margin-left"
           :profileTextData="profile.user_detail.detail"
           :profileTitle="profile.user_detail.title"
+          :is-mypage="true"
           @update:profile="updateProfile"
           @close="inputCloseAction('profile')"
           :key="closeKey.profile"
@@ -163,6 +139,7 @@
 </template>
 
 <script>
+import UserProfile from "@/components/organism/UserProfile.vue";
 import OrganismCareerTimeLine from "@/components/organism/OrganismCareerTimeLine.vue";
 import OrganismAcademicTimeLine from "@/components/organism/OrganismAcademicTimeLine.vue";
 import MoleculesProgressBox from "@/components/molecules/user/MoleculesProgressBox.vue";
@@ -192,6 +169,7 @@ export default {
     };
   },
   components: {
+    UserProfile,
     MoleculesProgressBox,
     MoleculesRectCard,
     OrganismCareerTimeLine,
@@ -390,24 +368,8 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.user-profile_inner {
-  @include pc {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-.slider {
-  margin-bottom: 8%;
 
-  @include sp {
-    @include noGutter;
-  }
-  @include pc {
-    width: 54%;
-  }
-}
+<style lang="scss" scoped>
 .title {
   vertical-align: top;
   position: relative;
@@ -437,6 +399,7 @@ export default {
     font-weight: normal;
   }
 }
+
 .price {
   border-radius: 16px;
   padding: 20px;
@@ -452,9 +415,11 @@ export default {
     margin: 0 0.8em;
   }
 }
+
 .condition {
   margin-top: 8%;
 }
+
 .list-condition {
   font-weight: bold;
   > li {
@@ -488,6 +453,7 @@ export default {
     }
   }
 }
+
 .future {
   margin-top: 8%;
   &__inner {
@@ -506,6 +472,7 @@ export default {
     }
   }
 }
+
 .experience {
   background-color: #f5f5f5;
   padding-top: 8%;
@@ -522,46 +489,6 @@ export default {
       top: 0;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
-    }
-  }
-}
-
-.profile {
-  z-index: 100;
-  @include sp {
-    height: 160px;
-  }
-  @include pc {
-    width: 40%;
-    margin-bottom: 10%;
-  }
-
-  .user-img {
-    width: 28%;
-  }
-
-  .profile__inner {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    .user-info {
-      @include sp {
-        margin-top: 1.5rem;
-        margin-left: 1rem;
-      }
-      &_name {
-        @include pc {
-          font-size: vw-pc(36);
-        }
-        @include pcL {
-          font-size: 36px;
-        }
-      }
-    }
-    .user-img {
-      @include sp {
-        margin-top: 5rem;
-      }
     }
   }
 }
