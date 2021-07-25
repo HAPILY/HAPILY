@@ -43,57 +43,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.wrapper {
-  overflow: hidden;
-  position: relative;
-  padding-top: 50px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  &:before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 50px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 1;
-    background: map-get($color, yellow, default);
-  }
-  // &.-scroll {
-  //   &:before {
-  //     position: fixed;
-  //     left: 0;
-  //     width: 100%;
-  //     height: 50px;
-  //     border-radius: 0;
-  //     z-index: 200;
-  //     opacity: 1;
-  //     transform: translate3d(0, 0, 0);
-  //     animation: scrollHeader 0.4s forwards;
-  //   }
-  // }
-}
-// @keyframes scrollHeader {
-//   0% {
-//     opacity: 1;
-//   }
-//   10% {
-//     opacity: 0.8;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// }
-.main {
-  flex-grow: 1;
 
-  .-gMenuOpen &,
-  .-searchMenuOpen & {
-    filter: blur(10px);
-  }
-}
+<style lang="scss" scoped>
+@import "assets/css/component/layout/_wrapper.scss";
 </style>

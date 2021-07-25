@@ -68,6 +68,7 @@ import { reactive } from "@vue/composition-api";
 import SubmitButton from "@/components/atoms/button/Submit.vue";
 
 export default {
+  layout: "NoHeaderLayout",
   components: {
     SubmitButton,
   },

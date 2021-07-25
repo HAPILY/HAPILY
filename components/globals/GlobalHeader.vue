@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  name: "GlobalHeader",
   computed: {
     userId() {
       const id = window.localStorage.getItem("id") || "";
@@ -36,39 +37,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 0;
-  z-index: 999;
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-  &:before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: 0.4s ease-out;
-    background: map-get($color, gradient, yellow);
-    opacity: 0;
-    .wrapper.-scroll & {
-      opacity: 1;
-    }
-  }
-  &_inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 50px;
-  }
-}
+@import "assets/css/component/global/_header.scss";
+
 .avator {
   width: 44px;
   height: 44px;
@@ -82,6 +52,7 @@ export default {
     width: 30px;
   }
 }
+
 .navi {
   display: flex;
   align-items: center;
@@ -131,20 +102,7 @@ export default {
     }
   }
 }
-.logo {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: -8px;
-  position: relative;
-  z-index: 1;
 
-  img {
-    width: 26px;
-  }
-}
 .btn {
   width: 44px;
   height: 44px;
