@@ -120,12 +120,12 @@ const userData = {
 
 export const getOne = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: { ...userData },
 };
 
 export const update = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: { ...userData },
 };

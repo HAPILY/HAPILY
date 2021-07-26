@@ -1,9 +1,9 @@
-@import 'variable/**/*';
-@import 'mixin/**/*';
-@import 'function/**/*';
-@import 'foundation/**/*';
-@import 'layout/**/*';
-@import 'component/**/*';
+@import "variable/**/*";
+@import "mixin/**/*";
+@import "function/**/*";
+@import "foundation/**/*";
+@import "layout/**/*";
+@import "component/index.scss";
 
 // .c-input-text {
 //   appearance: none;
@@ -41,27 +41,26 @@
   }
 }
 
-.bl-justify-root{
+.bl-justify-root {
   display: flex;
   position: relative;
   align-items: center;
 }
 
-.bl-margin-left{
-  margin-left:auto
+.bl-margin-left {
+  margin-left: auto;
 }
 
-.bl-mb-20{
+.bl-mb-20 {
   margin-bottom: 20px;
 }
 
-.bl-justify-center{
+.bl-justify-center {
   margin-left: auto;
   margin-right: auto;
 }
 
-
-.bl-box1{
+.bl-box1 {
   margin: 1em 0;
   border: 1px solid;
   color: #5989cf;

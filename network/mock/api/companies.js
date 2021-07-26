@@ -39,7 +39,7 @@ const company = {
 
 export const getAll = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: [
     { ...company },
     {
@@ -54,16 +54,16 @@ export const getAll = {
 
 export const create = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
 };
 
 export const getOne = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: company,
 };
 
 export const update = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
 };

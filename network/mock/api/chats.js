@@ -1,11 +1,11 @@
 export const send = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
 };
 
 export const getAll = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: {
     user: {
       id: 0,
@@ -47,5 +47,5 @@ export const getAll = {
 
 export const update = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
 };

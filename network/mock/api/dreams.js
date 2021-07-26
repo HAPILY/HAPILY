@@ -16,7 +16,7 @@ const dream = {
 
 export const getAll = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: [
     { ...dream },
     {
@@ -49,18 +49,18 @@ export const getAll = {
 
 export const create = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: dream,
 };
 
 export const getOne = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: dream,
 };
 
 export const update = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: dream,
 };

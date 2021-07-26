@@ -1,6 +1,6 @@
 export const getAll = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: [
     {
       id: 0,

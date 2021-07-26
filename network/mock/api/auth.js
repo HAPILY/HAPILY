@@ -1,6 +1,6 @@
 export const signup = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: {
     id: 1,
     email: "test@test.com",
@@ -13,7 +13,7 @@ export const signup = {
 
 export const login = {
   status: 200,
-  message: "SUCCESS",
+  message: "success",
   data: {
     id: 1,
     email: "test@test.com",
