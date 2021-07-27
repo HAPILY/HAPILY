@@ -66,7 +66,7 @@
             </template></organism-academic-input-modal
           >
           <organism-academic-time-line
-            :academic="profile.school"
+            :academic="profile.ed_backgrounds"
             @update="updateAcademicInputData"
             :key="`academicTimeLine-${closeKey.academicTimeLine}`"
           />
@@ -206,6 +206,7 @@ export default {
     // profile更新
     async updateProfile(value) {
       const params = {
+        ...this.profile.user_detail,
         title: value.title,
         detail: value.textData,
       };
@@ -270,7 +271,7 @@ export default {
         }
       );
       if (res.status === 200) {
-        this.profile = { ...res.data };
+        this.profile.ed_backgrounds.push({ ...res.data });
       }
       this.inputCloseAction("academicTimeLine");
     },
@@ -324,7 +325,7 @@ export default {
         ...params,
       });
       if (res.status === 200) {
-        this.profile = { ...res.data };
+        this.profile.want_tags.push({ ...res.data });
       }
     },
     // 執筆追加

@@ -19,9 +19,11 @@
           </organism-academic-input-modal>
         </div>
 
-        <template v-for="(_item, index) in item">
+        <template v-for="(value, key, index) in item">
           <div :key="index" style="padding: 0" class="mb-1">
-            <dt class="font-black text-base">{{ _item.class_name }}</dt>
+            <dt v-if="key === 'class_name'" class="font-black text-base">
+              {{ value }}
+            </dt>
             <!-- <p>{{ _item.classDetail }}</p> -->
           </div>
         </template>
@@ -63,4 +65,3 @@ export default {
 </script>
 
 <style></style>
-OrganismAcademicInputModal
