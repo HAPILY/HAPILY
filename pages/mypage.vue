@@ -164,6 +164,7 @@ export default {
     const profile = await $axios.get(`/v1/users/${id}`);
 
     return {
+      id,
       profile: profile.data,
       students: require(`~/assets/json/students.json`),
     };
@@ -189,6 +190,7 @@ export default {
   },
   data() {
     return {
+      id: undefined,
       profile: {},
       closeKey: {
         todo: 0,
@@ -207,10 +209,9 @@ export default {
         title: value.title,
         detail: value.textData,
       };
-      const res = await this.$axios.patch(
-        `/v1/users/${this.$route.params.id}`,
-        { ...params }
-      );
+      const res = await this.$axios.patch(`/v1/users/${this.id}`, {
+        ...params,
+      });
       if (res.status === 200) {
         this.profile = { ...res.data };
       }
@@ -225,7 +226,7 @@ export default {
       };
       console.log("addCareerInputData", params);
       const res = await this.$axios.post(
-        `/v1/users/${this.$route.params.id}/work_histories`,
+        `/v1/users/${this.id}/work_histories`,
         {
           ...params,
         }
@@ -246,7 +247,7 @@ export default {
       };
       console.log("updateCareerInputData", params);
       const res = await this.$axios.patch(
-        `/v1/users/${this.$route.params.id}/work_histories/${value.id}`,
+        `/v1/users/${this.id}/work_histories/${value.id}`,
         { ...params }
       );
       if (res.status === 200) {
@@ -263,7 +264,7 @@ export default {
       };
       console.log("addAcademicInputData", params);
       const res = await this.$axios.post(
-        `/v1/users/${this.$route.params.id}/ed_backgrounds`,
+        `/v1/users/${this.id}/ed_backgrounds`,
         {
           ...params,
         }
@@ -284,7 +285,7 @@ export default {
       };
       console.log("updateAcademicInputData", params);
       const res = await this.$axios.patch(
-        `/v1/users/${this.$route.params.id}/ed_backgrounds/${value.id}`,
+        `/v1/users/${this.id}/ed_backgrounds/${value.id}`,
         { ...params }
       );
       if (res.status === 200) {
@@ -319,12 +320,9 @@ export default {
         name: value,
       };
       console.log("addTag", params);
-      const res = await this.$axios.post(
-        `/v1/users/${this.$route.params.id}/want_tags`,
-        {
-          ...params,
-        }
-      );
+      const res = await this.$axios.post(`/v1/users/${this.id}/want_tags`, {
+        ...params,
+      });
       if (res.status === 200) {
         this.profile = { ...res.data };
       }
@@ -337,12 +335,9 @@ export default {
         redirect_url: newPost.redirect_url,
       };
       console.log("addWrite", params);
-      const res = await this.$axios.post(
-        `/v1/users/${this.$route.params.id}/writings`,
-        {
-          ...params,
-        }
-      );
+      const res = await this.$axios.post(`/v1/users/${this.id}/writings`, {
+        ...params,
+      });
       if (res.status === 200) {
         this.profile = { ...res.data };
       }
@@ -355,12 +350,9 @@ export default {
         redirect_url: newPost.redirect_url,
       };
       console.log("addAchievements", params);
-      const res = await this.$axios.post(
-        `/v1/users/${this.$route.params.id}/performances`,
-        {
-          ...params,
-        }
-      );
+      const res = await this.$axios.post(`/v1/users/${this.id}/performances`, {
+        ...params,
+      });
       if (res.status === 200) {
         this.profile = { ...res.data };
       }
@@ -370,126 +362,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  vertical-align: top;
-  position: relative;
-  padding: 0 0 ($unit * 4) ($unit * 6);
-  font-size: 1.1rem;
-  margin-bottom: 12px;
-  line-height: 1.6;
-  font-weight: bold;
-
-  &:before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    border-radius: 2px;
-    background: linear-gradient(to top, #fec22e 0%, #ffe371 80%);
-  }
-  .date {
-    text-align: right;
-    font-size: 0.8rem;
-    display: block;
-    margin-bottom: ($unit * 2);
-    line-height: 1.1;
-    font-weight: normal;
-  }
-}
-
-.price {
-  border-radius: 16px;
-  padding: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  line-height: 1.1;
-  background-color: map-get($color, blue, pale);
-  margin-top: 8%;
-  text-align: right;
-  span {
-    font-size: 60%;
-    display: inline-block;
-    margin: 0 0.8em;
-  }
-}
-
-.condition {
-  margin-top: 8%;
-}
-
-.list-condition {
-  font-weight: bold;
-  > li {
-    position: relative;
-    line-height: 1.4;
-    padding-left: 2em;
-    + li {
-      margin-top: 8px;
-    }
-    &:before {
-      content: "";
-      display: block;
-      position: absolute;
-      left: 1em;
-      top: 0.5em;
-      width: 0.4em;
-      height: 0.4em;
-      border-radius: 20px;
-      background: map-get($color, gradient, yellow);
-    }
-  }
-}
-
-.content {
-  font-size: 0.9rem;
-  line-height: 1.8;
-  margin-top: 4%;
-  p {
-    + p {
-      margin-top: 1em;
-    }
-  }
-}
-
-.future {
-  margin-top: 8%;
-  &__inner {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  &__txt {
-    width: 65%;
-  }
-  &__avator {
-    width: 30%;
-
-    img {
-      width: 100%;
-    }
-  }
-}
-
-.experience {
-  background-color: #f5f5f5;
-  padding-top: 8%;
-  padding-bottom: 8%;
-  margin-top: 12%;
-
-  .content {
-    background-color: #fff;
-    border-radius: ($unit * 4);
-    padding: ($unit * 8) ($unit * 5) ($unit * 6);
-    position: relative;
-    .title-center {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translate3d(-50%, -50%, 0);
-    }
-  }
-}
+@import "@/assets/css/component/user/_profile.scss";
 </style>

@@ -4,7 +4,7 @@ export default ({ $axios }) => {
       const token = window.localStorage.getItem("token");
       if (token) {
         const _token = JSON.parse(token);
-        config.headers["access-token"] = _token["access-token"];
+        config.headers["access-token"] = _token.token;
         config.headers["client"] = _token.client;
         config.headers["uid"] = _token.uid;
       }
