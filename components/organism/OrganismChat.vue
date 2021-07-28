@@ -1,297 +1,222 @@
 <template>
   <div class="chat">
-    <div class="chat-header">
-      <div class="chat-header__inner">
-        <div class="profile-img">
-          <img
-            class="rounded-full thumbnail"
-            src="@/assets/img/students/students_img0.jpg"
-          />
-        </div>
-        <div class="profile-info">
-          <h1 class="user-name">山田 太郎</h1>
-          <div class="sub-info">
-            <p class="contact">yamada@mail.jp</p>
-            <p class="location">
-              <atom-icon name="location" class="location-icon" />神奈川県
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ChatHeader :profile="type === 'user' ? company : user" :type="type" />
     <div class="chat-content" ref="chatContent">
       <div class="header-blanc" />
       <div
         class="chat-block"
-        v-for="(items, key, index) in chatData"
+        v-for="(items, key, index) in messages"
         :key="index"
       >
         <p class="chat-datetime">{{ key }}</p>
         <chat-area
-          v-for="(item, index) in items"
-          :postTime="item.postDateTime"
-          :kind="isMy(item.user)"
-          :class="isMy(item.user)"
-          :key="index"
+          v-for="item in items"
+          :postTime="formatDate(item.send_date)"
+          :kind="isMy(item.user_type)"
+          :class="isMy(item.user_type)"
+          :key="item.id"
           style="margin-bottom: 10px"
           >{{ item.content }}</chat-area
         >
       </div>
       <div class="footer-blanc" ref="footerBlanc" />
     </div>
-    <div class="chat-footer" ref="chatFooter">
-      <div class="footer__inner">
-        <div class="chat-input-area">
-          <div class="chat-input-area-content">
-            <div class="content__inner" ref="refInputContent">
-              <atom-textarea
-                :key="inputReset"
-                v-model="chatInputText"
-                class="chat-input"
-              />
-              <atom-icon name="photograph" class="photograph-icon" />
-              <atom-icon
-                @click="chatPost"
-                name="arrowright"
-                class="arrowright-icon"
-              />
-            </div>
-            <div class="chat-template" ref="refTemplate">
-              <span @click="isTemplateActive"
-                >{{ openCloseSymbol }} テンプレート文を入れる
-              </span>
-              <chat-template
-                @select="getSelectTemplateContent"
-                class="chat-template-content"
-                v-show="isShowTempale"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ChatFooter
+      v-model="chatInputText"
+      :input-reset="inputReset"
+      :is-show-template="isShowTemplate"
+      @chatPost="chatPost"
+      @toggleTemplateActive="toggleTemplateActive"
+      @getSelectTemplateContent="getSelectTemplateContent"
+    />
   </div>
 </template>
 
 <script>
-import {
-  computed,
-  ref,
-  reactive,
-  watch,
-  toRefs,
-  onMounted,
-  onUpdated,
-} from "@nuxtjs/composition-api";
 import AtomIcon from "../atoms/icon/AtomIcon.vue";
 import ChatArea from "../molecules/chat/chatArea.vue";
 import AtomInputText from "../atoms/input/AtomInputText.vue";
 import ChatTemplate from "./chat/chatTemplate.vue";
 import AtomTextarea from "../atoms/input/AtomTextarea.vue";
+import ChatHeader from "@/components/molecules/chat/header.vue";
+import ChatFooter from "@/components/molecules/chat/footer.vue";
+
 const moment = require("moment");
+
 export default {
-  components: { AtomIcon, ChatArea, AtomInputText, ChatTemplate, AtomTextarea },
-  setup() {
-    const chatFooter = ref();
-    const footerBlanc = ref();
-    const chatContent = ref();
-    const refTemplate = ref();
-    const refInputContent = ref();
-    const inputReset = ref(0);
-    let tempRefTemplateHeight = 0;
-    let tempRefInputContentHeight,
-      defaultRefInputContentHeight = 0;
-    const updateFooterHeight = (heigth) => {
-      chatFooter.value.style.height = heigth + "px";
-      updateFooterBlancHeight(heigth);
-    };
-    onMounted(() => {
-      tempRefInputContentHeight = defaultRefInputContentHeight =
-        refInputContent.value.clientHeight;
-      window.scroll(0, chatContent.value.scrollHeight);
-    });
-    let updateFlog = {
-      chatPost: false,
-      oepnTemplate: false,
-      chatInput: false,
-    };
-    const updateFooterBlancHeight = (heigth) =>
-      (footerBlanc.value.style.height = heigth + "px");
-
-    onUpdated(() => {
-      if (updateFlog.chatInput) {
-        updateFlog.chatInput = false;
-        if (refInputContent.value.clientHeight > tempRefInputContentHeight) {
-          updateFooterHeight(
-            chatFooter.value.clientHeight +
-              (refInputContent.value.clientHeight - tempRefInputContentHeight)
-          );
-          tempRefInputContentHeight = refInputContent.value.clientHeight;
-        } else if (
-          refInputContent.value.clientHeight < tempRefInputContentHeight
-        ) {
-          updateFooterHeight(
-            chatFooter.value.clientHeight -
-              (tempRefInputContentHeight - refInputContent.value.clientHeight)
-          );
-          tempRefInputContentHeight = refInputContent.value.clientHeight;
-        }
-      }
-      if (updateFlog.chatPost) {
-        updateFlog.chatPost = false;
-        if (refInputContent.value.clientHeight > defaultRefInputContentHeight) {
-          updateFooterHeight(
-            chatFooter.value.clientHeight -
-              (refInputContent.value.clientHeight -
-                defaultRefInputContentHeight)
-          );
-        }
-        inputReset.value++;
-        tempRefInputContentHeight = defaultRefInputContentHeight;
-        window.scroll(0, chatContent.value.scrollHeight);
-      }
-
-      if (updateFlog.oepnTemplate) {
-        updateFlog.oepnTemplate = false;
-        if (isShowTempale.value) {
-          tempRefTemplateHeight = refTemplate.value.clientHeight;
-          updateFooterHeight(
-            chatFooter.value.clientHeight + tempRefTemplateHeight
-          );
-        } else {
-          updateFooterHeight(
-            chatFooter.value.clientHeight - tempRefTemplateHeight
-          );
-        }
-      }
-    });
-    const getSelectTemplateContent = (value) => {
-      state.chatInputText = value;
-      inputReset.value++;
-      updateFlog.chatInput = true;
-    };
-    const state = reactive({
-      chatInputText: "",
-      chatData: {
-        [moment(Date.parse("2021/5/14")).format("yyyy/M/DD")]: [
-          {
-            chatId: 1,
-            user: 1,
-            content: "楽",
-            postDateTime: "11:08",
-          },
-          {
-            chatId: 2,
-            user: 2,
-            content: "楽しかったね",
-            postDateTime: "11:08",
-          },
-          {
-            chatId: 3,
-            user: 1,
-            content: "楽しかったね",
-            postDateTime: "11:08",
-          },
-        ],
-        [moment(Date.parse("2021/5/20")).format("yyyy/M/DD")]: [
-          {
-            chatId: 1,
-            user: 1,
-            content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
-          },
-          {
-            chatId: 2,
-            user: 2,
-            content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
-          },
-          {
-            chatId: 3,
-            user: 1,
-            content: "楽しかったね",
-            postDateTime: "11:08",
-          },
-          {
-            chatId: 1,
-            user: 1,
-            content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
-          },
-          {
-            chatId: 2,
-            user: 2,
-            content:
-              "楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね楽しかったね",
-            postDateTime: "11:08",
-          },
-          {
-            chatId: 3,
-            user: 1,
-            content: "楽しかったね",
-            postDateTime: "11:08",
-          },
-        ],
-      },
-    });
-    const chatPost = () => {
-      if (state.chatInputText.length > 0) {
-        const initDate = moment();
-        const initKey = initDate.format("yyyy/M/DD");
-        const postDate = initDate.format("h:mm");
-        const postData = {
-          chatId: 99,
-          user: 1,
-          content: state.chatInputText,
-          postDateTime: postDate,
-        };
-        if (state.chatData[initKey]) {
-          state.chatData[initKey].push(postData);
-        } else {
-          state.chatData[initKey] = [postData];
-        }
-        updateFlog.chatPost = true;
-        state.chatInputText = "";
-      }
-    };
-    const openCloseSymbol = computed(() => {
-      if (isShowTempale.value) {
-        return "-";
-      }
-      return "+";
-    });
-    const isShowTempale = ref(false);
-    const isTemplateActive = () => {
-      isShowTempale.value = !isShowTempale.value;
-      updateFlog.oepnTemplate = true;
-    };
-    const myId = 1;
-    const isMy = (id) => (id === myId ? "my" : "pair");
-    watch(
-      () => state.chatInputText,
-      () => {
-        updateFlog.chatInput = true;
-      }
-    );
+  components: {
+    AtomIcon,
+    ChatArea,
+    AtomInputText,
+    ChatTemplate,
+    AtomTextarea,
+    ChatHeader,
+    ChatFooter,
+  },
+  props: {
+    chatData: {
+      type: Object,
+      default: () => ({}),
+    },
+    type: {
+      type: String,
+      default: "user",
+    },
+  },
+  data() {
     return {
-      myId,
-      isMy,
-      isTemplateActive,
-      isShowTempale,
-      openCloseSymbol,
-      chatPost,
-      inputReset,
-      chatContent,
-      getSelectTemplateContent,
-      footerBlanc,
-      chatFooter,
-      refTemplate,
-      refInputContent,
-      ...toRefs(state),
+      inputReset: 0,
+      chatInputText: "",
+      isShowTemplate: false,
+      updateFlog: {
+        chatPost: false,
+        openTemplate: false,
+        chatInput: false,
+      },
+      tempRefTemplateHeight: 0,
+      tempRefInputContentHeight: 0,
+      defaultRefInputContentHeight: 0,
     };
+  },
+  computed: {
+    user() {
+      return this.chatData.user || {};
+    },
+    company() {
+      return this.chatData.company || {};
+    },
+    messages() {
+      const arr = {};
+      this.chatData.messages.forEach((result) => {
+        const date = moment(result.send_date).format("yyyy/M/DD");
+        if (!arr[date]?.length) {
+          arr[date] = [];
+        }
+
+        arr[date].push({
+          ...result,
+        });
+      });
+      return arr || {};
+    },
+  },
+  watch: {
+    chatInputText() {
+      this.updateFlog.chatInput = true;
+    },
+  },
+  updated() {
+    console.log("updated");
+    const chatContent = document.querySelector(".chatContent");
+    const chatTemplate = document.querySelector(".chat-template");
+    const chatFooter = document.querySelector(".chat-footer");
+    const refInputContent = document.querySelector(".content__inner");
+    const inputContentHeight = refInputContent.clientHeight;
+    const chatFooterHeight = chatFooter.clientHeight;
+    this.tempRefTemplateHeight = chatTemplate.clientHeight;
+
+    if (this.updateFlog.chatInput) {
+      this.updateFlog.chatInput = false;
+      if (inputContentHeight > this.tempRefTemplateHeight) {
+        this.updateFooterHeight(
+          chatFooterHeight + (inputContentHeight - this.tempRefTemplateHeight)
+        );
+      } else if (inputContentHeight < this.tempRefTemplateHeight) {
+        this.updateFooterHeight(
+          chatFooterHeight - (this.tempRefTemplateHeight - inputContentHeight)
+        );
+      }
+      this.tempRefTemplateHeight = inputContentHeight;
+    }
+
+    if (this.updateFlog.chatPost) {
+      this.updateFlog.chatPost = false;
+      if (inputContentHeight > this.defaultRefInputContentHeight) {
+        this.updateFooterHeight(
+          chatFooterHeight -
+            (inputContentHeight - this.defaultRefInputContentHeight)
+        );
+      }
+
+      this.inputReset++;
+      this.tempRefInputContentHeight = this.defaultRefInputContentHeight;
+      window.scroll(0, chatContent?.scrollHeight);
+    }
+
+    if (this.updateFlog.openTemplate) {
+      this.updateFlog.openTemplate = false;
+      if (this.isShowTemplate) {
+        this.updateFooterHeight(chatFooterHeight + this.tempRefTemplateHeight);
+      } else {
+        this.updateFooterHeight(chatFooterHeight - this.tempRefTemplateHeight);
+      }
+    }
+  },
+  mounted() {
+    const chatContent = document.querySelector(".chatContent");
+    const refInputContent = document.querySelector(".content__inner");
+    this.defaultRefInputContentHeight = refInputContent?.clientHeight;
+    this.tempRefInputContentHeight = refInputContent?.clientHeight;
+    window.scroll(0, chatContent?.scrollHeight);
+  },
+  methods: {
+    // chat送信
+    chatPost() {
+      if (!this.chatInputText) {
+        return;
+      }
+      this.updateFlog = {
+        ...this.updateFlog,
+        chatPost: true,
+      };
+
+      const initDate = moment();
+      const postDate = initDate.format("YYYY/M/DD h:mm");
+      const params = {
+        content: this.chatInputText,
+        image: "バイナリーデータ",
+        send_date: postDate,
+        user_type: this.type,
+        user_id: this.user.id || 0,
+        company_id: this.company.id || 0,
+      };
+      console.log("params", params);
+      this.chatInputText = "";
+    },
+    toggleTemplateActive() {
+      console.log("isTemplateActive");
+      this.isShowTemplate = !this.isShowTemplate;
+      this.updateFlog = {
+        ...this.updateFlog,
+        openTemplate: true,
+      };
+    },
+    getSelectTemplateContent(value) {
+      console.log("getSelectTemplateContent");
+      this.chatInputText = value;
+      this.inputReset++;
+      this.updateFlog = {
+        ...this.updateFlog,
+        chatInput: true,
+      };
+    },
+    updateFooterBlancHeight(height) {
+      console.log("updateFooterBlancHeight");
+      const footerBlanc = document.querySelector(".footer-blanc");
+      footerBlanc.style.height = `${height}px`;
+    },
+    updateFooterHeight(height) {
+      console.log("updateFooterHeight");
+      const chatFooter = document.querySelector(".chat-footer");
+      chatFooter.style.height = `${height}px`;
+      this.updateFooterBlancHeight(height);
+    },
+    formatDate(date) {
+      return moment(date).format("h:mm");
+    },
+    isMy(type) {
+      return this.type === type ? "my" : "pair";
+    },
   },
 };
 </script>
@@ -301,28 +226,7 @@ $footerHeght: 100px;
 
 .chat {
   font-family: "Hiragino Kaku Gothic ProN";
-  &-header {
-    background: map-get($color, yellow, default);
-    height: 140px;
-    width: 100%;
-    padding-top: 53px;
-    padding-left: 25px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    &__inner {
-      display: flex;
-      width: 70%;
-      .profile {
-        &-img {
-          margin-right: 20px;
-        }
-        &-info {
-          padding-top: 10px;
-        }
-      }
-    }
-  }
+
   &-content {
     overflow: scroll;
     -ms-overflow-style: none;
@@ -332,6 +236,7 @@ $footerHeght: 100px;
       display: none;
     }
   }
+
   &-block {
     display: grid;
     margin-top: 40px;
@@ -352,51 +257,8 @@ $footerHeght: 100px;
     margin-bottom: 10px;
     color: map-get($color, blue, default);
   }
-  &-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background: #ffffff;
-    width: 100%;
-    height: $footerHeght;
-    min-height: $footerHeght;
-    border-top: 1px solid #dddddd;
-  }
-  &-input-area-content {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    padding-right: 10px;
-    .content__inner {
-      display: flex;
-    }
-  }
-  &-input {
-    width: 85%;
-    margin-left: 30px;
-    margin-top: 15px;
-    height: auto;
-    min-height: 44px;
-  }
-  &-template {
-    margin-top: 6px;
-    margin-left: 30px;
-    font-size: 12px;
-    font-weight: 300;
-    color: map-get($color, blue, default);
-    &-content {
-      margin-top: 5px;
-    }
-  }
 }
 
-.footer__inner {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
 .footer-blanc {
   height: $footerHeght;
 }
@@ -407,50 +269,5 @@ $footerHeght: 100px;
 
 .sub-info {
   display: flex;
-}
-
-.user-name {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.contact,
-.location {
-  font-size: 10px;
-  font-weight: 300;
-}
-
-.contact {
-  color: map-get($color, blue, default);
-}
-
-.thumbnail {
-  width: 75px;
-}
-
-.location {
-  margin-left: 5px;
-  &-icon {
-    width: 15px;
-    display: inline-block;
-  }
-}
-
-.photograph-icon,
-.arrowright-icon {
-  width: 25px;
-  height: 30px;
-  margin-top: 23px;
-  margin-left: 10px;
-}
-
-.profile-info {
-  float: left;
-}
-
-.chat-input-area {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
 }
 </style>
