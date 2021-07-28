@@ -16,8 +16,14 @@
           :class="isMy(item.user_type)"
           :key="item.id"
           style="margin-bottom: 10px"
-          >{{ item.content }}</chat-area
         >
+          <template v-if="item.image">
+            <img :src="item.image" class="chat-image" alt="" />
+          </template>
+          <template v-else>
+            {{ item.content }}
+          </template>
+        </chat-area>
       </div>
       <div class="footer-blanc" ref="footerBlanc" />
     </div>
