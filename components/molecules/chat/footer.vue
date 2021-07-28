@@ -1,9 +1,9 @@
 <template>
-  <div class="chat-footer" ref="chatFooter">
+  <div class="chat-footer">
     <div class="footer__inner">
       <div class="chat-input-area">
         <div class="chat-input-area-content">
-          <div class="content__inner" ref="refInputContent">
+          <div class="content__inner">
             <atom-textarea
               :key="inputReset"
               v-model="chatInputText"
@@ -12,12 +12,18 @@
             />
             <atom-icon name="photograph" class="photograph-icon" />
             <atom-icon
-              @click="chatPost"
+              v-if="chatInputText === ''"
               name="arrowright"
               class="arrowright-icon"
             />
+            <atom-icon
+              v-else
+              @click="chatPost"
+              name="active-arrowright"
+              class="arrowright-icon"
+            />
           </div>
-          <div class="chat-template" ref="refTemplate">
+          <div class="chat-template">
             <span @click="toggleTemplateActive"
               >{{ openCloseSymbol }} テンプレート文を入れる
             </span>
@@ -152,6 +158,10 @@ $footerHeght: 100px;
   height: 30px;
   margin-top: 23px;
   margin-left: 10px;
+
+  &.active {
+    color: map-get($color, blue, default);
+  }
 }
 
 .chat-input-area {
