@@ -4,6 +4,7 @@
       ref="textarea"
       v-model="computedValue"
       class="input-text"
+      :rows="rows"
     ></textarea>
     <div class="dummy" ref="dummy"></div>
   </div>
@@ -14,6 +15,10 @@ export default {
   props: {
     value: {
       type: String,
+    },
+    rows: {
+      type: Number,
+      default: 2,
     },
   },
   mounted() {

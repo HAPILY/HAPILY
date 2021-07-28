@@ -8,6 +8,7 @@
               :key="inputReset"
               v-model="chatInputText"
               class="chat-input"
+              :row="1"
             />
             <atom-icon name="photograph" class="photograph-icon" />
             <atom-icon

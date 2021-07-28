@@ -1,6 +1,6 @@
 <template>
   <div>
-    <organism-chat :chat-data="chatData" :type="type" />
+    <organism-chat :chat-data="chatData" :type="type" @sendChat="sendChat" />
   </div>
 </template>
 
@@ -22,6 +22,19 @@ export default {
       chatData: chat.data,
       type: userType,
     };
+  },
+  data() {
+    return {
+      chatData: undefined,
+    };
+  },
+  methods: {
+    async sendChat(params) {
+      const res = await this.$axios.post("/v1/chats", { ...params });
+      if (res?.data) {
+        this.chatData = { ...res.data };
+      }
+    },
   },
 };
 </script>

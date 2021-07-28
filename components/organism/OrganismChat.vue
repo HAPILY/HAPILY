@@ -68,14 +68,8 @@ export default {
       inputReset: 0,
       chatInputText: "",
       isShowTemplate: false,
-      updateFlog: {
-        chatPost: false,
-        openTemplate: false,
-        chatInput: false,
-      },
-      tempRefTemplateHeight: 0,
-      tempRefInputContentHeight: 0,
-      defaultRefInputContentHeight: 0,
+      defaultFooterHeight: 100,
+      textareaHeight: 48,
     };
   },
   computed: {
@@ -102,61 +96,26 @@ export default {
   },
   watch: {
     chatInputText() {
-      this.updateFlog.chatInput = true;
+      const chatInput = document.querySelector(".chat-input");
+      if (chatInput.clientHeight > this.textareaHeight) {
+        // 行増加
+        console.log("chatInput.clientHeight1", chatInput.clientHeight);
+        this.textareaHeight = chatInput.clientHeight;
+        this.updateFooterHeight(
+          this.defaultFooterHeight + this.textareaHeight / 2
+        );
+      } else if (chatInput.clientHeight < this.textareaHeight) {
+        // 行減少
+        this.textareaHeight = chatInput.clientHeight;
+        console.log("chatInput.clientHeight2", chatInput.clientHeight);
+        this.updateFooterHeight(
+          this.defaultFooterHeight + this.textareaHeight / 2
+        );
+      }
     },
-  },
-  updated() {
-    console.log("updated");
-    const chatContent = document.querySelector(".chatContent");
-    const chatTemplate = document.querySelector(".chat-template");
-    const chatFooter = document.querySelector(".chat-footer");
-    const refInputContent = document.querySelector(".content__inner");
-    const inputContentHeight = refInputContent.clientHeight;
-    const chatFooterHeight = chatFooter.clientHeight;
-    this.tempRefTemplateHeight = chatTemplate.clientHeight;
-
-    if (this.updateFlog.chatInput) {
-      this.updateFlog.chatInput = false;
-      if (inputContentHeight > this.tempRefTemplateHeight) {
-        this.updateFooterHeight(
-          chatFooterHeight + (inputContentHeight - this.tempRefTemplateHeight)
-        );
-      } else if (inputContentHeight < this.tempRefTemplateHeight) {
-        this.updateFooterHeight(
-          chatFooterHeight - (this.tempRefTemplateHeight - inputContentHeight)
-        );
-      }
-      this.tempRefTemplateHeight = inputContentHeight;
-    }
-
-    if (this.updateFlog.chatPost) {
-      this.updateFlog.chatPost = false;
-      if (inputContentHeight > this.defaultRefInputContentHeight) {
-        this.updateFooterHeight(
-          chatFooterHeight -
-            (inputContentHeight - this.defaultRefInputContentHeight)
-        );
-      }
-
-      this.inputReset++;
-      this.tempRefInputContentHeight = this.defaultRefInputContentHeight;
-      window.scroll(0, chatContent?.scrollHeight);
-    }
-
-    if (this.updateFlog.openTemplate) {
-      this.updateFlog.openTemplate = false;
-      if (this.isShowTemplate) {
-        this.updateFooterHeight(chatFooterHeight + this.tempRefTemplateHeight);
-      } else {
-        this.updateFooterHeight(chatFooterHeight - this.tempRefTemplateHeight);
-      }
-    }
   },
   mounted() {
     const chatContent = document.querySelector(".chatContent");
-    const refInputContent = document.querySelector(".content__inner");
-    this.defaultRefInputContentHeight = refInputContent?.clientHeight;
-    this.tempRefInputContentHeight = refInputContent?.clientHeight;
     window.scroll(0, chatContent?.scrollHeight);
   },
   methods: {
@@ -165,40 +124,37 @@ export default {
       if (!this.chatInputText) {
         return;
       }
-      this.updateFlog = {
-        ...this.updateFlog,
-        chatPost: true,
-      };
 
       const initDate = moment();
       const postDate = initDate.format("YYYY/M/DD h:mm");
       const params = {
         content: this.chatInputText,
-        image: "バイナリーデータ",
+        image: "",
         send_date: postDate,
         user_type: this.type,
         user_id: this.user.id || 0,
         company_id: this.company.id || 0,
       };
       console.log("params", params);
+      this.$emit("sendChat", params);
+      this.inputReset++;
       this.chatInputText = "";
     },
     toggleTemplateActive() {
       console.log("isTemplateActive");
       this.isShowTemplate = !this.isShowTemplate;
-      this.updateFlog = {
-        ...this.updateFlog,
-        openTemplate: true,
-      };
+
+      this.$nextTick(() => {
+        const chatTemplate = document.querySelector(".chat-template");
+        this.updateFooterHeight(
+          this.defaultFooterHeight + chatTemplate.clientHeight
+        );
+      });
     },
     getSelectTemplateContent(value) {
       console.log("getSelectTemplateContent");
       this.chatInputText = value;
       this.inputReset++;
-      this.updateFlog = {
-        ...this.updateFlog,
-        chatInput: true,
-      };
     },
     updateFooterBlancHeight(height) {
       console.log("updateFooterBlancHeight");
