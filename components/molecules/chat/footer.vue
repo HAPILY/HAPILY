@@ -10,7 +10,12 @@
               class="chat-input"
               :row="1"
             />
-            <atom-icon name="photograph" class="photograph-icon" />
+            <ImageInput
+              @postImage="postImage"
+              @clickInputFile="clickInputFile"
+              ref="imageInput"
+            />
+            <!-- <atom-icon name="photograph" class="photograph-icon" /> -->
             <atom-icon
               v-if="chatInputText === ''"
               name="arrowright"
@@ -41,13 +46,16 @@
 
 <script>
 import ChatTemplate from "@/components/organism/chat/chatTemplate.vue";
+import ImageInput from "@/components/molecules/ImageInput.vue";
 import AtomIcon from "@/components/atoms/icon/AtomIcon.vue";
 import AtomTextarea from "@/components/atoms/input/AtomTextarea.vue";
+import { getFileExtension, resize } from "@/utils/image";
 
 export default {
   name: "ChatFooter",
   components: {
     ChatTemplate,
+    ImageInput,
     AtomIcon,
     AtomTextarea,
   },
@@ -91,6 +99,28 @@ export default {
     },
     getSelectTemplateContent(value) {
       this.$emit("getSelectTemplateContent", value);
+    },
+    postImage(event) {
+      const reader = new FileReader();
+      const image = new Image();
+      const vm = this;
+
+      image.onload = function () {
+        const fileExtension = getFileExtension(image.src);
+        const base = resize(this, image.width, image.height, fileExtension);
+        vm.$emit("imagePost", base);
+      };
+      reader.onload = function (e) {
+        image.src = e.target?.result || "";
+      };
+
+      const target = event.target;
+      const files = target.files;
+      reader.readAsDataURL(files[0]);
+    },
+    clickInputFile() {
+      const imageInputRef = this.$refs.imageInput;
+      imageInputRef?.$refs?.image?.click?.();
     },
   },
 };
@@ -152,7 +182,7 @@ $footerHeght: 100px;
   height: $footerHeght;
 }
 
-.photograph-icon,
+.image-input,
 .arrowright-icon {
   width: 25px;
   height: 30px;
@@ -162,6 +192,10 @@ $footerHeght: 100px;
   &.active {
     color: map-get($color, blue, default);
   }
+}
+
+.image-input {
+  display: inline-flex;
 }
 
 .chat-input-area {

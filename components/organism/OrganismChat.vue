@@ -26,6 +26,7 @@
       :input-reset="inputReset"
       :is-show-template="isShowTemplate"
       @chatPost="chatPost"
+      @imagePost="imagePost"
       @toggleTemplateActive="toggleTemplateActive"
       @getSelectTemplateContent="getSelectTemplateContent"
     />
@@ -136,6 +137,25 @@ export default {
         company_id: this.company.id || 0,
       };
       console.log("params", params);
+      this.$emit("sendChat", params);
+      this.inputReset++;
+      this.chatInputText = "";
+    },
+    imagePost(imageData) {
+      if (!imageData) {
+        return;
+      }
+
+      const initDate = moment();
+      const postDate = initDate.format("YYYY/M/DD h:mm");
+      const params = {
+        content: "",
+        image: imageData,
+        send_date: postDate,
+        user_type: this.type,
+        user_id: this.user.id || 0,
+        company_id: this.company.id || 0,
+      };
       this.$emit("sendChat", params);
       this.inputReset++;
       this.chatInputText = "";
