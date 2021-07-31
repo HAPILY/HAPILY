@@ -44,7 +44,7 @@
             </template>
           </organism-campany-input-modal>
           <organism-career-time-line
-            :career="profile.work_history"
+            :career="profile.work_histories"
             @update="updateCareerInputData"
             :key="`careerTimeLine-${closeKey.careerTimeLine}`"
           />
@@ -233,7 +233,7 @@ export default {
         }
       );
       if (res.status === 200) {
-        this.profile = { ...res.data };
+        this.profile.work_histories.push({ ...res.data });
       }
       this.inputCloseAction("careerTimeLine");
     },

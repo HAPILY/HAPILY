@@ -2,36 +2,40 @@
   <div class="career">
     <molecules-progress-box :items="career">
       <template slot-scope="{ item }">
-        <div class="flex" style="padding: 0">
-          <h1 class="career-title font-black text-xl">
-            {{ item.title }}
-          </h1>
-          <organism-campany-input-modal
-            :status="item"
-            headerTitle="職歴の編集"
-            @save="updateCareerInputData($event, item.id)"
-          >
-            <template #ignition>
-              <div style="margin-top: 6px; margin-left: 10px; color: blue">
-                編集
-              </div>
-            </template>
-          </organism-campany-input-modal>
-        </div>
-        <dt class="font-black text-base">{{ item.detail[0].position }}</dt>
-        <dd class="text-sm career-date">
-          {{ item.start_date }} -
-          <span v-if="item.end_date !== '在籍中'">{{ item.end_date }}</span>
-          <atom-tag v-else>在籍中</atom-tag>
-        </dd>
-        <ul>
-          <li class="job-list" v-for="(j, index) in item.detail" :key="index">
-            <dl>
-              <dt>{{ j.position }}</dt>
-              <dd>{{ j.job_detail }}</dd>
-            </dl>
-          </li>
-        </ul>
+        <template v-if="item.title">
+          <div class="flex" style="padding: 0">
+            <h1 class="career-title font-black text-xl">
+              {{ item.title }}
+            </h1>
+            <organism-campany-input-modal
+              :status="item"
+              headerTitle="職歴の編集"
+              @save="updateCareerInputData($event, item.id)"
+            >
+              <template #ignition>
+                <div style="margin-top: 6px; margin-left: 10px; color: blue">
+                  編集
+                </div>
+              </template>
+            </organism-campany-input-modal>
+          </div>
+          <dt class="font-black text-base">{{ item.detail[0].position }}</dt>
+          <dd class="text-sm career-date">
+            {{ item.start_date }} -
+            <span v-if="item.end_date !== '在籍中'">{{
+              item.end_date || ""
+            }}</span>
+            <atom-tag v-else>在籍中</atom-tag>
+          </dd>
+          <ul>
+            <li class="job-list" v-for="(j, index) in item.detail" :key="index">
+              <dl>
+                <dt>{{ j.position }}</dt>
+                <dd>{{ j.job_detail }}</dd>
+              </dl>
+            </li>
+          </ul>
+        </template>
       </template>
     </molecules-progress-box>
   </div>

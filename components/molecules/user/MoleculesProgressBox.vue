@@ -1,11 +1,13 @@
 <template>
   <ul :id="EId" class="timeline">
-    <li v-for="(item, index) in items" :key="index" class="timeline-point">
-      <div>
-        <slot :item="item"></slot>
-      </div>
-      <span class="border-line"></span>
-    </li>
+    <template v-for="(item, index) in items">
+      <li v-if="item.title" :key="index" class="timeline-point">
+        <div>
+          <slot :item="item"></slot>
+        </div>
+        <span class="border-line"></span>
+      </li>
+    </template>
   </ul>
 </template>
 

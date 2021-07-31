@@ -30,12 +30,12 @@
                 v-model="job.job_detail"
               />
             </molecule-nested-area>
-            <atom-border-button class="add-job-btn" @click="addJobArea">
+            <!-- <atom-border-button class="add-job-btn" @click="addJobArea">
               <div class="flex justify-center">
                 <atom-icon class="w-4" name="plus" />
                 <span>ポジションを追加</span>
               </div>
-            </atom-border-button>
+            </atom-border-button> -->
           </div>
           <atom-button class="w-full" @click="saveData">保存</atom-button>
         </div>
