@@ -325,7 +325,7 @@ export default {
         ...params,
       });
       if (res.status === 200) {
-        this.profile.want_tags.push({ ...res.data });
+        this.profile.want_tags = [...res.data];
       }
     },
     // 執筆追加
@@ -340,7 +340,7 @@ export default {
         ...params,
       });
       if (res.status === 200) {
-        this.profile = { ...res.data };
+        this.profile.writings.push({ ...res.data });
       }
     },
     // 実績追加
@@ -355,7 +355,7 @@ export default {
         ...params,
       });
       if (res.status === 200) {
-        this.profile = { ...res.data };
+        this.profile.performances.push({ ...res.data });
       }
     },
   },

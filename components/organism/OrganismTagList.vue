@@ -1,9 +1,11 @@
 <template>
   <div class="dream-list">
     <div class="dream-list__inner">
-      <atom-tag class="tag" v-for="item in tagList" :key="item.id">
-        {{ item.name }}
-      </atom-tag>
+      <template v-for="item in tagList">
+        <atom-tag class="tag" v-if="item.name" :key="item.id">
+          {{ item.name }}
+        </atom-tag>
+      </template>
     </div>
   </div>
 </template>
