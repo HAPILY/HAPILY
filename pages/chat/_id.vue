@@ -13,6 +13,7 @@ export default {
   },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios, params }) {
+    const groupId = params.id;
     // 自分がuser or companyどちらか確認
     const userType = window.localStorage.getItem("type");
     // 相手とのchatデータ取得
@@ -21,6 +22,7 @@ export default {
     return {
       chatData: chat.data,
       type: userType,
+      groupId,
     };
   },
   data() {

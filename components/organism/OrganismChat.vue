@@ -12,8 +12,8 @@
         <chat-area
           v-for="item in items"
           :postTime="formatDate(item.send_date)"
-          :kind="isMy(item.user_type)"
-          :class="isMy(item.user_type)"
+          :kind="isMy(item.send_user_type)"
+          :class="isMy(item.send_user_type)"
           :key="item.id"
           style="margin-bottom: 10px"
         >
@@ -138,7 +138,7 @@ export default {
         content: this.chatInputText,
         image: "",
         send_date: postDate,
-        user_type: this.type,
+        send_user_type: this.type,
         user_id: this.user.id || 0,
         company_id: this.company.id || 0,
       };
@@ -158,7 +158,7 @@ export default {
         content: "",
         image: imageData,
         send_date: postDate,
-        user_type: this.type,
+        send_user_type: this.type,
         user_id: this.user.id || 0,
         company_id: this.company.id || 0,
       };
