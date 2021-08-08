@@ -3,7 +3,11 @@
     <div class="company-info l-container -max-900">
       <div class="bl-justify-root info__inner">
         <img class="rounded-full company-icon" :src="iconUrl" />
-        <atom-button class="contact-btn" :color="'red'">声をかける</atom-button>
+        <nuxt-link :to="`/chat/${uid}/${cid}`">
+          <atom-button class="contact-btn" :color="'red'"
+            >声をかける</atom-button
+          >
+        </nuxt-link>
       </div>
       <div class="company-sub-info">
         <h1 class="company-name">{{ name }}</h1>
@@ -34,6 +38,14 @@ import OrganismTagList from "@/components/organism/OrganismTagList.vue";
 export default {
   components: { AtomButton, AtomIcon, OrganismTagList },
   props: {
+    uid: {
+      type: String,
+      default: "0",
+    },
+    cid: {
+      type: Number,
+      default: 0,
+    },
     name: {
       type: String,
       default: "",

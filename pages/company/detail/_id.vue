@@ -1,6 +1,8 @@
 <template>
   <detail
     class="company-detail"
+    :uid="uid"
+    :cid="company.id"
     :name="company.name"
     :vision="company.vision"
     :company-url="company.company_url"
@@ -19,8 +21,10 @@ export default {
   components: { Detail },
   layout: "NoCircleNoFooterLayout",
   async asyncData({ $axios, params }) {
+    const uid = window.localStorage.getItem("id");
     const company = await $axios.get(`/v1/companies/${params.id}`);
     return {
+      uid,
       company: company.data,
     };
   },

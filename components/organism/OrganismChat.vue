@@ -61,6 +61,10 @@ export default {
     ChatFooter,
   },
   props: {
+    groupId: {
+      type: Number,
+      default: 0,
+    },
     chatData: {
       type: Object,
       default: () => ({}),
@@ -143,7 +147,7 @@ export default {
         company_id: this.company.id || 0,
       };
       console.log("params", params);
-      this.$emit("sendChat", params);
+      this.$emit("sendChat", this.groupId, params);
       this.inputReset++;
       this.chatInputText = "";
     },
