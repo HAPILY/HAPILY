@@ -24,11 +24,13 @@ export default {
 <style lang="scss" scoped>
 .dream-list {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-self: center;
+
   .dream-list__inner {
     display: flex;
     flex-wrap: wrap;
+    align-self: center;
 
     .tag {
       padding-left: 10px;
