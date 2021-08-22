@@ -6,6 +6,7 @@
     <input
       v-model="computedValue"
       :placeholder="placeholder"
+      :type="type"
       :id="id"
       @blur="$emit('blur', $event)"
       @keydown.enter="onKeydownEnter($event)"
@@ -21,6 +22,10 @@ export default {
     },
     placeholder: {
       type: String,
+    },
+    type: {
+      type: String,
+      default: "text",
     },
     icon: {
       type: String,

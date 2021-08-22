@@ -46,6 +46,7 @@
                     v-model="dream.minPrice"
                     icon="yen"
                     placeholder="最小金額"
+                    type="number"
                     class="rounded-shadow"
                   />
                   <div class="validate">{{ errors[0] }}</div>
@@ -62,6 +63,7 @@
                     v-model="dream.maxPrice"
                     icon="yen"
                     placeholder="最大金額"
+                    type="number"
                     class="rounded-shadow"
                   />
                   <div class="validate">{{ errors[0] }}</div>
