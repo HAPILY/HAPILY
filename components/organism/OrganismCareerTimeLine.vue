@@ -19,7 +19,7 @@
               </template>
             </organism-campany-input-modal>
           </div>
-          <dt class="font-black text-base">{{ item.detail[0].position }}</dt>
+          <dt class="font-black text-base">{{ getPosition(item.details) }}</dt>
           <dd class="text-sm career-date">
             {{ item.start_date }} -
             <span v-if="item.end_date !== '在籍中'">{{
@@ -28,7 +28,11 @@
             <atom-tag v-else>在籍中</atom-tag>
           </dd>
           <ul>
-            <li class="job-list" v-for="(j, index) in item.detail" :key="index">
+            <li
+              class="job-list"
+              v-for="(j, index) in item.details"
+              :key="index"
+            >
               <dl>
                 <dt>{{ j.position }}</dt>
                 <dd>{{ j.job_detail }}</dd>
@@ -64,8 +68,13 @@ export default {
       emit("update", value);
     };
 
+    const getPosition = (details) => {
+      return details[0]?.position || "";
+    };
+
     return {
       updateCareerInputData,
+      getPosition,
     };
   },
 };

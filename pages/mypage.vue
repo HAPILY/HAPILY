@@ -159,6 +159,7 @@ import OrganismWriterPostInputModal from "@/components/organism/OrganismPostInpu
 
 export default {
   name: "mypage",
+  middleware: ["checkAuth"],
   async asyncData({ $axios }) {
     const id = window.localStorage.getItem("id");
     const profile = await $axios.get(`/v1/users/${id}`);

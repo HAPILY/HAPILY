@@ -13,6 +13,7 @@
 import OrganismChat from "@/components/organism/OrganismChat.vue";
 
 export default {
+  middleware: ["checkAuth"],
   components: {
     OrganismChat,
   },
