@@ -1,6 +1,6 @@
 <template>
   <div class="gMenu">
-    <div class="gMenu__container l-container">
+    <div class="container l-container">
       <ul class="gMenu__nav">
         <li>
           <nuxt-link class="gMenu-btn tracking-tighter" to="/dream-list">
@@ -39,7 +39,7 @@
   right: 0;
   bottom: 0;
   z-index: 1000;
-  &__container {
+  .container {
     max-width: 900px;
   }
   &-btn {
@@ -52,7 +52,7 @@
     text-align: center;
     background-color: #fff;
     border-radius: 20px;
-    box-shadow: 3px 1px 0 -1px #f0c039;
+    box-shadow: 3px 4px 0 0 #f0c039;
     color: map-get($color, blue, default);
     font-size: 15px;
     font-weight: 500;

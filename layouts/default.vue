@@ -2,6 +2,7 @@
   <div class="wrapper" :class="wrapperClass">
     <GlobalHeader />
     <GlobalMenu v-if="menuOpen" />
+    <GlobalMenuSearch v-if="searchMenuOpen" />
     <div class="main">
       <Nuxt />
     </div>
@@ -27,6 +28,9 @@ export default {
   computed: {
     menuOpen() {
       return this.$store.state["menu"].globalMenu;
+    },
+    searchMenuOpen() {
+      return this.$store.state["menu"].searchMenu;
     },
     wrapperClass() {
       return {
