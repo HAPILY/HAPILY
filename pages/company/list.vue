@@ -22,11 +22,33 @@
 
 <script>
 import OrganismCampanyListItem from "@/components/organism/OrganismCampanyListItem.vue";
+
 export default {
-  components: { OrganismCampanyListItem },
+  components: {
+    OrganismCampanyListItem,
+  },
   layout: "NoCircleNoFooterLayout",
-  async asyncData({ $axios }) {
-    const companies = await $axios.get("/v1/companies");
+  async asyncData({ $axios, query }) {
+    let companies;
+    if (query && Object.keys(query).length) {
+      // 検索からの遷移
+      let params = "";
+      Object.keys(query).forEach((key) => {
+        if (key === "tags") {
+          query[key].forEach((tag) => {
+            params += `tags%5B%5D=${tag}&`;
+          });
+        } else {
+          params += `${key}=${query[key]}&`;
+        }
+      });
+      // 末尾の&を削除
+      const getParams = params.slice(0, -1);
+      companies = await $axios.get(`/v1/companies?${getParams}`);
+    } else {
+      companies = await $axios.get("/v1/companies");
+    }
+
     return {
       companies: companies.data,
     };

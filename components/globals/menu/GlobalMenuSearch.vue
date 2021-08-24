@@ -43,7 +43,7 @@
                   rules="numeric"
                 >
                   <GlobalMenuInput
-                    v-model="dream.minPrice"
+                    v-model="dream.min"
                     icon="yen"
                     placeholder="最小金額"
                     type="number"
@@ -60,7 +60,7 @@
                   rules="numeric"
                 >
                   <GlobalMenuInput
-                    v-model="dream.maxPrice"
+                    v-model="dream.max"
                     icon="yen"
                     placeholder="最大金額"
                     type="number"
@@ -78,7 +78,9 @@
             />
           </li>
         </ul>
-        <button type="submit" class="search-btn">検索</button>
+        <button type="submit" class="search-btn" @click="searchDream">
+          検索
+        </button>
       </ValidationObserver>
     </div>
     <!-- 企業を探す -->
@@ -100,7 +102,9 @@
             />
           </li>
         </ul>
-        <button type="submit" class="search-btn">検索</button>
+        <button type="submit" class="search-btn" @click="searchCompany">
+          検索
+        </button>
       </ValidationObserver>
     </div>
   </div>
@@ -113,8 +117,8 @@ export default {
       tab: 0,
       dream: {
         keyword: "",
-        minPrice: "",
-        maxPrice: "",
+        min: "",
+        max: "",
         tags: [],
       },
       company: {
@@ -122,6 +126,59 @@ export default {
         tags: [],
       },
     };
+  },
+  methods: {
+    getParams(value) {
+      const params = { ...value };
+      Object.keys(params).forEach((key) => {
+        if (!params[key]) {
+          delete params[key];
+        }
+      });
+
+      return params;
+    },
+    searchDream() {
+      const keyword = this.dream.keyword;
+      const minPrice = this.dream.min;
+      const maxPrice = this.dream.max;
+      const tags = this.dream.tags;
+      // 全て未入力なら何もしない
+      if (!keyword && !minPrice && !maxPrice && !tags.length) {
+        return;
+      }
+
+      const params = this.getParams(this.dream);
+
+      this.dream = {
+        keyword: "",
+        min: "",
+        max: "",
+        tags: [],
+      };
+
+      this.$router.push({
+        path: "dream-list",
+        query: params,
+      });
+    },
+    searchCompany() {
+      const keyword = this.company.keyword;
+      const tags = this.company.tags;
+      // 全て未入力なら何もしない
+      if (!keyword && !tags.length) {
+        return;
+      }
+
+      const params = this.getParams(this.company);
+
+      this.dream = { keyword: "", tags: [] };
+
+      this.$router.push({
+        path: "company/list",
+        query: params,
+      });
+    },
   },
 };
 </script>
