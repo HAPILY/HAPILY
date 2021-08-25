@@ -64,7 +64,7 @@ export default {
       if (!this.search) {
         return;
       }
-      console.log("onSearch", this.search);
+
       this.$router.push({
         name: "dream-list",
         params: {

@@ -80,7 +80,7 @@ export default {
 
     const sendLogin = async () => {
       const res = await root.$axios.post("/auth/sign_in", { ...state });
-      console.log("sendLogin", res);
+
       if (Object.keys(res?.data).length) {
         window.localStorage.setItem("type", res.data.type || "user");
         window.localStorage.setItem("id", res.data.id);

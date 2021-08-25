@@ -85,7 +85,6 @@ export default {
 
     const sendSignup = async () => {
       const res = await root.$axios.post("/auth", { ...state });
-      console.log("sendSignup", res);
       if (res.status === "success") {
         window.localStorage.setItem("id", res.data.id);
         window.location.href = "/";

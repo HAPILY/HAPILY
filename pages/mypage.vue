@@ -226,7 +226,7 @@ export default {
         end_date: value.end_date,
         detail: value.detail,
       };
-      console.log("addCareerInputData", params);
+
       const res = await this.$axios.post(
         `/v1/users/${this.id}/work_histories`,
         {
@@ -247,7 +247,7 @@ export default {
         end_date: value.end_date,
         detail: value.detail,
       };
-      console.log("updateCareerInputData", params);
+
       const res = await this.$axios.patch(
         `/v1/users/${this.id}/work_histories/${value.id}`,
         { ...params }
@@ -264,7 +264,7 @@ export default {
         end_date: value.end_date,
         class_name: value.class_name,
       };
-      console.log("addAcademicInputData", params);
+
       const res = await this.$axios.post(
         `/v1/users/${this.id}/ed_backgrounds`,
         {
@@ -285,7 +285,7 @@ export default {
         end_date: value.end_date,
         class_name: value.class_name,
       };
-      console.log("updateAcademicInputData", params);
+
       const res = await this.$axios.patch(
         `/v1/users/${this.id}/ed_backgrounds/${value.id}`,
         { ...params }
@@ -321,7 +321,7 @@ export default {
       const params = {
         name: value,
       };
-      console.log("addTag", params);
+
       const res = await this.$axios.post(`/v1/users/${this.id}/want_tags`, {
         ...params,
       });
@@ -336,7 +336,7 @@ export default {
         thumbnail: newPost.thumbnail,
         redirect_url: newPost.redirect_url,
       };
-      console.log("addWrite", params);
+
       const res = await this.$axios.post(`/v1/users/${this.id}/writings`, {
         ...params,
       });
@@ -351,7 +351,7 @@ export default {
         thumbnail: newPost.thumbnail,
         redirect_url: newPost.redirect_url,
       };
-      console.log("addAchievements", params);
+
       const res = await this.$axios.post(`/v1/users/${this.id}/performances`, {
         ...params,
       });

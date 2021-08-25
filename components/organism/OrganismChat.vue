@@ -110,7 +110,6 @@ export default {
       const chatInput = document.querySelector(".chat-input");
       if (chatInput.clientHeight > this.textareaHeight) {
         // 行増加
-        console.log("chatInput.clientHeight1", chatInput.clientHeight);
         this.textareaHeight = chatInput.clientHeight;
         this.updateFooterHeight(
           this.defaultFooterHeight + this.textareaHeight / 2
@@ -118,7 +117,6 @@ export default {
       } else if (chatInput.clientHeight < this.textareaHeight) {
         // 行減少
         this.textareaHeight = chatInput.clientHeight;
-        console.log("chatInput.clientHeight2", chatInput.clientHeight);
         this.updateFooterHeight(
           this.defaultFooterHeight + this.textareaHeight / 2
         );
@@ -146,7 +144,6 @@ export default {
         user_id: this.user.id || 0,
         company_id: this.company.id || 0,
       };
-      console.log("params", params);
       this.$emit("sendChat", this.groupId, params);
       this.inputReset++;
       this.chatInputText = "";
@@ -171,7 +168,6 @@ export default {
       this.chatInputText = "";
     },
     toggleTemplateActive() {
-      console.log("isTemplateActive");
       this.isShowTemplate = !this.isShowTemplate;
 
       this.$nextTick(() => {
@@ -182,17 +178,14 @@ export default {
       });
     },
     getSelectTemplateContent(value) {
-      console.log("getSelectTemplateContent");
       this.chatInputText = value;
       this.inputReset++;
     },
     updateFooterBlancHeight(height) {
-      console.log("updateFooterBlancHeight");
       const footerBlanc = document.querySelector(".footer-blanc");
       footerBlanc.style.height = `${height}px`;
     },
     updateFooterHeight(height) {
-      console.log("updateFooterHeight");
       const chatFooter = document.querySelector(".chat-footer");
       chatFooter.style.height = `${height}px`;
       this.updateFooterBlancHeight(height);
